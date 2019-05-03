@@ -24,6 +24,14 @@ public class Invitacion extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(invitacionAdapter);
+        
+        preparePeopleData();
+        
 
+    }
+
+    private void preparePeopleData() {
+        CardOfPeople people1 = new CardOfPeople("12","2","2","2");
+        peopleList.add(people1);
     }
 }
