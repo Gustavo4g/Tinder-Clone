@@ -1,25 +1,25 @@
 package com.example.tinder;
 
 public class CardOfPeople {
-    private String title;
+    private String name;
     private String img;
     private String age;
     private String description;
 
 
-    public CardOfPeople(String title, String img, String age, String description) {
-        this.title = title;
+    public CardOfPeople(String name, String img, String age, String description) {
+        this.name = name;
         this.img = img;
         this.age = age;
         this.description = description;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImg() {

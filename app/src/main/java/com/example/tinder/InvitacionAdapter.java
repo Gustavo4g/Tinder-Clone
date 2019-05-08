@@ -23,8 +23,8 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         CardOfPeople cardOfPeople = peopleList.get(i);
-        myViewHolder.title.setText(cardOfPeople.getTitle());
-
+        myViewHolder.name.setText(cardOfPeople.getName());
+        myViewHolder.age.setText(cardOfPeople.getAge());
     }
 
     @Override
@@ -33,13 +33,14 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView name, year, age;
 
         public MyViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.title);
-            genre = view.findViewById(R.id.genre);
-            year = view.findViewById(R.id.year);
+
+            name = view.findViewById(R.id.person_name);
+            //genre = view.findViewById(R.id.genre);
+            age = view.findViewById(R.id.person_age);
         }
     }
 

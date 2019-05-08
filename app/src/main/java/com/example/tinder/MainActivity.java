@@ -17,8 +17,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Intent i = new Intent(this, Invitacion.class);
-        startActivity(i);
+        //Para mi amor marc para que cuando tenga lo del login entre en esta pantalla
+
+
+        Intent peticionAmistad = new Intent(this, Invitacion.class);
+        startActivity(peticionAmistad);
+
 
     }
 }
