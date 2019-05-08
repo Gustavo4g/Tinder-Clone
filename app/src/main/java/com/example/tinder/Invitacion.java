@@ -44,9 +44,7 @@ public class Invitacion extends AppCompatActivity {
     }
 
     private void preparePeopleData() {
-        CardOfPeople people1 = new CardOfPeople("Iscle","2","2","Hoy me he comprado una agenda y me he dado cuenta de que le falta algo importantísimo.\n" +
-                "– ¿El qué?\n" +
-                "– Tu número de teléfono (guiño guiño!) ");
+        CardOfPeople people1 = new CardOfPeople("Iscle","2","2","He programado el mundo ahora quiero programar tu corazon ");
         peopleList.add(people1);
         CardOfPeople people2 = new CardOfPeople("Gustavo","2","12","2");
         peopleList.add(people2);
