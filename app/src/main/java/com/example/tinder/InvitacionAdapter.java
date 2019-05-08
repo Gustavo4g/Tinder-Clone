@@ -25,6 +25,7 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
         CardOfPeople cardOfPeople = peopleList.get(i);
         myViewHolder.name.setText(cardOfPeople.getName());
         myViewHolder.age.setText(cardOfPeople.getAge());
+        myViewHolder.description.setText(cardOfPeople.getDescription());
     }
 
     @Override
@@ -33,13 +34,12 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, year, age;
+        public TextView name, description, age;
 
         public MyViewHolder(View view) {
             super(view);
-
             name = view.findViewById(R.id.person_name);
-            //genre = view.findViewById(R.id.genre);
+            description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);
         }
     }
