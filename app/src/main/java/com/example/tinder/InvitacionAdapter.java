@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tinder.Model.CardOfPeople;
+
 import java.util.List;
 
 public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.MyViewHolder>{
@@ -23,8 +25,9 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         CardOfPeople cardOfPeople = peopleList.get(i);
-        myViewHolder.title.setText(cardOfPeople.getTitle());
-
+        myViewHolder.name.setText(cardOfPeople.getName());
+        myViewHolder.age.setText(cardOfPeople.getAge());
+        myViewHolder.description.setText(cardOfPeople.getDescription());
     }
 
     @Override
@@ -33,13 +36,13 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView name, description, age;
 
         public MyViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.title);
-            genre = view.findViewById(R.id.genre);
-            year = view.findViewById(R.id.year);
+            name = view.findViewById(R.id.person_name);
+            description = view.findViewById(R.id.person_description);
+            age = view.findViewById(R.id.person_age);
         }
     }
 
