@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Model;
 
 public class CardOfPeople {
     private String name;

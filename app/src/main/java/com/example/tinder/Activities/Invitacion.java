@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
+
+import com.example.tinder.InvitacionAdapter;
+import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.R;
 
 import java.util.ArrayList;
 import java.util.List;

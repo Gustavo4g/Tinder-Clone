@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tinder.Model.CardOfPeople;
+
 import java.util.List;
 
 public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.MyViewHolder>{

@@ -1,14 +1,11 @@
-package com.example.tinder;
+package com.example.tinder.Activities;
 
 import android.content.Intent;
-import android.speech.RecognizerIntent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import java.util.List;
+import com.example.tinder.R;
 
 public class MainActivity extends AppCompatActivity {
 
