@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TinderManager {
     private final String TAG = "Salle Tinder";
-    private final String BASE_URL = "android2.byted.xyz/";
+    private final String BASE_URL = "http://android2.byted.xyz/";
 
     private TinderService service;
     private UserToken userToken;
