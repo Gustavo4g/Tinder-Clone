@@ -33,7 +33,7 @@ public interface TinderService {
     Call<CardOfPeople> myProfileGet();
 
     //Profile GET call, requires user ID
-    @GET("api/profiles/")
+    @GET("api/profiles/{id}")
     Call<CardOfPeople> profileGet(@Header("id") String userid);
 
     //Profile Invite POST, requires user ID
@@ -52,6 +52,7 @@ public interface TinderService {
     @GET("api/accepted-invites")
     Call<Invite[]> acceptedInvites();
 
+    //GET profiles
     @GET("api/profiles")
     Call<CardOfPeople[]> getProfiles();
 
