@@ -52,5 +52,7 @@ public interface TinderService {
     @GET("api/accepted-invites")
     Call<Invite[]> acceptedInvites();
 
+    @GET("api/profiles")
+    Call<CardOfPeople[]> getProfiles();
 
 }
