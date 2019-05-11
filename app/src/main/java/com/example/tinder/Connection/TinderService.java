@@ -26,31 +26,31 @@ public interface TinderService {
 
     //Profile update call
     @PUT("api/my-profile")
-    Call<Void> profilePut(@Body CardOfPeople profile);
+    Call<Void> profilePut(@Header("Authorization") String userToken, @Body CardOfPeople profile);
 
     //Own profile GET call
     @GET("api/my-profile")
-    Call<CardOfPeople> myProfileGet();
+    Call<CardOfPeople> myProfileGet(@Header("Authorization") String userToken);
 
     //Profile GET call, requires user ID
     @GET("api/profiles/{id}")
-    Call<CardOfPeople> profileGet(@Header("id") String userid);
+    Call<CardOfPeople> profileGet(@Header("Authorization") String userToken, @Header("id") String userid);
 
     //Profile Invite POST, requires user ID
     @POST("api/invite/{userId}")
-    Call<Void> profileInvite(@Header("userId") String userId);
+    Call<Void> profileInvite(@Header("Authorization") String userToken, @Header("userId") String userId);
 
     //Pending invites GET
     @GET("api/pending-invites")
-    Call<Invite[]> prendingInvites();
+    Call<Invite[]> prendingInvites(@Header("Authorization") String userToken);
 
     //PUT invite accept petition
     @PUT("api/invite/{id}/state/{state}")
-    Call<Void> inviteAnswer(@Header("id") long id, @Header("state") boolean state);
+    Call<Void> inviteAnswer( @Header("Authorization") String userToken, @Header("id") long id, @Header("state") boolean state);
 
     //GET accepted invites petition
     @GET("api/accepted-invites")
-    Call<Invite[]> acceptedInvites();
+    Call<Invite[]> acceptedInvites(@Header("Authorization") String userToken);
 
     //GET profiles
     @GET("api/profiles")
