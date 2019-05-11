@@ -11,22 +11,22 @@ import com.example.tinder.InvitacionAdapter;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Invitacion extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<CardOfPeople> peopleList = new ArrayList<>();
+    private List<CardOfPeople> peopleList = null;
     private InvitacionAdapter invitacionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invitacion);
-
-        //Esto es para la barra de arriba
-
+        peopleList = new ArrayList<>(Arrays.asList((CardOfPeople[])getIntent().getSerializableExtra("Info")));
         this.getSupportActionBar().setDisplayShowHomeEnabled(false);
         this.getSupportActionBar().setDisplayShowTitleEnabled(false);
         this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -40,8 +40,9 @@ public class Invitacion extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(invitacionAdapter);
         
-        preparePeopleData();
-        
+        //preparePeopleData();
+
+        invitacionAdapter.notifyDataSetChanged();
 
     }
 

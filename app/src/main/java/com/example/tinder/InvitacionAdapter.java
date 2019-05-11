@@ -25,9 +25,9 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.M
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         CardOfPeople cardOfPeople = peopleList.get(i);
-        myViewHolder.name.setText(cardOfPeople.getName());
-        myViewHolder.age.setText(cardOfPeople.getAge());
-        myViewHolder.description.setText(cardOfPeople.getDescription());
+        myViewHolder.name.setText(cardOfPeople.getDisplayName());
+        myViewHolder.age.setText(cardOfPeople.getGender().getType());
+        myViewHolder.description.setText(cardOfPeople.getAboutMe());
     }
 
     @Override
