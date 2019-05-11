@@ -19,6 +19,8 @@ public class TinderManager {
     private TinderService service;
     private UserToken userToken;
 
+    private CardOfPeople[] cardOfPeople;
+
     private TinderManager() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -55,7 +57,8 @@ public class TinderManager {
             @Override
             public void onResponse(Call<CardOfPeople[]> call, Response<CardOfPeople[]> response) {
                 if (response.isSuccessful()){
-                    mainActivity.onLogin2Success(response.body());
+                    cardOfPeople = response.body();
+                    mainActivity.onLogin2Success(null);
                 }else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
@@ -77,5 +80,9 @@ public class TinderManager {
 
     public void setUserToken(UserToken userToken) {
         this.userToken = userToken;
+    }
+
+    public CardOfPeople[] getCardOfPeople() {
+        return cardOfPeople;
     }
 }

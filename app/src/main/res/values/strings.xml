@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Tinder</string>
     <string name="your_username">Your Username</string>
-    <String name="your_password">Your Password</String>
-    <String name="username">Username</String>
-    <String name="password">Password</String>
-    <String name="remember_me">Remember me</String>
-    <String name="sign_in">SignIn</String>
-    <String name="did_you_forget_your_password">did tou forget your password?</String>
-    <String name="don_t_you_have_an_account_yet_register_a_new_acount">don't you have an account yet? Register a new one!</String>
+    <string name="your_password">Your Password</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="sign_in">SignIn</string>
+    <string name="did_you_forget_your_password">did tou forget your password?</string>
+    <string name="don_t_you_have_an_account_yet_register_a_new_acount">don\'t you have an account yet? Register a new one!</string>
 
 </resources>

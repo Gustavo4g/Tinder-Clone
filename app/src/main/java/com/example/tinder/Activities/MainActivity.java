@@ -15,6 +15,7 @@ import com.example.tinder.R;
 
 public class MainActivity extends AppCompatActivity implements DataBack {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +40,15 @@ public class MainActivity extends AppCompatActivity implements DataBack {
         TinderManager.getInstance().searchUsers(this);
 
 
-
     }
 
     @Override
     public void onLogin2Success(Object cardofpeople) {
-        Intent peticionAmistad = new Intent(this, Invitacion.class);
-        peticionAmistad.putExtra("Info",(CardOfPeople[]) cardofpeople);
-        this.startActivity(peticionAmistad);
+        runOnUiThread(() -> {
+            Intent peticionAmistad = new Intent(this, Invitacion.class);
+            this.startActivity(peticionAmistad);
+
+        });
     }
 
     @Override
