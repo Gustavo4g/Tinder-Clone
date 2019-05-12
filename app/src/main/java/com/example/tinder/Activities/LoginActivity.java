@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity  implements LoginCallBack {
     }
 
     private void forgotPassword() {
-        Snackbar.make(mainLayout, "No, you didn't.", Snackbar.LENGTH_LONG).show();
+         Snackbar.make(mainLayout, "No, you didn't", Snackbar.LENGTH_LONG).show();
     }
 
     private void register() {

@@ -53,11 +53,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterCallB
         if (password.equals(passwordConfirmation)) {
             TinderManager.getInstance().register(this, new Register(email, "en", username, password));
         }else{
-
-            runOnUiThread(() -> {
-                // Create a Snackbar showing the error to the user
                 Snackbar.make(mainLayout, "Password and Confirm Password must be the same.", Snackbar.LENGTH_LONG).show();
-            });
+
         }
     }
 

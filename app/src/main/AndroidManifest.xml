@@ -14,15 +14,18 @@
         <activity
             android:name=".Activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/CustomTheme.NoActionBar"></activity>
-        <activity android:name=".Activities.Invitacion" />
-        <activity android:name=".Activities.MainActivity">
+            android:theme="@style/CustomTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activities.Invitacion" />
+        <activity android:name=".Activities.MainActivity" />
     </application>
 
 </manifest>
