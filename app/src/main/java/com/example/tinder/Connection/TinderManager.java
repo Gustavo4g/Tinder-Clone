@@ -3,7 +3,10 @@ package com.example.tinder.Connection;
 import android.util.Log;
 
 import com.example.tinder.Interfaces.DataBack;
+import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Login;
+import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
 import retrofit2.Call;
@@ -69,6 +72,55 @@ public class TinderManager {
             }
         });
     }
+
+    public void login(DataCallback loginCallBack, Login login) {
+        Call<UserToken> call = service.login(login);
+        call.enqueue(new Callback<UserToken>() {
+            @Override
+            public void onResponse(Call<UserToken> call, Response<UserToken> response) {
+                if (response.isSuccessful()) {
+                    loginCallBack.onLoginSuccess(response.body());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    loginCallBack.onLoginFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserToken> call, Throwable t) {
+                loginCallBack.onLoginFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void register(DataCallback registerCallback, Register register) {
+        Call<Void> call = service.register(register);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if (response.isSuccessful()) {
+                    registerCallback.onRegisterSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    registerCallback.onRegisterFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                registerCallback.onRegisterFailed(t.getMessage());
+            }
+        });
+    }
+
+    
+
+
+
 
 
     public UserToken getUserToken() {
