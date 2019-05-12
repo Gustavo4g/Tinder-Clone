@@ -1,9 +1,12 @@
 package com.example.tinder.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -125,6 +128,10 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             TinderManager.getInstance().getRelationship(this, (int) value.getId());
 
+            byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            image.setImageBitmap(decodedByte);
 
         }
 
@@ -139,7 +146,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     @Override
     public void onRelationShipFailed(String reason) {
         invite.setText("Tirar la caña");
-        
+
         Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }

@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements DataBack {
         //Para mi amor marc para que cuando tenga lo del login entre en esta pantalla
         //Este es mi token para hacer pruebas cuando el login este implementado no se necesitara
 
-        UserToken userToken = new UserToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsb2wzMyIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU1NzY4MTY3NH0.Huqb8KEWS66_xMaOWBLkiYJz8dKLcCmurgjGz90wFyRcv7_G4qG4Jh3p9tioYlSr8XTBZAYpabKpoNK4NNv5uw");
+       // UserToken userToken = new UserToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsb2wzMyIsImF1dGgiOiJST0xFX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTU1NzY4MTY3NH0.Huqb8KEWS66_xMaOWBLkiYJz8dKLcCmurgjGz90wFyRcv7_G4qG4Jh3p9tioYlSr8XTBZAYpabKpoNK4NNv5uw");
 
 
-        TinderManager.getInstance().setUserToken(userToken);
+        //TinderManager.getInstance().setUserToken(userToken);
 
         TinderManager.getInstance().searchUsers(this);
 
