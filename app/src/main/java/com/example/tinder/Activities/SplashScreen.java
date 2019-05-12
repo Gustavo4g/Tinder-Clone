@@ -25,9 +25,9 @@ public class SplashScreen extends AppCompatActivity {
 
         runOnUiThread(() -> {
             // Create the MainActivity intent
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            Intent loginActivityIntent = new Intent(this, LoginActivity.class);
             // Start MainActivity via the intent
-            startActivity(mainActivityIntent);
+            startActivity(loginActivityIntent);
             // Finish the SplashScreen
             finishAffinity();
         });
