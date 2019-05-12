@@ -1,7 +1,9 @@
 package com.example.tinder.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("Login - Tinder"); //posar el nom que vulguem
 
         mainLayout = findViewById(R.id.main_layout);
-        usernameEditText = findViewById(R.id.username_tv);
-        passwordEditText = findViewById(R.id.password_tv);
+        usernameEditText = findViewById(R.id.username);
+        passwordEditText = findViewById(R.id.password);
         loadingLayout = findViewById(R.id.loading_layout);
 
         Button loginButton = findViewById(R.id.login);
@@ -33,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         Button registerButton = findViewById(R.id.register);
 
         loginButton.setOnClickListener(v -> login());
+        forgotPassword.setOnClickListener(v -> forgotPassword());
+        registerButton.setOnClickListener(v -> register());
 
     }
 
@@ -45,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         // Show the loading layout
         loadingLayout.setVisibility(View.VISIBLE);
        // Manager21Points.getInstance().login(username, password, this);
+    }
+
+    private void forgotPassword() {
+        Snackbar.make(mainLayout, "No, you didn't.", Snackbar.LENGTH_LONG).show();
+    }
+
+    private void register() {
+        Intent registerIntent = new Intent(this, RegisterActivity.class);
+        startActivity(registerIntent);
     }
 
 

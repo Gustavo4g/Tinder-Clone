@@ -6,4 +6,5 @@
     <color name="icons">#FFFFFF</color>
     <color name="design_default_color_primary_dark">#3700B3</color>
     <color name="accent">#009688</color>
+    <color name="tinder">#FF5864</color>
 </resources>

@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme">
         <activity
-            android:name=".Activities.login2"
-            android:label="@string/title_activity_login2"
+            android:name=".Activities.LoginActivity"
+            android:label="@string/title_activity_login"
             android:theme="@style/CustomTheme.NoActionBar"></activity>
         <activity android:name=".Activities.Invitacion" />
         <activity android:name=".Activities.MainActivity">
