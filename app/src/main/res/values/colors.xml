@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="icons">#FFFFFF</color>
     <color name="design_default_color_primary_dark">#3700B3</color>
+    <color name="accent">#009688</color>
 </resources>
