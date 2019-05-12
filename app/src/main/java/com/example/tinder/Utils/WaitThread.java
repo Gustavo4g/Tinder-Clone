@@ -3,6 +3,10 @@ package com.example.tinder.Utils;
 public class WaitThread extends Thread {
 
     public void run() {
-        this.sleep(3000);
+        try {
+            this.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

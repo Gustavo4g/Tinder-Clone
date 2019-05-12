@@ -86,7 +86,8 @@ public class TinderManager {
             @Override
             public void onResponse(Call<UserToken> call, Response<UserToken> response) {
                 if (response.isSuccessful()) {
-                    loginCallBack.onLoginSuccess(response.body());
+                    userToken = response.body();
+                    loginCallBack.onLoginSuccess(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 

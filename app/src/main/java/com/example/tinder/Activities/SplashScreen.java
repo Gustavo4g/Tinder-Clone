@@ -2,6 +2,7 @@ package com.example.tinder.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -20,9 +21,11 @@ public class SplashScreen extends AppCompatActivity {
         mainLayout = findViewById(R.id.main_layout);
 
         //Create a thread to wait for three seconds
-        WaitThread wait = new WaitThread();
-        wait.run();
+        (new Handler()).postDelayed(this::goToLogin, 2000);
 
+    }
+
+    private void goToLogin() {
         runOnUiThread(() -> {
             // Create the MainActivity intent
             Intent loginActivityIntent = new Intent(this, LoginActivity.class);

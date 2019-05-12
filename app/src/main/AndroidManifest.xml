@@ -12,20 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme">
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/CustomTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/CustomTheme.NoActionBar"></activity>
         <activity
             android:name=".Activities.RegisterActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activities.Invitacion" />
         <activity android:name=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:theme="@style/CustomTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
