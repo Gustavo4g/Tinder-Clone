@@ -18,11 +18,11 @@ public interface DataCallback {
 
     //Own profile get
     void onOwnProfileGetSuccess(Object profile);
-    void onOwnProfileGetFaile(String Reason);
+    void onOwnProfileGetFailed(String Reason);
 
     //profile GET call
     void onProfileGetSuccess(Object profile);
-    void onProfileGetFaile(String Reason);
+    void onProfileGetFailed(String Reason);
 
     //Profile Invite POST call
     void onProfileInviteSuccess();
@@ -33,8 +33,8 @@ public interface DataCallback {
     void onPendingInvitesFailed(String reason);
 
     //PUT invite accept petition
-    void onInviteAnswer();
-    void onInviteFailure(String reason);
+    void onInviteAnswerSuccess();
+    void onInviteAnswerFailure(String reason);
 
     //GET accepted invites Petition
     void onAcceptedInvitesSuccess(Invite[] invites);
