@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.LoginCallBack;
+import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
@@ -99,7 +100,7 @@ public class TinderManager {
         });
     }
 
-    public void register(DataCallback registerCallback, Register register) {
+    public void register(RegisterCallBack registerCallback, Register register) {
         Call<Void> call = service.register(register);
 
         call.enqueue(new Callback<Void>() {

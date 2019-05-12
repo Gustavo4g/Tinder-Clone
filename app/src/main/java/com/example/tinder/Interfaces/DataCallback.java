@@ -4,9 +4,6 @@ import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 
 public interface DataCallback {
-    //Register
-    void onRegisterSuccess();
-    void onRegisterFailed(String Reason);
 
     //Profile update
     void onProfilePutSuccess();
