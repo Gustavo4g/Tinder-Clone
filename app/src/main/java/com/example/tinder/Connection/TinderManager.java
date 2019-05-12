@@ -117,11 +117,71 @@ public class TinderManager {
         });
     }
 
-    
+    public void profilePut(DataCallback dataCallback, CardOfPeople profile){
+        Call<Void> call = service.profilePut(userToken.getToken(), profile);
 
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onRegisterSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
 
+                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dataCallback.onRegisterFailed(t.getMessage());
+            }
+        });
+    }
 
+    public void ownProfileGet(DataCallback dataCallback){
+        Call<CardOfPeople> call = service.myProfileGet(userToken.getToken());
+
+        call.enqueue(new Callback<CardOfPeople>() {
+            @Override
+            public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onRegisterSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardOfPeople> call, Throwable t) {
+                dataCallback.onRegisterFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void profileGet(DataCallback dataCallback, String userId){
+        Call<CardOfPeople> call = service.profileGet(userToken.getToken(), userId);
+
+        call.enqueue(new Callback<CardOfPeople>() {
+            @Override
+            public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onRegisterSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardOfPeople> call, Throwable t) {
+                dataCallback.onRegisterFailed(t.getMessage());
+            }
+        });
+    }
 
     public UserToken getUserToken() {
         return userToken;
