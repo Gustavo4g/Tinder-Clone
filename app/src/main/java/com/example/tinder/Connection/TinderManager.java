@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
@@ -127,17 +128,17 @@ public class TinderManager {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onRegisterSuccess();
+                    dataCallback.onProfilePutSuccess();
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                    dataCallback.onProfilePutFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                dataCallback.onRegisterFailed(t.getMessage());
+                dataCallback.onProfilePutFailed(t.getMessage());
             }
         });
     }
@@ -149,17 +150,17 @@ public class TinderManager {
             @Override
             public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onRegisterSuccess();
+                    dataCallback.onOwnProfileGetSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                    dataCallback.onOwnProfileGetFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<CardOfPeople> call, Throwable t) {
-                dataCallback.onRegisterFailed(t.getMessage());
+                dataCallback.onOwnProfileGetFailed(t.getMessage());
             }
         });
     }
@@ -171,17 +172,106 @@ public class TinderManager {
             @Override
             public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onRegisterSuccess();
+                    dataCallback.onProfileGetSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onRegisterFailed(getProblem(response.code()));
+                    dataCallback.onProfileGetFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<CardOfPeople> call, Throwable t) {
-                dataCallback.onRegisterFailed(t.getMessage());
+                dataCallback.onProfileGetFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void profileInvite(DataCallback dataCallback, String userId){
+        Call<Void> call = service.profileInvite(userToken.getToken(), userId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onProfileInviteSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onProfileInviteFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dataCallback.onProfileInviteFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void pendingInvites(DataCallback dataCallback){
+        Call<Invite[]> call = service.prendingInvites(userToken.getToken());
+
+        call.enqueue(new Callback<Invite[]>() {
+            @Override
+            public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onPendingInvitesSuccess(response.body());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onPendingInvitesFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Invite[]> call, Throwable t) {
+                dataCallback.onPendingInvitesFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void inviteAnswer(DataCallback dataCallback, long id ,boolean state){
+        Call<Void> call = service.inviteAnswer(userToken.getToken(), id, state);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onInviteAnswerSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onInviteAnswerFailure(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dataCallback.onInviteAnswerFailure(t.getMessage());
+            }
+        });
+    }
+
+
+    public void acceptedInvites(DataCallback dataCallback){
+        Call<Invite[]> call = service.acceptedInvites(userToken.getToken());
+
+        call.enqueue(new Callback<Invite[]>() {
+            @Override
+            public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onAcceptedInvitesSuccess(response.body());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onAcceptedInvitesFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Invite[]> call, Throwable t) {
+                dataCallback.onAcceptedInvitesFailed(t.getMessage());
             }
         });
     }
