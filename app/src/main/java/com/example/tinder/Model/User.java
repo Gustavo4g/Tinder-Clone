@@ -13,7 +13,10 @@ public class User implements Serializable {
     private String imageUrl = null;
     private String resetDate = null;
 
+    public User(){
 
+
+    }
     // Getter Methods
 
     public float getId() {

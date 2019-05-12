@@ -3,6 +3,7 @@
     <string name="your_username">Your Username</string>
     <string name="your_password">Your Password</string>
     <string name="username">Username</string>
+    <string name="displaynam">Display Name</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="sign_in">SignIn</string>
@@ -14,5 +15,13 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="password_confirmation">Password confirmation</string>
     <string name="register">Register</string>
+    <string name="name">Name:</string>
+    <string name="AboutMe">About Me:</string>
+    <string name="Age">Age:</string>
+    <string name="heigh">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="gender">Gender:</string>
+
+
 
 </resources>

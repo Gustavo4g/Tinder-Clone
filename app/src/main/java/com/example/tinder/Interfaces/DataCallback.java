@@ -37,5 +37,9 @@ public interface DataCallback {
     void onGetProfilesSuccess(CardOfPeople[] profiles);
     void onGetProfilesFailed(String reason);
 
+    //get relationship
+
+
+
 
 }

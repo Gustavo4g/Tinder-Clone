@@ -6,6 +6,7 @@ import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Interfaces.RegisterCallBack;
+import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
@@ -288,5 +289,26 @@ public class TinderManager {
 
     public CardOfPeople[] getCardOfPeople() {
         return cardOfPeople;
+    }
+
+    public void getRelationship(RelationShipCallBack dataCallback, int id){
+        Call<CardOfPeople> call = service.getRelationship(userToken.getToken());
+        call.enqueue(new Callback<CardOfPeople>() {
+            @Override
+            public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onRelationShipSuccess(response.body());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onRelationShipFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardOfPeople> call, Throwable t) {
+                dataCallback.onRelationShipFailed(t.getMessage());
+            }
+        });
     }
 }

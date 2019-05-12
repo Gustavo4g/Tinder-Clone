@@ -56,4 +56,7 @@ public interface TinderService {
     @GET("api/profiles")
     Call<CardOfPeople[]> getProfiles(@Header("Authorization") String userToken);
 
+    @GET("api/relationships/{id}")
+    Call<CardOfPeople> getRelationship(@Header("Authorization") String userToken);
+
 }

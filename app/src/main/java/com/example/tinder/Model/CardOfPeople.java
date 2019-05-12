@@ -27,6 +27,10 @@ public class CardOfPeople implements Serializable {
     private String sentMessages = null;
     private String adminChatrooms = null;
 
+    public CardOfPeople(){
+
+    }
+
 
     // Getter Methods
 

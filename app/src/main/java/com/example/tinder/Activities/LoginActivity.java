@@ -16,7 +16,7 @@ import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Model.Login;
 import com.example.tinder.R;
 
-public class LoginActivity extends AppCompatActivity  implements LoginCallBack {
+public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     private CoordinatorLayout mainLayout;
     private EditText usernameEditText;
     private EditText passwordEditText;
