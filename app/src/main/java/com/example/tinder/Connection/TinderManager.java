@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
+import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
@@ -77,7 +78,7 @@ public class TinderManager {
         });
     }
 
-    public void login(DataCallback loginCallBack, Login login) {
+    public void login(LoginCallBack loginCallBack, Login login) {
         Call<UserToken> call = service.login(login);
         call.enqueue(new Callback<UserToken>() {
             @Override

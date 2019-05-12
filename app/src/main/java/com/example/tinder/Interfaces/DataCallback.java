@@ -8,10 +8,6 @@ public interface DataCallback {
     void onRegisterSuccess();
     void onRegisterFailed(String Reason);
 
-    //Login
-    void onLoginSuccess(Object UserToken);
-    void onLoginFailed(String reason);
-
     //Profile update
     void onProfilePutSuccess();
     void onProfilePutFailed(String reason);

@@ -7,15 +7,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.example.tinder.Connection.TinderManager;
+import com.example.tinder.Interfaces.LoginCallBack;
+import com.example.tinder.Model.Login;
 import com.example.tinder.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  implements LoginCallBack {
     private CoordinatorLayout mainLayout;
     private EditText usernameEditText;
     private EditText passwordEditText;
+    private CheckBox rememberMeCheckBox;
     private LinearLayout loadingLayout;
     private String username;
 
@@ -28,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         mainLayout = findViewById(R.id.main_layout);
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
+        rememberMeCheckBox = findViewById(R.id.rememberMe);
         loadingLayout = findViewById(R.id.loading_layout);
 
         Button loginButton = findViewById(R.id.login);
@@ -43,12 +49,13 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         username = this.usernameEditText.getText().toString();
         String password = this.passwordEditText.getText().toString();
+        boolean rememberMe = rememberMeCheckBox.isSelected();
 
         // TODO: Check for errors in user input!
 
         // Show the loading layout
         loadingLayout.setVisibility(View.VISIBLE);
-       // Manager21Points.getInstance().login(username, password, this);
+        TinderManager.getInstance().login(this, new Login(username, password, rememberMe));
     }
 
     private void forgotPassword() {
@@ -61,4 +68,27 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onLoginSuccess(Object UserToken) {
+
+        runOnUiThread(() -> {
+            // Create the MainActivity intent
+            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            // Start MainActivity via the intent
+            startActivity(mainActivityIntent);
+            // Finish the LoginActivity
+            finishAffinity();
+        });
+    }
+
+    @Override
+    public void onLoginFailed(String reason) {
+
+        runOnUiThread(() -> {
+            // Hide the loading layout
+            loadingLayout.setVisibility(View.GONE);
+            // Create a Snackbar showing the error to the user
+            Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
+        });
+    }
 }
