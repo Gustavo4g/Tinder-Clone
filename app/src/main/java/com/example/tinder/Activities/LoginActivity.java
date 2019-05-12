@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.example.tinder.R;
 
 public class LoginActivity extends AppCompatActivity {
     private CoordinatorLayout mainLayout;
@@ -22,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("Login - Tinder"); //posar el nom que vulguem
 
         mainLayout = findViewById(R.id.main_layout);
-        usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
+        usernameEditText = findViewById(R.id.username_tv);
+        passwordEditText = findViewById(R.id.password_tv);
         loadingLayout = findViewById(R.id.loading_layout);
 
         Button loginButton = findViewById(R.id.login);
