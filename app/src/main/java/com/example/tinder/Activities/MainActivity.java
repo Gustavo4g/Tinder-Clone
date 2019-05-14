@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Connection.TinderService;
@@ -53,6 +54,6 @@ public class MainActivity extends AppCompatActivity implements DataBack {
 
     @Override
     public void onLogin2Failed(String reason) {
-
+        Log.d("Error", reason);
     }
 }

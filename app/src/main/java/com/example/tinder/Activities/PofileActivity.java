@@ -46,14 +46,6 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mainLayout = findViewById(R.id.main_layout);
-        //al crear la activity hay que passarle de esta forma info del usuario que queremos ver
-
-        //Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-        //Bundle b = new Bundle();
-        //b.putExtra("key", obj); //Your user
-        //intent.putExtras(b); //Put your user to your next Intent
-        //startActivity(intent);
-        //finish();
 
         setContentView(R.layout.profile);
         setTitle("Profile - Tinder"); //posar el nom que vulguem
@@ -76,11 +68,9 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         image = findViewById(R.id.image);
 
-        Bundle b = getIntent().getExtras();
-        CardOfPeople value;
+        CardOfPeople value = TinderManager.getInstance().getAaaaa();
 
-        if(b != null) {
-            value = (CardOfPeople) b.getSerializable("key");
+
             displayName.setText(value.getDisplayName());
             nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
             AboutMe_Display.setText(value.getAboutMe());
@@ -119,11 +109,11 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender().getType().equals("DO NOT SHOW")){
+            if (value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
-                genderDisplay.setText(value.getGender().getType());
+                genderDisplay.setText(value.getGender());
             }
 
             TinderManager.getInstance().getRelationship(this, (int) value.getId());
@@ -133,8 +123,26 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             image.setImageBitmap(decodedByte);
 
-        }
+            invite.setOnClickListener(v -> invite());
 
+
+
+
+    }
+
+    private void invite(){
+
+        switch (invite.getText().toString()){
+
+            case "Block":
+
+                break;
+
+            case "Tirar la caña" :
+
+                break;
+
+        }
 
     }
 
