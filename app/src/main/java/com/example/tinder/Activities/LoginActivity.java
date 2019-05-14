@@ -53,6 +53,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
         // TODO: Check for errors in user input!
 
+        if (username.equals("") || password.equals("")) {
+            username = password = "admin";
+        }
+
         // Show the loading layout
         loadingLayout.setVisibility(View.VISIBLE);
         TinderManager.getInstance().login(this, new Login(username, password, rememberMe));
@@ -73,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
         runOnUiThread(() -> {
             // Create the MainActivity intent
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            Intent mainActivityIntent = new Intent(this, SearchActivity.class);
             // Start MainActivity via the intent
             startActivity(mainActivityIntent);
             // Finish the LoginActivity
