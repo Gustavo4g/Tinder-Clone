@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -48,7 +49,12 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
         mainLayout = findViewById(R.id.main_layout);
 
         setContentView(R.layout.profile);
-        setTitle("Profile - Tinder"); //posar el nom que vulguem
+        //Esto es para la barra de arriba
+        this.getSupportActionBar().setDisplayShowHomeEnabled(false);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        this.getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+        this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         name = findViewById(R.id.name);
         display = findViewById(R.id.display);
@@ -155,6 +161,6 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     public void onRelationShipFailed(String reason) {
         invite.setText("Tirar la caña");
 
-        Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }
