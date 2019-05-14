@@ -16,10 +16,10 @@ public class CardOfPeople implements Serializable {
     private boolean banned;
     private String filterPreferences = null;
     Location location;
-    User UserObject;
+    User user;
     Relationship relationship;
-    Gender GenderObject;
-    Ethnicity EthnicityObject;
+    Gender gender;
+    Ethnicity ethnicity;
     private String sentInvitations = null;
     private String receivedInvitations = null;
     private String sentBlocks = null;
@@ -83,7 +83,7 @@ public class CardOfPeople implements Serializable {
     }
 
     public User getUser() {
-        return UserObject;
+        return user;
     }
 
     public Relationship getRelationship() {
@@ -91,11 +91,11 @@ public class CardOfPeople implements Serializable {
     }
 
     public Gender getGender() {
-        return GenderObject;
+        return gender;
     }
 
     public Ethnicity getEthnicity() {
-        return EthnicityObject;
+        return ethnicity;
     }
 
     public String getSentInvitations() {
@@ -177,7 +177,7 @@ public class CardOfPeople implements Serializable {
     }
 
     public void setUser(User userObject) {
-        this.UserObject = userObject;
+        this.user= userObject;
     }
 
     public void setRelationship(Relationship relationship) {
@@ -185,11 +185,11 @@ public class CardOfPeople implements Serializable {
     }
 
     public void setGender(Gender genderObject) {
-        this.GenderObject = genderObject;
+        this.gender = genderObject;
     }
 
     public void setEthnicity(Ethnicity ethnicityObject) {
-        this.EthnicityObject = ethnicityObject;
+        this.ethnicity = ethnicityObject;
     }
 
     public void setSentInvitations(String sentInvitations) {
