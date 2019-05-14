@@ -1,8 +1,7 @@
 package com.example.tinder.Model;
 
-import java.io.Serializable;
 
-public class User implements Serializable {
+public class User {
     private float id;
     private String login;
     private String firstName;
@@ -13,10 +12,7 @@ public class User implements Serializable {
     private String imageUrl = null;
     private String resetDate = null;
 
-    public User(){
 
-
-    }
     // Getter Methods
 
     public float getId() {

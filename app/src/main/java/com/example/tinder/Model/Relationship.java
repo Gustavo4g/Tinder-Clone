@@ -1,10 +1,8 @@
 package com.example.tinder.Model;
 
-import java.io.Serializable;
-
-public class Gender {
+public class Relationship {
     private float id;
-    private String type;
+    private String status;
 
 
     // Getter Methods
@@ -13,8 +11,8 @@ public class Gender {
         return id;
     }
 
-    public String getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
     // Setter Methods
@@ -23,7 +21,7 @@ public class Gender {
         this.id = id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

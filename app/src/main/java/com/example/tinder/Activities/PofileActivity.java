@@ -113,7 +113,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
-                genderDisplay.setText(value.getGender());
+                genderDisplay.setText(value.getGender().getType());
             }
 
             TinderManager.getInstance().getRelationship(this, (int) value.getId());

@@ -15,9 +15,9 @@ public class CardOfPeople implements Serializable {
     private boolean showAge;
     private boolean banned;
     private String filterPreferences = null;
-    private String location = null;
+    Location location;
     User UserObject;
-    private String relationship = null;
+    Relationship relationship;
     Gender GenderObject;
     Ethnicity EthnicityObject;
     private String sentInvitations = null;
@@ -26,10 +26,6 @@ public class CardOfPeople implements Serializable {
     private String receivedBlocks = null;
     private String sentMessages = null;
     private String adminChatrooms = null;
-
-    public CardOfPeople(){
-
-    }
 
 
     // Getter Methods
@@ -82,7 +78,7 @@ public class CardOfPeople implements Serializable {
         return filterPreferences;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -90,7 +86,7 @@ public class CardOfPeople implements Serializable {
         return UserObject;
     }
 
-    public String getRelationship() {
+    public Relationship getRelationship() {
         return relationship;
     }
 
@@ -176,7 +172,7 @@ public class CardOfPeople implements Serializable {
         this.filterPreferences = filterPreferences;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -184,7 +180,7 @@ public class CardOfPeople implements Serializable {
         this.UserObject = userObject;
     }
 
-    public void setRelationship(String relationship) {
+    public void setRelationship(Relationship relationship) {
         this.relationship = relationship;
     }
 
