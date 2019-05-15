@@ -51,6 +51,10 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         } else {
             viewHolder.image.setImageResource(R.drawable.iscle);
         }
+
+        if (profile.getLocation() != null) {
+            viewHolder.location.setText(profile.getLocation().getAddress());
+        }
     }
 
     @Override
