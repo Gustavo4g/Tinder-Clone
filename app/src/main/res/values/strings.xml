@@ -21,7 +21,7 @@
     <string name="heigh">Height:</string>
     <string name="weight">Weight:</string>
     <string name="gender">Gender:</string>
-    <string name = "splash_Screen">Wait a short while. We\'re preparing everything for you</string>
+    <string name="splash_Screen">Wait a short while. We\'re preparing everything for you</string>
 
 
 </resources>

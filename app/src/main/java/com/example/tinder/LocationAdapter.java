@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.ViewHolder> {
+public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private List<CardOfPeople> peopleList;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card_column, viewGroup,false);
+                .inflate(R.layout.profile_rv_row, viewGroup,false);
         return new ViewHolder(itemView);
     }
 
@@ -60,7 +59,7 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, description, age;
+        TextView name, description, age, location;
         ImageView image;
 
         ViewHolder(View view) {
@@ -69,10 +68,11 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);
+            location = view.findViewById(R.id.person_location);
         }
     }
 
-    public InvitacionAdapter (List<CardOfPeople> peopleList){
+    public LocationAdapter(ArrayList<CardOfPeople> peopleList){
         this.peopleList = peopleList;
     }
 

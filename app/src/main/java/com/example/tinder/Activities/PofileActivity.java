@@ -15,10 +15,8 @@ import android.widget.TextView;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.CardOfPeople;
-import com.example.tinder.Model.Login;
 import com.example.tinder.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -58,7 +56,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
         setContentView(R.layout.profile);
         setTitle("Profile - Tinder"); //posar el nom que vulguem
 
-        name = findViewById(R.id.name);
+        name = findViewById(R.id.person_name);
         display = findViewById(R.id.display);
         displayName = findViewById(R.id.displayName);
         nameName = findViewById(R.id.nameName);
@@ -74,7 +72,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
         genderDisplay = findViewById(R.id.genderDisplay);
         invite = findViewById(R.id.invite);
 
-        image = findViewById(R.id.image);
+        image = findViewById(R.id.person_photo);
 
         Bundle b = getIntent().getExtras();
         CardOfPeople value;
