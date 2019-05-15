@@ -93,13 +93,11 @@ public class TinderManager {
     }
 
     public void authenticate(IIsAuthenticated callback, String token) {
-        Log.d(TAG, "authenticate: " + token);
         Call<String> call = service.authenticate("Bearer " + token);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
-                    Log.d(TAG, "onResponse: Success...");
                     if (response.body() == null || response.body().isEmpty()) {
                         callback.failure();
                     } else {
@@ -107,14 +105,12 @@ public class TinderManager {
                         setUserToken(token);
                     }
                 } else {
-                    Log.d(TAG, "onResponse: No success...");
                     callback.failure();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.d(TAG, "onFailure: Failure... " + t.toString());
                 callback.failure();
             }
         });
