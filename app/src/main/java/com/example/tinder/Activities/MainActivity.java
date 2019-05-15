@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements DataBack {
     @Override
     public void onLogin2Success(Object cardofpeople) {
         runOnUiThread(() -> {
-            Intent peticionAmistad = new Intent(this, SearchActivity.class);
+            Intent peticionAmistad = new Intent(this, Invitacion.class);
+            //Intent peticionAmistad = new Intent(this, SearchActivity.class);
             this.startActivity(peticionAmistad);
 
         });

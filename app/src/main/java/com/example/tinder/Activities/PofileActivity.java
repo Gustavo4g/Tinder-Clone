@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
@@ -44,17 +45,14 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mainLayout = findViewById(R.id.main_layout);
-        //al crear la activity hay que passarle de esta forma info del usuario que queremos ver
-
-        //Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-        //Bundle b = new Bundle();
-        //b.putExtra("key", obj); //Your user
-        //intent.putExtras(b); //Put your user to your next Intent
-        //startActivity(intent);
-        //finish();
 
         setContentView(R.layout.profile);
-        setTitle("Profile - Tinder"); //posar el nom que vulguem
+        //Esto es para la barra de arriba
+        this.getSupportActionBar().setDisplayShowHomeEnabled(false);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        this.getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+        this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         name = findViewById(R.id.person_name);
         display = findViewById(R.id.display);
@@ -74,11 +72,9 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         image = findViewById(R.id.person_photo);
 
-        Bundle b = getIntent().getExtras();
-        CardOfPeople value;
+        CardOfPeople value = TinderManager.getInstance().getAaaaa();
 
-        if(b != null) {
-            value = (CardOfPeople) b.getSerializable("key");
+
             displayName.setText(value.getDisplayName());
             nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
             AboutMe_Display.setText(value.getAboutMe());
@@ -117,7 +113,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender().getType().equals("DO NOT SHOW")){
+            if (value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
@@ -131,8 +127,26 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             image.setImageBitmap(decodedByte);
 
-        }
+            invite.setOnClickListener(v -> invite());
 
+
+
+
+    }
+
+    private void invite(){
+
+        switch (invite.getText().toString()){
+
+            case "Block":
+
+                break;
+
+            case "Tirar la caña" :
+
+                break;
+
+        }
 
     }
 
@@ -145,6 +159,6 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     public void onRelationShipFailed(String reason) {
         invite.setText("Tirar la caña");
 
-        Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
+        //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }

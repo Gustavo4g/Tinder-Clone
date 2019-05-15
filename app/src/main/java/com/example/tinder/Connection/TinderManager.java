@@ -27,6 +27,7 @@ public class TinderManager {
     private UserToken userToken;
 
     private CardOfPeople[] cardOfPeople;
+    private CardOfPeople aaaaa;
 
     private TinderManager() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -311,5 +312,14 @@ public class TinderManager {
                 dataCallback.onRelationShipFailed(t.getMessage());
             }
         });
+    }
+
+    public CardOfPeople getAaaaa(){
+
+        return aaaaa;
+    }
+
+    public void setAaaaa(CardOfPeople aaaaa){
+        this.aaaaa = aaaaa;
     }
 }

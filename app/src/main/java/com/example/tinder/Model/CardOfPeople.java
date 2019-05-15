@@ -15,21 +15,17 @@ public class CardOfPeople implements Serializable {
     private boolean showAge;
     private boolean banned;
     private String filterPreferences = null;
-    private String location = null;
-    User UserObject;
-    private String relationship = null;
-    Gender GenderObject;
-    Ethnicity EthnicityObject;
+    Location location;
+    User user;
+    Relationship relationship;
+    Gender gender;
+    Ethnicity ethnicity;
     private String sentInvitations = null;
     private String receivedInvitations = null;
     private String sentBlocks = null;
     private String receivedBlocks = null;
     private String sentMessages = null;
     private String adminChatrooms = null;
-
-    public CardOfPeople(){
-
-    }
 
 
     // Getter Methods
@@ -82,24 +78,24 @@ public class CardOfPeople implements Serializable {
         return filterPreferences;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
     public User getUser() {
-        return UserObject;
+        return user;
     }
 
-    public String getRelationship() {
+    public Relationship getRelationship() {
         return relationship;
     }
 
     public Gender getGender() {
-        return GenderObject;
+        return gender;
     }
 
     public Ethnicity getEthnicity() {
-        return EthnicityObject;
+        return ethnicity;
     }
 
     public String getSentInvitations() {
@@ -176,24 +172,24 @@ public class CardOfPeople implements Serializable {
         this.filterPreferences = filterPreferences;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
     public void setUser(User userObject) {
-        this.UserObject = userObject;
+        this.user= userObject;
     }
 
-    public void setRelationship(String relationship) {
+    public void setRelationship(Relationship relationship) {
         this.relationship = relationship;
     }
 
     public void setGender(Gender genderObject) {
-        this.GenderObject = genderObject;
+        this.gender = genderObject;
     }
 
     public void setEthnicity(Ethnicity ethnicityObject) {
-        this.EthnicityObject = ethnicityObject;
+        this.ethnicity = ethnicityObject;
     }
 
     public void setSentInvitations(String sentInvitations) {

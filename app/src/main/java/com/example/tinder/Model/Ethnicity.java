@@ -2,7 +2,7 @@ package com.example.tinder.Model;
 
 import java.io.Serializable;
 
-public class Ethnicity implements Serializable {
+public class Ethnicity {
     private float id;
     private String ethnicity;
 

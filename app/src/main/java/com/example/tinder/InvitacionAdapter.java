@@ -1,20 +1,22 @@
 package com.example.tinder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tinder.Activities.PofileActivity;
+import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Model.CardOfPeople;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
             byte[] decodedString = Base64.decode(profile.getPicture(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             viewHolder.image.setImageBitmap(decodedByte);
+            viewHolder.image.setOnClickListener(v -> click(profile, viewHolder));
         } else {
             viewHolder.image.setImageResource(R.drawable.iscle);
         }
@@ -62,13 +65,19 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, description, age;
         ImageView image;
+        public View view;
 
         ViewHolder(View view) {
             super(view);
+            this.view = view;
             image = view.findViewById(R.id.person_photo);
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);
+        }
+
+        public View getView() {
+            return view;
         }
     }
 
@@ -89,5 +98,14 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
         }
 
         return Integer.toString(age);
+    }
+
+    private void click(CardOfPeople cardOfPeople, ViewHolder viewHolder){
+
+        Context context = viewHolder.getView().getContext();
+        Intent intent = new Intent(context, PofileActivity.class);
+
+        TinderManager.getInstance().setAaaaa(cardOfPeople);
+        context.startActivity(intent);
     }
 }
