@@ -84,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterCallB
     public void onLoginSuccess(Object UserToken) {
         runOnUiThread(() -> {
             // Create the MainActivity intent
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            Intent mainActivityIntent = new Intent(this, SearchActivity.class);
             // Start MainActivity via the intent
             startActivity(mainActivityIntent);
             // Finish the LoginActivity

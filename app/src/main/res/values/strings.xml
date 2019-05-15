@@ -6,10 +6,10 @@
     <string name="displaynam">Display Name</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
-    <string name="sign_in">SignIn</string>
-    <string name="did_you_forget_your_password">did tou forget your password?</string>
-    <string name="don_t_you_have_an_account_yet_register_a_new_acount">don\'t you have an account yet? Register a new one!</string>
-    <string name="title_activity_login">login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="title_activity_login">Login</string>
     <string name="logo">Logo</string>
     <string name="email">Email</string>
     <string name="confirm_password">Confirm Password</string>
@@ -21,7 +21,5 @@
     <string name="heigh">Height:</string>
     <string name="weight">Weight:</string>
     <string name="gender">Gender:</string>
-    <string name="splash_Screen">Wait a short while. We\'re preparing everything for you</string>
-
-
+    <string name="please_wait">Please, wait while we prepare everything for you...</string>
 </resources>

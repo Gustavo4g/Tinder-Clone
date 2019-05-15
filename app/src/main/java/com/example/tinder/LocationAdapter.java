@@ -90,4 +90,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
 
         return Integer.toString(age);
     }
+
+    public void setDataset(ArrayList<CardOfPeople> profiles) {
+        this.peopleList = profiles;
+        notifyDataSetChanged();
+    }
 }

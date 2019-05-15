@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
         runOnUiThread(() -> {
             // Create the MainActivity intent
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            Intent mainActivityIntent = new Intent(this, SearchActivity.class);
             // Start MainActivity via the intent
             startActivity(mainActivityIntent);
             // Finish the LoginActivity

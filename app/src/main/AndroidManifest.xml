@@ -21,7 +21,6 @@
             android:name=".Activities.RegisterActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activities.Invitacion" />
-        <activity android:name=".Activities.MainActivity" />
         <activity
             android:name=".Activities.SplashScreen"
             android:theme="@style/CustomTheme.NoActionBar">
