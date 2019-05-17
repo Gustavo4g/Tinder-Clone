@@ -88,16 +88,21 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
                 String asd = sdf.format(a.getTime());
                 String o = asd.substring(0, 3);
-                int j = Integer.parseInt(o)- Integer.parseInt(value.getBirthDate().substring(0, 3));
-                if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))){
-                    j--;
-                }else{
-                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
-                            Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))){
+                if  (value.getBirthDate() != null) {
+                    int j = Integer.parseInt(o) - Integer.parseInt(value.getBirthDate().substring(0, 3));
+                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))) {
                         j--;
+                    } else {
+                        if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
+                                Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))) {
+                            j--;
+                        }
                     }
+                    AgeDisplay.setText(String.valueOf(j));
+                }else{
+                    Age.setVisibility(View.INVISIBLE);
+                    AgeDisplay.setVisibility(View.INVISIBLE);
                 }
-                AgeDisplay.setText(String.valueOf(j));
 
             }else {
                 Age.setVisibility(View.INVISIBLE);
@@ -117,7 +122,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender() == null && value.getGender().equals("DO NOT SHOW")){
+            if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
