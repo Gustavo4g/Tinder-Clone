@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tinder.Connection.TinderManager;
+import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
@@ -21,7 +22,7 @@ import com.example.tinder.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class PofileActivity extends AppCompatActivity implements RelationShipCallBack {
+public class PofileActivity extends AppCompatActivity implements RelationShipCallBack, InviteRequestCallBack {
 
     private CoordinatorLayout mainLayout;
     private TextView display;
@@ -40,6 +41,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     private TextView genderDisplay;
     private Button invite;
     private ImageView image;
+    private CardOfPeople value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -72,7 +74,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         image = findViewById(R.id.person_photo);
 
-        CardOfPeople value = TinderManager.getInstance().getAaaaa();
+        value = TinderManager.getInstance().getAaaaa();
 
 
             displayName.setText(value.getDisplayName());
@@ -140,10 +142,10 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             case "Block":
 
-                break;
+            break;
 
             case "Tirar la caña" :
-
+                TinderManager.getInstance().profileInvite(this, ""+value.getId());
                 break;
 
         }
@@ -160,5 +162,15 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
         invite.setText("Tirar la caña");
 
         //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProfileInviteSuccess() {
+        Snackbar.make(mainLayout, "¡Ya sabe que te gusta!", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProfileInviteFailed(String reason) {
+        Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }

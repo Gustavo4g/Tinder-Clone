@@ -17,10 +17,6 @@ public interface DataCallback {
     void onProfileGetSuccess(Object profile);
     void onProfileGetFailed(String Reason);
 
-    //Profile Invite POST call
-    void onProfileInviteSuccess();
-    void onProfileInviteFailed(String reason);
-
     //Pending Invites GET
     void onPendingInvitesSuccess(Invite[] invites);
     void onPendingInvitesFailed(String reason);
