@@ -135,7 +135,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 genderDisplay.setText(value.getGender().getType());
             }
 
-            TinderManager.getInstance().getRelationship(this, (int) value.getId());
+            TinderManager.getInstance().getRelationship(this, (long) value.getId());
 
             if (value.getPicture() != null){
                 byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);

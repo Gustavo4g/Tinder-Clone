@@ -329,7 +329,7 @@ public class TinderManager {
         return cardOfPeople;
     }
 
-    public void getRelationship(RelationShipCallBack dataCallback, int id) {
+    public void getRelationship(RelationShipCallBack dataCallback, long id) {
         Call<CardOfPeople> call = service.getRelationship(userToken.getToken());
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
