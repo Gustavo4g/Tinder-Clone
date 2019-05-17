@@ -229,7 +229,7 @@ public class TinderManager {
     }
 
     public void profileInvite(InviteRequestCallBack dataCallback, String userId){
-        Call<Void> call = service.profileInvite(userToken.getToken(), userId);
+        Call<Void> call = service.profileInvite("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {
             @Override
