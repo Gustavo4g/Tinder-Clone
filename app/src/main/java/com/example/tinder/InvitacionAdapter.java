@@ -54,6 +54,7 @@ public class InvitacionAdapter  extends RecyclerView.Adapter<InvitacionAdapter.V
             viewHolder.image.setOnClickListener(v -> click(profile, viewHolder));
         } else {
             viewHolder.image.setImageResource(R.drawable.iscle);
+            viewHolder.image.setOnClickListener(v -> click(profile, viewHolder));
         }
     }
 
