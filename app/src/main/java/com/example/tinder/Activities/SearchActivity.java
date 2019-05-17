@@ -1,27 +1,24 @@
 package com.example.tinder.Activities;
 
 import android.content.Intent;
-import android.location.Location;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
-import com.example.tinder.InvitacionAdapter;
 import com.example.tinder.LocationAdapter;
-import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
+import com.example.tinder.SearchDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity implements DataBack {
     private static final String TAG = "SearchActivity";
@@ -60,9 +57,18 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Log.d(TAG, "onClick: Filter button pressed!");
+
+            SearchDialog dialog = new SearchDialog(this) {
+                @Override
+                public void onSearch(HashMap<String, String> parameters) {
+                    // Fer la request!
+                    Log.d(TAG, "onSearch: " + parameters.toString());
+                }
+            };
+
+            dialog.show();
         });
     }
-
 
     @Override
     public void onLogin2Success(Object id_token) {

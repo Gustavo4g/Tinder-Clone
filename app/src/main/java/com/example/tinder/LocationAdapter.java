@@ -20,11 +20,30 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
     private List<CardOfPeople> peopleList;
 
+    public LocationAdapter(ArrayList<CardOfPeople> peopleList) {
+        this.peopleList = peopleList;
+    }
+
+    private static String getAge(int year, int month, int day) {
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+
+        return Integer.toString(age);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.profile_rv_row, viewGroup,false);
+                .inflate(R.layout.profile_rv_row, viewGroup, false);
         return new ViewHolder(itemView);
     }
 
@@ -35,7 +54,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         viewHolder.name.setText(profile.getDisplayName());
         viewHolder.description.setText(profile.getAboutMe());
 
-        if (profile.getBirthDate() != null){
+        if (profile.getBirthDate() != null) {
             int year = Integer.parseInt(profile.getBirthDate().substring(0, 4));
             int month = Integer.parseInt(profile.getBirthDate().substring(5, 7));
             int day = Integer.parseInt(profile.getBirthDate().substring(8, 10));
@@ -44,7 +63,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             viewHolder.age.setText("-");
         }
 
-        if (profile.getPicture() != null){
+        if (profile.getPicture() != null) {
             byte[] decodedString = Base64.decode(profile.getPicture(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             viewHolder.image.setImageBitmap(decodedByte);
@@ -62,6 +81,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         return peopleList.size();
     }
 
+    public void setDataset(ArrayList<CardOfPeople> profiles) {
+        this.peopleList = profiles;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, description, age, location;
         ImageView image;
@@ -74,29 +98,5 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             age = view.findViewById(R.id.person_age);
             location = view.findViewById(R.id.person_location);
         }
-    }
-
-    public LocationAdapter(ArrayList<CardOfPeople> peopleList){
-        this.peopleList = peopleList;
-    }
-
-    private String getAge(int year, int month, int day){
-        Calendar dob = Calendar.getInstance();
-        Calendar today = Calendar.getInstance();
-
-        dob.set(year, month, day);
-
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
-            age--;
-        }
-
-        return Integer.toString(age);
-    }
-
-    public void setDataset(ArrayList<CardOfPeople> profiles) {
-        this.peopleList = profiles;
-        notifyDataSetChanged();
     }
 }
