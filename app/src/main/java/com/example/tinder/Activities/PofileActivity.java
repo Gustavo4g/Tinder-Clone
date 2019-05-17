@@ -78,8 +78,12 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
 
             displayName.setText(value.getDisplayName());
-            nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
-            AboutMe_Display.setText(value.getAboutMe());
+            if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
+                nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
+            }
+            if  (value.getAboutMe() != null) {
+                AboutMe_Display.setText(value.getAboutMe());
+            }
 
             if (value.getShowAge()){
                 Calendar a = Calendar.getInstance();
@@ -115,7 +119,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender().equals("DO NOT SHOW")){
+            if (value.getGender() == null && value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
