@@ -117,7 +117,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender().equals("DO NOT SHOW")){
+            if (value.getGender() == null && value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
