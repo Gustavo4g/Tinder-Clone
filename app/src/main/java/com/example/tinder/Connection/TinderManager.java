@@ -228,7 +228,7 @@ public class TinderManager {
         });
     }
 
-    public void profileInvite(InviteRequestCallBack dataCallback, String userId) {
+    public void profileInvite(InviteRequestCallBack dataCallback, long userId) {
         Call<Void> call = service.profileInvite("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {

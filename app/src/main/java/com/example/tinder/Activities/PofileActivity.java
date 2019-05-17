@@ -158,7 +158,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
             break;
 
             case "Tirar la caña" :
-                TinderManager.getInstance().profileInvite(this, ""+value.getId());
+                TinderManager.getInstance().profileInvite(this, (long)value.getId());
                 break;
 
         }

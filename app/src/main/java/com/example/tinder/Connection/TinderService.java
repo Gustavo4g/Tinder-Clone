@@ -38,7 +38,7 @@ public interface TinderService {
 
     //Profile Invite POST, requires user ID
     @POST("api/invite/{userId}")
-    Call<Void> profileInvite(@Header("Authorization") String userToken, @Header("userId") String userId);
+    Call<Void> profileInvite(@Header("Authorization") String userToken, @Header("userId") long userId);
 
     //Pending invites GET
     @GET("api/pending-invites")
