@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        TinderManager.getInstance().searchUsers(this);
+        TinderManager.getInstance().searchUsers(this, null);
 
         ImageButton settings = getSupportActionBar().getCustomView().findViewById(R.id.action_gear);
         settings.setOnClickListener(v -> {
@@ -63,6 +63,23 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
                 public void onSearch(HashMap<String, String> parameters) {
                     // Fer la request!
                     Log.d(TAG, "onSearch: " + parameters.toString());
+
+                    TinderManager.getInstance().searchUsers(new DataBack() {
+                        @Override
+                        public void onLogin2Success(Object id_token) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(SearchActivity.this, Invitacion.class));
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onLogin2Failed(String reason) {
+
+                        }
+                    }, parameters);
                 }
             };
 

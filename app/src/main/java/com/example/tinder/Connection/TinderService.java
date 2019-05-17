@@ -7,6 +7,8 @@ import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -14,6 +16,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.QueryMap;
 
 public interface TinderService {
 
@@ -55,7 +58,7 @@ public interface TinderService {
 
     //GET profiles
     @GET("api/profiles")
-    Call<CardOfPeople[]> getProfiles(@Header("Authorization") String userToken);
+    Call<CardOfPeople[]> getProfiles(@Header("Authorization") String userToken, @QueryMap Map<String, String> parameters);
 
     @GET("api/relationships/{id}")
     Call<CardOfPeople> getRelationship(@Header("Authorization") String userToken);

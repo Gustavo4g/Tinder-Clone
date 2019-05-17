@@ -15,6 +15,9 @@ import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,9 +65,11 @@ public class TinderManager {
         }
     }
 
-
-    public void searchUsers(DataBack mainActivity) {
-        Call<CardOfPeople[]> call = service.getProfiles("Bearer " + userToken.getToken());
+    public void searchUsers(DataBack mainActivity, Map<String, String> parameters) {
+        if (parameters == null) {
+            parameters = new HashMap<>();
+        }
+        Call<CardOfPeople[]> call = service.getProfiles("Bearer " + userToken.getToken(), parameters);
         call.enqueue(new Callback<CardOfPeople[]>() {
             @Override
             public void onResponse(Call<CardOfPeople[]> call, Response<CardOfPeople[]> response) {
