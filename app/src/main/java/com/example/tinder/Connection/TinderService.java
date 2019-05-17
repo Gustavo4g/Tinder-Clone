@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface TinderService {
 
@@ -34,11 +35,11 @@ public interface TinderService {
 
     //Profile GET call, requires user ID
     @GET("api/profiles/{id}")
-    Call<CardOfPeople> profileGet(@Header("Authorization") String userToken, @Header("id") String userid);
+    Call<CardOfPeople> profileGet(@Header("Authorization") String userToken, @Path("id") String userid);
 
     //Profile Invite POST, requires user ID
     @POST("api/invite/{userId}")
-    Call<Void> profileInvite(@Header("Authorization") String userToken, @Header("userId") String userId);
+    Call<Void> profileInvite(@Header("Authorization") String userToken, @Path("userId") long userId);
 
     //Pending invites GET
     @GET("api/pending-invites")
@@ -46,7 +47,7 @@ public interface TinderService {
 
     //PUT invite accept petition
     @PUT("api/invite/{id}/state/{state}")
-    Call<Void> inviteAnswer( @Header("Authorization") String userToken, @Header("id") long id, @Header("state") boolean state);
+    Call<Void> inviteAnswer( @Header("Authorization") String userToken, @Path("id") long id, @Path("state") boolean state);
 
     //GET accepted invites petition
     @GET("api/accepted-invites")

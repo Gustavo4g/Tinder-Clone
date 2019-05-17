@@ -8,12 +8,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tinder.Connection.TinderManager;
+import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
@@ -21,7 +23,7 @@ import com.example.tinder.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class PofileActivity extends AppCompatActivity implements RelationShipCallBack {
+public class PofileActivity extends AppCompatActivity implements RelationShipCallBack, InviteRequestCallBack {
 
     private CoordinatorLayout mainLayout;
     private TextView display;
@@ -40,11 +42,12 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     private TextView genderDisplay;
     private Button invite;
     private ImageView image;
+    private CardOfPeople value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mainLayout = findViewById(R.id.main_layout);
+        mainLayout = findViewById(R.id.main_layout2);
 
         setContentView(R.layout.profile);
         //Esto es para la barra de arriba
@@ -72,28 +75,40 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         image = findViewById(R.id.person_photo);
 
-        CardOfPeople value = TinderManager.getInstance().getAaaaa();
+        value = TinderManager.getInstance().getAaaaa();
 
-
-            displayName.setText(value.getDisplayName());
-            nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
-            AboutMe_Display.setText(value.getAboutMe());
+            if (value.getDisplayName() == null || value.getDisplayName().isEmpty()){
+                displayName.setText("No Name");
+            }else{
+                displayName.setText(value.getDisplayName());
+            }
+            if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
+                nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
+            }
+            if  (value.getAboutMe() != null) {
+                AboutMe_Display.setText(value.getAboutMe());
+            }
 
             if (value.getShowAge()){
                 Calendar a = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
                 String asd = sdf.format(a.getTime());
                 String o = asd.substring(0, 3);
-                int j = Integer.parseInt(o)- Integer.parseInt(value.getBirthDate().substring(0, 3));
-                if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))){
-                    j--;
-                }else{
-                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
-                            Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))){
+                if  (value.getBirthDate() != null) {
+                    int j = Integer.parseInt(o) - Integer.parseInt(value.getBirthDate().substring(0, 3));
+                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))) {
                         j--;
+                    } else {
+                        if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
+                                Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))) {
+                            j--;
+                        }
                     }
+                    AgeDisplay.setText(String.valueOf(j));
+                }else{
+                    Age.setVisibility(View.INVISIBLE);
+                    AgeDisplay.setVisibility(View.INVISIBLE);
                 }
-                AgeDisplay.setText(String.valueOf(j));
 
             }else {
                 Age.setVisibility(View.INVISIBLE);
@@ -113,19 +128,22 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender().equals("DO NOT SHOW")){
+            if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
                 genderDisplay.setText(value.getGender().getType());
             }
 
-            TinderManager.getInstance().getRelationship(this, (int) value.getId());
+            TinderManager.getInstance().getRelationship(this, (long) value.getId());
 
-            byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-            image.setImageBitmap(decodedByte);
+            if (value.getPicture() != null){
+                byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                image.setImageBitmap(decodedByte);
+            }else {
+                image.setImageResource(R.drawable.iscle);
+            }
 
             invite.setOnClickListener(v -> invite());
 
@@ -140,10 +158,11 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             case "Block":
 
-                break;
+            break;
 
             case "Tirar la caña" :
-
+                Log.d("user",value.getUser().getId()+"");
+                TinderManager.getInstance().profileInvite(this, (long) value.getUser().getId());
                 break;
 
         }
@@ -160,5 +179,15 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
         invite.setText("Tirar la caña");
 
         //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProfileInviteSuccess() {
+        Snackbar.make(findViewById(R.id.main_layout2), "¡Ya sabe que te gusta!", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onProfileInviteFailed(String reason) {
+        Snackbar.make(findViewById(R.id.main_layout2), "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }

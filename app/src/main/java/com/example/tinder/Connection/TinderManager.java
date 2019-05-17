@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
+import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
@@ -67,10 +68,10 @@ public class TinderManager {
         call.enqueue(new Callback<CardOfPeople[]>() {
             @Override
             public void onResponse(Call<CardOfPeople[]> call, Response<CardOfPeople[]> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     cardOfPeople = response.body();
                     mainActivity.onLogin2Success(null);
-                }else {
+                } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
                     mainActivity.onLogin2Failed(getProblem(response.code()));
@@ -161,7 +162,7 @@ public class TinderManager {
         });
     }
 
-    public void profilePut(DataCallback dataCallback, CardOfPeople profile){
+    public void profilePut(DataCallback dataCallback, CardOfPeople profile) {
         Call<Void> call = service.profilePut(userToken.getToken(), profile);
 
         call.enqueue(new Callback<Void>() {
@@ -183,7 +184,7 @@ public class TinderManager {
         });
     }
 
-    public void ownProfileGet(DataCallback dataCallback){
+    public void ownProfileGet(DataCallback dataCallback) {
         Call<CardOfPeople> call = service.myProfileGet(userToken.getToken());
 
         call.enqueue(new Callback<CardOfPeople>() {
@@ -205,7 +206,7 @@ public class TinderManager {
         });
     }
 
-    public void profileGet(DataCallback dataCallback, String userId){
+    public void profileGet(DataCallback dataCallback, String userId) {
         Call<CardOfPeople> call = service.profileGet(userToken.getToken(), userId);
 
         call.enqueue(new Callback<CardOfPeople>() {
@@ -227,8 +228,8 @@ public class TinderManager {
         });
     }
 
-    public void profileInvite(DataCallback dataCallback, String userId){
-        Call<Void> call = service.profileInvite(userToken.getToken(), userId);
+    public void profileInvite(InviteRequestCallBack dataCallback, long userId){
+        Call<Void> call = service.profileInvite("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -249,7 +250,7 @@ public class TinderManager {
         });
     }
 
-    public void pendingInvites(DataCallback dataCallback){
+    public void pendingInvites(DataCallback dataCallback) {
         Call<Invite[]> call = service.prendingInvites(userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
@@ -271,7 +272,7 @@ public class TinderManager {
         });
     }
 
-    public void inviteAnswer(DataCallback dataCallback, long id ,boolean state){
+    public void inviteAnswer(DataCallback dataCallback, long id, boolean state) {
         Call<Void> call = service.inviteAnswer(userToken.getToken(), id, state);
 
         call.enqueue(new Callback<Void>() {
@@ -294,7 +295,7 @@ public class TinderManager {
     }
 
 
-    public void acceptedInvites(DataCallback dataCallback){
+    public void acceptedInvites(DataCallback dataCallback) {
         Call<Invite[]> call = service.acceptedInvites(userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
@@ -328,7 +329,7 @@ public class TinderManager {
         return cardOfPeople;
     }
 
-    public void getRelationship(RelationShipCallBack dataCallback, int id){
+    public void getRelationship(RelationShipCallBack dataCallback, long id) {
         Call<CardOfPeople> call = service.getRelationship(userToken.getToken());
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
@@ -349,12 +350,12 @@ public class TinderManager {
         });
     }
 
-    public CardOfPeople getAaaaa(){
+    public CardOfPeople getAaaaa() {
 
         return aaaaa;
     }
 
-    public void setAaaaa(CardOfPeople aaaaa){
+    public void setAaaaa(CardOfPeople aaaaa) {
         this.aaaaa = aaaaa;
     }
 }

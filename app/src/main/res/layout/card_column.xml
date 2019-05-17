@@ -65,17 +65,6 @@
             card_view:layout_constraintTop_toTopOf="@+id/barrier3" />
 
         <ImageView
-            android:id="@+id/dislike"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/heart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic__ionicons_svg_md_heart_dislike" />
-
-        <ImageView
             android:id="@+id/heart"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -83,7 +72,8 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dislike"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic__ionicons_svg_md_heart" />
 
         <android.support.constraint.Barrier
@@ -99,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             card_view:barrierDirection="top"
-            card_view:constraint_referenced_ids="heart,dislike"
+            card_view:constraint_referenced_ids="heart"
             tools:layout_editor_absoluteY="731dp" />
 
         <TextView
