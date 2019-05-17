@@ -10,4 +10,8 @@ public class UserToken {
     public String getToken() {
         return id_token;
     }
+
+    public void setToken(String id_token) {
+        this.id_token = id_token;
+    }
 }

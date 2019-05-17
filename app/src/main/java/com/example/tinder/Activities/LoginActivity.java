@@ -1,6 +1,8 @@
 package com.example.tinder.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -73,11 +75,17 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
 
     @Override
-    public void onLoginSuccess(Object UserToken) {
-
+    public void onLoginSuccess(Object userToken) {
         runOnUiThread(() -> {
+            if (rememberMeCheckBox.isChecked()) {
+                SharedPreferences.Editor sharedPrefEditor = getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit();
+                sharedPrefEditor.putBoolean("rememberMe", true);
+                sharedPrefEditor.putString("userToken", (String) userToken);
+                sharedPrefEditor.apply();
+            }
             // Create the MainActivity intent
-            Intent mainActivityIntent = new Intent(this, MainActivity.class);
+            Intent mainActivityIntent = new Intent(this, SearchActivity.class);
             // Start MainActivity via the intent
             startActivity(mainActivityIntent);
             // Finish the LoginActivity

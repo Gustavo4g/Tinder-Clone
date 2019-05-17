@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
+import com.example.tinder.Interfaces.IIsAuthenticated;
 import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
@@ -18,9 +19,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class TinderManager {
-    private final String TAG = "Salle Tinder";
+    private static final String TAG = "TinderManager";
     private final String BASE_URL = "http://android2.byted.xyz/";
 
     private TinderService service;
@@ -32,6 +34,7 @@ public class TinderManager {
     private TinderManager() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -81,6 +84,38 @@ public class TinderManager {
         });
     }
 
+    public void setUserToken(String token) {
+        if (this.userToken == null) {
+            this.userToken = new UserToken(token);
+        } else {
+            this.userToken.setToken(token);
+        }
+    }
+
+    public void authenticate(IIsAuthenticated callback, String token) {
+        Call<String> call = service.authenticate("Bearer " + token);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() == null || response.body().isEmpty()) {
+                        callback.failure();
+                    } else {
+                        callback.success();
+                        setUserToken(token);
+                    }
+                } else {
+                    callback.failure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                callback.failure();
+            }
+        });
+    }
+
     public void login(LoginCallBack loginCallBack, Login login) {
         Call<UserToken> call = service.login(login);
         call.enqueue(new Callback<UserToken>() {
@@ -88,7 +123,7 @@ public class TinderManager {
             public void onResponse(Call<UserToken> call, Response<UserToken> response) {
                 if (response.isSuccessful()) {
                     userToken = response.body();
-                    loginCallBack.onLoginSuccess(null);
+                    loginCallBack.onLoginSuccess(userToken.getToken());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
