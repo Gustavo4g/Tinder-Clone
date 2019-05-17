@@ -76,8 +76,12 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
 
             displayName.setText(value.getDisplayName());
-            nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
-            AboutMe_Display.setText(value.getAboutMe());
+            if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
+                nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
+            }
+            if  (value.getAboutMe() != null) {
+                AboutMe_Display.setText(value.getAboutMe());
+            }
 
             if (value.getShowAge()){
                 Calendar a = Calendar.getInstance();
