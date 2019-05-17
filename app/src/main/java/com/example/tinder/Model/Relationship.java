@@ -11,14 +11,14 @@ public class Relationship {
         return id;
     }
 
-    public String getStatus() {
-        return status;
+    public void setId(float id) {
+        this.id = id;
     }
 
     // Setter Methods
 
-    public void setId(float id) {
-        this.id = id;
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {

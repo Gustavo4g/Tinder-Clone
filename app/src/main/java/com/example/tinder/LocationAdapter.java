@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tinder.Activities.PofileActivity;
+import com.example.tinder.Activities.ProfileActivity;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Model.CardOfPeople;
 
@@ -83,7 +83,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         viewHolder.mainLayout.setOnClickListener(v -> {
             TinderManager.getInstance().setAaaaa(profile);
             Context context = viewHolder.mainLayout.getContext();
-            context.startActivity(new Intent(context, PofileActivity.class));
+            context.startActivity(new Intent(context, ProfileActivity.class));
         });
     }
 
@@ -98,9 +98,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, description, age, location;
-        ImageView image;
-        ConstraintLayout mainLayout;
+        final TextView name;
+        final TextView description;
+        final TextView age;
+        final TextView location;
+        final ImageView image;
+        final ConstraintLayout mainLayout;
 
         ViewHolder(View view) {
             super(view);

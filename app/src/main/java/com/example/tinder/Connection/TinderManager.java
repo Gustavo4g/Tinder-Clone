@@ -29,7 +29,7 @@ public class TinderManager {
     private static final String TAG = "TinderManager";
     private final String BASE_URL = "http://android2.byted.xyz/";
 
-    private TinderService service;
+    private final TinderService service;
     private UserToken userToken;
 
     private CardOfPeople[] cardOfPeople;
@@ -43,11 +43,6 @@ public class TinderManager {
                 .build();
 
         service = retrofit.create(TinderService.class);
-    }
-
-
-    private static class Holder {
-        private static final TinderManager instance = new TinderManager();
     }
 
     public static TinderManager getInstance() {
@@ -88,14 +83,6 @@ public class TinderManager {
                 mainActivity.onLogin2Failed(t.getMessage());
             }
         });
-    }
-
-    public void setUserToken(String token) {
-        if (this.userToken == null) {
-            this.userToken = new UserToken(token);
-        } else {
-            this.userToken.setToken(token);
-        }
     }
 
     public void authenticate(IIsAuthenticated callback, String token) {
@@ -233,7 +220,7 @@ public class TinderManager {
         });
     }
 
-    public void profileInvite(InviteRequestCallBack dataCallback, long userId){
+    public void profileInvite(InviteRequestCallBack dataCallback, long userId) {
         Call<Void> call = service.profileInvite("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {
@@ -299,7 +286,6 @@ public class TinderManager {
         });
     }
 
-
     public void acceptedInvites(DataCallback dataCallback) {
         Call<Invite[]> call = service.acceptedInvites(userToken.getToken());
 
@@ -324,6 +310,14 @@ public class TinderManager {
 
     public UserToken getUserToken() {
         return userToken;
+    }
+
+    private void setUserToken(String token) {
+        if (this.userToken == null) {
+            this.userToken = new UserToken(token);
+        } else {
+            this.userToken.setToken(token);
+        }
     }
 
     public void setUserToken(UserToken userToken) {
@@ -362,5 +356,9 @@ public class TinderManager {
 
     public void setAaaaa(CardOfPeople aaaaa) {
         this.aaaaa = aaaaa;
+    }
+
+    private static class Holder {
+        private static final TinderManager instance = new TinderManager();
     }
 }

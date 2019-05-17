@@ -6,7 +6,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -56,8 +55,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterCallB
         String email = this.emailEditText.getText().toString();
         if (password.equals(passwordConfirmation)) {
             TinderManager.getInstance().register(this, new Register(email, "en", username, password));
-        }else{
-                Snackbar.make(mainLayout, "Password and Confirm Password must be the same.", Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(mainLayout, "Password and Confirm Password must be the same.", Snackbar.LENGTH_LONG).show();
 
         }
     }

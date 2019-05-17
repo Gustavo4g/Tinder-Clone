@@ -23,7 +23,7 @@ import com.example.tinder.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class PofileActivity extends AppCompatActivity implements RelationShipCallBack, InviteRequestCallBack {
+public class ProfileActivity extends AppCompatActivity implements RelationShipCallBack, InviteRequestCallBack {
 
     private CoordinatorLayout mainLayout;
     private TextView display;
@@ -45,11 +45,11 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     private CardOfPeople value;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainLayout = findViewById(R.id.main_layout2);
 
-        setContentView(R.layout.profile);
+        setContentView(R.layout.activity_profile);
         //Esto es para la barra de arriba
         this.getSupportActionBar().setDisplayShowHomeEnabled(false);
         this.getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -77,91 +77,89 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         value = TinderManager.getInstance().getAaaaa();
 
-            if (value.getDisplayName() == null || value.getDisplayName().isEmpty()){
-                displayName.setText("No Name");
-            }else{
-                displayName.setText(value.getDisplayName());
-            }
-            if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
-                nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
-            }
-            if  (value.getAboutMe() != null) {
-                AboutMe_Display.setText(value.getAboutMe());
-            }
+        if (value.getDisplayName() == null || value.getDisplayName().isEmpty()) {
+            displayName.setText("No Name");
+        } else {
+            displayName.setText(value.getDisplayName());
+        }
+        if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
+            nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
+        }
+        if (value.getAboutMe() != null) {
+            AboutMe_Display.setText(value.getAboutMe());
+        }
 
-            if (value.getShowAge()){
-                Calendar a = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
-                String asd = sdf.format(a.getTime());
-                String o = asd.substring(0, 3);
-                if  (value.getBirthDate() != null) {
-                    int j = Integer.parseInt(o) - Integer.parseInt(value.getBirthDate().substring(0, 3));
-                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))) {
+        if (value.getShowAge()) {
+            Calendar a = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
+            String asd = sdf.format(a.getTime());
+            String o = asd.substring(0, 3);
+            if (value.getBirthDate() != null) {
+                int j = Integer.parseInt(o) - Integer.parseInt(value.getBirthDate().substring(0, 3));
+                if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))) {
+                    j--;
+                } else {
+                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
+                            Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))) {
                         j--;
-                    } else {
-                        if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
-                                Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))) {
-                            j--;
-                        }
                     }
-                    AgeDisplay.setText(String.valueOf(j));
-                }else{
-                    Age.setVisibility(View.INVISIBLE);
-                    AgeDisplay.setVisibility(View.INVISIBLE);
                 }
-
-            }else {
+                AgeDisplay.setText(String.valueOf(j));
+            } else {
                 Age.setVisibility(View.INVISIBLE);
                 AgeDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getHeight()>0){
-                if (value.getUnitSystem().equals("METRIC")) {
-                    heighDisplay.setText(String.valueOf(value.getHeight()));
-                    weightDisplay.setText(String.valueOf(value.getWeight()));
-                }else{
-                    heighDisplay.setText(String.valueOf(value.getHeight()*3.28));
-                    weightDisplay.setText(String.valueOf(value.getWeight()*2.2));
-                }
-            }else{
-                heigh.setVisibility(View.INVISIBLE);
-                heighDisplay.setVisibility(View.INVISIBLE);
+        } else {
+            Age.setVisibility(View.INVISIBLE);
+            AgeDisplay.setVisibility(View.INVISIBLE);
+        }
+
+        if (value.getHeight() > 0) {
+            if (value.getUnitSystem().equals("METRIC")) {
+                heighDisplay.setText(String.valueOf(value.getHeight()));
+                weightDisplay.setText(String.valueOf(value.getWeight()));
+            } else {
+                heighDisplay.setText(String.valueOf(value.getHeight() * 3.28));
+                weightDisplay.setText(String.valueOf(value.getWeight() * 2.2));
             }
+        } else {
+            heigh.setVisibility(View.INVISIBLE);
+            heighDisplay.setVisibility(View.INVISIBLE);
+        }
 
-            if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")){
-                genderDisplay.setVisibility(View.INVISIBLE);
-                Gender.setVisibility(View.INVISIBLE);
-            }else{
-                genderDisplay.setText(value.getGender().getType());
-            }
+        if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")) {
+            genderDisplay.setVisibility(View.INVISIBLE);
+            Gender.setVisibility(View.INVISIBLE);
+        } else {
+            genderDisplay.setText(value.getGender().getType());
+        }
 
-            TinderManager.getInstance().getRelationship(this, (long) value.getId());
+        TinderManager.getInstance().getRelationship(this, (long) value.getId());
 
-            if (value.getPicture() != null){
-                byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
-                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                image.setImageBitmap(decodedByte);
-            }else {
-                image.setImageResource(R.drawable.iscle);
-            }
+        if (value.getPicture() != null) {
+            byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            image.setImageBitmap(decodedByte);
+        } else {
+            image.setImageResource(R.drawable.iscle);
+        }
 
-            invite.setOnClickListener(v -> invite());
-
-
+        invite.setOnClickListener(v -> invite());
 
 
     }
 
-    private void invite(){
+    private void invite() {
 
-        switch (invite.getText().toString()){
+        switch (invite.getText().toString()) {
 
             case "Block":
 
-            break;
+                break;
 
-            case "Tirar la caña" :
-                Log.d("user",value.getUser().getId()+"");
+            case "Tirar la caña":
+                Log.d("user", value.getUser().getId() + "");
                 TinderManager.getInstance().profileInvite(this, (long) value.getUser().getId());
                 break;
 

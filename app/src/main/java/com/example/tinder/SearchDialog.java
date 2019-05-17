@@ -34,7 +34,7 @@ public abstract class SearchDialog extends Dialog {
         return new SimpleDateFormat("yyyy-MM-dd").format(birthday.getTime());
     }
 
-    public abstract void onSearch(HashMap<String, String> parameters);
+    protected abstract void onSearch(HashMap<String, String> parameters);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

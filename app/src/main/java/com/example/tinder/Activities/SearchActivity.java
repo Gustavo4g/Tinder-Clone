@@ -67,12 +67,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
                     TinderManager.getInstance().searchUsers(new DataBack() {
                         @Override
                         public void onLogin2Success(Object id_token) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    startActivity(new Intent(SearchActivity.this, Invitacion.class));
-                                }
-                            });
+                            runOnUiThread(() -> startActivity(new Intent(SearchActivity.this, Invitacion.class)));
                         }
 
                         @Override
