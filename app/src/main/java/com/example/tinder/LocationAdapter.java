@@ -1,8 +1,11 @@
 package com.example.tinder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -11,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tinder.Activities.PofileActivity;
+import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Model.CardOfPeople;
 
 import java.util.ArrayList;
@@ -74,6 +79,12 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         if (profile.getLocation() != null) {
             viewHolder.location.setText(profile.getLocation().getAddress());
         }
+
+        viewHolder.mainLayout.setOnClickListener(v -> {
+            TinderManager.getInstance().setAaaaa(profile);
+            Context context = viewHolder.mainLayout.getContext();
+            context.startActivity(new Intent(context, PofileActivity.class));
+        });
     }
 
     @Override
@@ -89,9 +100,11 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, description, age, location;
         ImageView image;
+        ConstraintLayout mainLayout;
 
         ViewHolder(View view) {
             super(view);
+            mainLayout = view.findViewById(R.id.main_layout);
             image = view.findViewById(R.id.person_photo);
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
