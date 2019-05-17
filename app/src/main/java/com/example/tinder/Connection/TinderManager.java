@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
+import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.LoginCallBack;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
@@ -227,7 +228,7 @@ public class TinderManager {
         });
     }
 
-    public void profileInvite(DataCallback dataCallback, String userId){
+    public void profileInvite(InviteRequestCallBack dataCallback, String userId){
         Call<Void> call = service.profileInvite(userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {
