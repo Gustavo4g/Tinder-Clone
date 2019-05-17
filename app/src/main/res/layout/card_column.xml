@@ -90,6 +90,7 @@
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="heart"
             card_view:barrierDirection="top"
+            card_view:constraint_referenced_ids="heart"
             tools:layout_editor_absoluteY="731dp" />
 
         <TextView
