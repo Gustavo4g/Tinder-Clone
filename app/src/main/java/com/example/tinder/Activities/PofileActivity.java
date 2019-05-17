@@ -77,8 +77,11 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
         value = TinderManager.getInstance().getAaaaa();
 
-
-            displayName.setText(value.getDisplayName());
+            if (value.getDisplayName() == null || value.getDisplayName().isEmpty()){
+                displayName.setText("No Name");
+            }else{
+                displayName.setText(value.getDisplayName());
+            }
             if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
                 nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
             }
@@ -158,7 +161,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
             break;
 
             case "Tirar la caña" :
-                TinderManager.getInstance().profileInvite(this, (long)value.getId());
+                TinderManager.getInstance().profileInvite(this, (long) value.getId());
                 break;
 
         }
