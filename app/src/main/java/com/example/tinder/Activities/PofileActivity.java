@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -183,6 +184,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
     @Override
     public void onProfileInviteFailed(String reason) {
-        Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
+        Log.d("INVITE:" , "onProfileInviteFailed: " + reason);
+        //Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }
