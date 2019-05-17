@@ -47,7 +47,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mainLayout = findViewById(R.id.main_layout);
+        mainLayout = findViewById(R.id.main_layout2);
 
         setContentView(R.layout.profile);
         //Esto es para la barra de arriba
@@ -161,7 +161,8 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
             break;
 
             case "Tirar la caña" :
-                TinderManager.getInstance().profileInvite(this, (long) value.getId());
+                Log.d("user",value.getUser().getId()+"");
+                TinderManager.getInstance().profileInvite(this, (long) value.getUser().getId());
                 break;
 
         }
@@ -182,12 +183,11 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
     @Override
     public void onProfileInviteSuccess() {
-        Snackbar.make(mainLayout, "¡Ya sabe que te gusta!", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.main_layout2), "¡Ya sabe que te gusta!", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void onProfileInviteFailed(String reason) {
-        Log.d("INVITE:" , "onProfileInviteFailed: " + reason);
-        //Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.main_layout2), "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }
