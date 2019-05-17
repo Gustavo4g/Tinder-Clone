@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -90,16 +91,21 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd");
                 String asd = sdf.format(a.getTime());
                 String o = asd.substring(0, 3);
-                int j = Integer.parseInt(o)- Integer.parseInt(value.getBirthDate().substring(0, 3));
-                if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))){
-                    j--;
-                }else{
-                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
-                            Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))){
+                if  (value.getBirthDate() != null) {
+                    int j = Integer.parseInt(o) - Integer.parseInt(value.getBirthDate().substring(0, 3));
+                    if (Integer.parseInt(value.getBirthDate().substring(5, 6)) < Integer.parseInt(asd.substring(5, 6))) {
                         j--;
+                    } else {
+                        if (Integer.parseInt(value.getBirthDate().substring(5, 6)) == Integer.parseInt(asd.substring(5, 6)) &&
+                                Integer.parseInt(value.getBirthDate().substring(8, 9)) < Integer.parseInt(asd.substring(8, 9))) {
+                            j--;
+                        }
                     }
+                    AgeDisplay.setText(String.valueOf(j));
+                }else{
+                    Age.setVisibility(View.INVISIBLE);
+                    AgeDisplay.setVisibility(View.INVISIBLE);
                 }
-                AgeDisplay.setText(String.valueOf(j));
 
             }else {
                 Age.setVisibility(View.INVISIBLE);
@@ -119,7 +125,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
                 heighDisplay.setVisibility(View.INVISIBLE);
             }
 
-            if (value.getGender() == null && value.getGender().equals("DO NOT SHOW")){
+            if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")){
                 genderDisplay.setVisibility(View.INVISIBLE);
                 Gender.setVisibility(View.INVISIBLE);
             }else{
@@ -128,10 +134,13 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             TinderManager.getInstance().getRelationship(this, (int) value.getId());
 
-            byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-            image.setImageBitmap(decodedByte);
+            if (value.getPicture() != null){
+                byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                image.setImageBitmap(decodedByte);
+            }else {
+                image.setImageResource(R.drawable.iscle);
+            }
 
             invite.setOnClickListener(v -> invite());
 
@@ -175,6 +184,7 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
     @Override
     public void onProfileInviteFailed(String reason) {
-        Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
+        Log.d("INVITE:" , "onProfileInviteFailed: " + reason);
+        //Snackbar.make(mainLayout, "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }
