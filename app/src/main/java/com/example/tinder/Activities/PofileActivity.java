@@ -134,10 +134,13 @@ public class PofileActivity extends AppCompatActivity implements RelationShipCal
 
             TinderManager.getInstance().getRelationship(this, (int) value.getId());
 
-            byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-            image.setImageBitmap(decodedByte);
+            if (value.getPicture() != null){
+                byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
+                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                image.setImageBitmap(decodedByte);
+            }else {
+                image.setImageResource(R.drawable.iscle);
+            }
 
             invite.setOnClickListener(v -> invite());
 
