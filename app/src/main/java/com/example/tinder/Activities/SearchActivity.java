@@ -46,6 +46,11 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
             startActivity(peticionAmistad);
         });
 
+        ImageButton chats = getSupportActionBar().getCustomView().findViewById(R.id.action_chat);
+        chats.setOnClickListener(v -> {
+            startActivity(new Intent(SearchActivity.this, ChatListActivity.class));
+        });
+
         profileRV = findViewById(R.id.profile_rv);
         profileRV.setHasFixedSize(true);
         profileRV.setLayoutManager(new LinearLayoutManager(this));
