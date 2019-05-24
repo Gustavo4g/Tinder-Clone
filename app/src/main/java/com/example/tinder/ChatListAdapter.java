@@ -1,5 +1,7 @@
 package com.example.tinder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tinder.Activities.chatRoomActivity;
 import com.example.tinder.Model.ChatRow;
 
 import java.util.ArrayList;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
+    private Context context;
     private ArrayList<ChatRow> chatList;
 
-    public ChatListAdapter(ArrayList<ChatRow> chatList) {
+    public ChatListAdapter(Context context, ArrayList<ChatRow> chatList) {
+        this.context = context;
         this.chatList = chatList;
     }
 
@@ -34,6 +39,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         viewHolder.name.setText(row.getName());
         viewHolder.lastMessage.setText(row.getLastMessage());
+        viewHolder.mainLayout.setOnClickListener(v -> {
+            Intent chatRoomIntent = new Intent(context, chatRoomActivity.class);
+            chatRoomIntent.putExtra("USER_ID", row.getId());
+            context.startActivity(chatRoomIntent);
+        });
     }
 
     @Override
