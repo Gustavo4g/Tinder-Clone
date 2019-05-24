@@ -21,6 +21,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     private ArrayList<ChatRow> chatList;
 
     public ChatListAdapter(Context context, ArrayList<ChatRow> chatList) {
+        if (chatList == null) chatList = new ArrayList<>();
         this.context = context;
         this.chatList = chatList;
     }

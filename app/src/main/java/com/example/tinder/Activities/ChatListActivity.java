@@ -30,15 +30,10 @@ public class ChatListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        ArrayList<ChatRow> chatList = new ArrayList<>();
-        chatList.add(new ChatRow(0, "Gustavo", "Hola guapo ❤"));
-        chatList.add(new ChatRow(1, "Natalia", "jaja ya ves! \uD83D\uDE0F tengo ganas de hacerlo ya..."));
-        chatList.add(new ChatRow(2, "Emoji man", "\uD83D\uDE0F\uD83D\uDCA9\uD83E\uDD20\uD83E\uDD15\uD83D\uDE25\uD83D\uDC7A\uD83D\uDC85\uD83D\uDC69\u200D\uD83D\uDE92\uD83D\uDC83\uD83D\uDE21\uD83E\uDD70\uD83D\uDE07\uD83D\uDE0E\uD83C\uDF14\uD83D\uDC1F\uD83D\uDC37\uD83C\uDF73\uD83E\uDD5D\uD83C\uDFD3\uD83C\uDFCC️\u200D♀️\uD83C\uDFB8\uD83C\uDFAF\uD83E\uDDE9\uD83D\uDEF4\uD83D\uDE86\uD83C\uDFF0\uD83D\uDCEE\uD83C\uDF21\uD83D\uDD28\uD83E\uDDFA\uD83D\uDCC5\uD83D\uDCE8\uD83E\uDDFC\uD83D\uDD03❓4️⃣\uD83D\uDCAC\uD83D\uDC41️\u200D\uD83D\uDDE8️\uD83E\uDDDF\u200D♂️\uD83E\uDDDA\u200D♂️\uD83D\uDE25\uD83E\uDD29\uD83D\uDE03"));
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ChatListAdapter chatListAdapter = new ChatListAdapter(this, chatList);
+        ChatListAdapter chatListAdapter = new ChatListAdapter(this, null);
         recyclerView.setAdapter(chatListAdapter);
     }
 }
