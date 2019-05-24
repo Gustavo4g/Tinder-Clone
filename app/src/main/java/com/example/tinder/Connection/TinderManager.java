@@ -27,7 +27,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class TinderManager {
     private static final String TAG = "TinderManager";
-    private final String BASE_URL = "http://android2.byted.xyz/";
+    private final String BASE_URL = "http://android3.byted.xyz/";
 
     private final TinderService service;
     private UserToken userToken;
