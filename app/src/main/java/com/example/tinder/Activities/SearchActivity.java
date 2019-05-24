@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
@@ -25,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
 
     private RecyclerView profileRV;
     private LocationAdapter profileRVAdapter;
+    private LinearLayout loadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
         TinderManager.getInstance().searchUsers(this, null);
+        loadingView = findViewById(R.id.loading_layout);
 
         ImageButton settings = getSupportActionBar().getCustomView().findViewById(R.id.action_gear);
         settings.setOnClickListener(v -> {
@@ -90,10 +94,11 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
     @Override
     public void onLogin2Success(Object id_token) {
         profileRVAdapter.setDataset(new ArrayList<>(Arrays.asList(TinderManager.getInstance().getCardOfPeople())));
+        loadingView.setVisibility(View.GONE);
     }
 
     @Override
     public void onLogin2Failed(String reason) {
-
+        loadingView.setVisibility(View.GONE);
     }
 }
