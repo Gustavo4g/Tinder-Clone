@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.tinder.Connection.TinderManager;
@@ -44,13 +45,13 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         TinderManager.getInstance().searchUsers(this, null);
         loadingView = findViewById(R.id.loading_layout);
 
-        ImageButton settings = getSupportActionBar().getCustomView().findViewById(R.id.action_gear);
+        ImageView settings = getSupportActionBar().getCustomView().findViewById(R.id.action_gear);
         settings.setOnClickListener(v -> {
             Intent peticionAmistad = new Intent(SearchActivity.this, Invitacion.class);
             startActivity(peticionAmistad);
         });
 
-        ImageButton chats = getSupportActionBar().getCustomView().findViewById(R.id.action_chat);
+        ImageView chats = getSupportActionBar().getCustomView().findViewById(R.id.action_chat);
         chats.setOnClickListener(v -> {
             startActivity(new Intent(SearchActivity.this, ChatListActivity.class));
         });
