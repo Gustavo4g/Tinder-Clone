@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/chat"
+        android:layout_width="84dp"
+        android:layout_height="37dp"
+        android:background="#45F5A5"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="-1dp" />
+</android.support.constraint.ConstraintLayout>
