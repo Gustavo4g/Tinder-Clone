@@ -18,6 +18,9 @@ import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,9 +30,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class TinderManager {
     private static final String TAG = "TinderManager";
-    private final String BASE_URL = "http://android2.byted.xyz/";
+    private final String BASE_URL = "http://android3.byted.xyz/";
 
-    private TinderService service;
+    private final TinderService service;
     private UserToken userToken;
 
     private CardOfPeople[] cardOfPeople;
@@ -43,11 +46,6 @@ public class TinderManager {
                 .build();
 
         service = retrofit.create(TinderService.class);
-    }
-
-
-    private static class Holder {
-        private static final TinderManager instance = new TinderManager();
     }
 
     public static TinderManager getInstance() {
@@ -65,9 +63,11 @@ public class TinderManager {
         }
     }
 
-
-    public void searchUsers(DataBack mainActivity) {
-        Call<CardOfPeople[]> call = service.getProfiles("Bearer " + userToken.getToken());
+    public void searchUsers(DataBack mainActivity, Map<String, String> parameters) {
+        if (parameters == null) {
+            parameters = new HashMap<>();
+        }
+        Call<CardOfPeople[]> call = service.getProfiles("Bearer " + userToken.getToken(), parameters);
         call.enqueue(new Callback<CardOfPeople[]>() {
             @Override
             public void onResponse(Call<CardOfPeople[]> call, Response<CardOfPeople[]> response) {
@@ -86,14 +86,6 @@ public class TinderManager {
                 mainActivity.onLogin2Failed(t.getMessage());
             }
         });
-    }
-
-    public void setUserToken(String token) {
-        if (this.userToken == null) {
-            this.userToken = new UserToken(token);
-        } else {
-            this.userToken.setToken(token);
-        }
     }
 
     public void authenticate(IIsAuthenticated callback, String token) {
@@ -231,7 +223,7 @@ public class TinderManager {
         });
     }
 
-    public void profileInvite(InviteRequestCallBack dataCallback, long userId){
+    public void profileInvite(InviteRequestCallBack dataCallback, long userId) {
         Call<Void> call = service.profileInvite("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<Void>() {
@@ -297,7 +289,6 @@ public class TinderManager {
         });
     }
 
-
     public void acceptedInvites(DataCallback dataCallback) {
         Call<Invite[]> call = service.acceptedInvites(userToken.getToken());
 
@@ -322,6 +313,14 @@ public class TinderManager {
 
     public UserToken getUserToken() {
         return userToken;
+    }
+
+    private void setUserToken(String token) {
+        if (this.userToken == null) {
+            this.userToken = new UserToken(token);
+        } else {
+            this.userToken.setToken(token);
+        }
     }
 
     public void setUserToken(UserToken userToken) {
@@ -404,5 +403,9 @@ public class TinderManager {
                 dataCallback.onPostMessageFailed(t.getMessage());
             }
         });
+    }
+
+    private static class Holder {
+        private static final TinderManager instance = new TinderManager();
     }
 }

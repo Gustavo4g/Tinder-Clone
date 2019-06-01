@@ -1,7 +1,5 @@
 package com.example.tinder.Model;
 
-import java.io.Serializable;
-
 public class Ethnicity {
     private float id;
     private String ethnicity;
@@ -13,14 +11,14 @@ public class Ethnicity {
         return id;
     }
 
-    public String getEthnicity() {
-        return ethnicity;
+    public void setId(float id) {
+        this.id = id;
     }
 
     // Setter Methods
 
-    public void setId(float id) {
-        this.id = id;
+    public String getEthnicity() {
+        return ethnicity;
     }
 
     public void setEthnicity(String ethnicity) {

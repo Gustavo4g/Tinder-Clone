@@ -1,22 +1,17 @@
 package com.example.tinder.Activities;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.widget.ImageButton;
 
 import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.Connection.TinderService;
 import com.example.tinder.InvitacionAdapter;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +35,7 @@ public class Invitacion extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerview);
         invitacionAdapter = new InvitacionAdapter(peopleList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(invitacionAdapter);

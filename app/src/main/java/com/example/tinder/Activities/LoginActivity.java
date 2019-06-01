@@ -27,10 +27,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     private String username;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Login - Tinder"); //posar el nom que vulguem
+        setTitle("Login - Tinder");
 
         mainLayout = findViewById(R.id.main_layout);
         usernameEditText = findViewById(R.id.username);
@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         loginButton.setOnClickListener(v -> login());
         forgotPassword.setOnClickListener(v -> forgotPassword());
         registerButton.setOnClickListener(v -> register());
-
     }
 
     private void login() {
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     }
 
     private void forgotPassword() {
-         Snackbar.make(mainLayout, "No, you didn't", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mainLayout, "No, you didn't", Snackbar.LENGTH_LONG).show();
     }
 
     private void register() {
