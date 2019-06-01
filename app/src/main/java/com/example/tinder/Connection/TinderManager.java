@@ -7,11 +7,14 @@ import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
 import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.LoginCallBack;
+import com.example.tinder.Interfaces.GetMessageCallback;
+import com.example.tinder.Interfaces.PostMessageCallback;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
+import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
@@ -357,5 +360,49 @@ public class TinderManager {
 
     public void setAaaaa(CardOfPeople aaaaa) {
         this.aaaaa = aaaaa;
+    }
+
+    public void getMessages(GetMessageCallback dataCallback, Message m){
+        Call<Object> call = service.getMessages(userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
+
+        call.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onGetMessagesSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onGetMessagesFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                dataCallback.onGetMessagesFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void postMessages(PostMessageCallback dataCallback, Message m){
+        Call<Void> call = service.postMessage(userToken.getToken(), m);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onPostMessageSuccess();
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onPostMessageFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                dataCallback.onPostMessageFailed(t.getMessage());
+            }
+        });
     }
 }
