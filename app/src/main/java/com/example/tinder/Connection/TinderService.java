@@ -4,6 +4,7 @@ package com.example.tinder.Connection;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
+import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.UserToken;
 
@@ -14,6 +15,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface TinderService {
 
@@ -57,10 +59,19 @@ public interface TinderService {
     @GET("api/profiles")
     Call<CardOfPeople[]> getProfiles(@Header("Authorization") String userToken);
 
+    //Relationship get on an id
     @GET("api/relationships/{id}")
     Call<CardOfPeople> getRelationship(@Header("Authorization") String userToken);
 
+    //authenticating own user by a token
     @GET("api/authenticate")
     Call<String> authenticate(@Header("Authorization") String userToken);
 
+    @GET("/api/direct-messages")
+    Call<Object> getMessages(@Header("Authorization") String userToken,
+                             @Query("RecipientId.equals") float recipientId,
+                             @Query("SenderId.equals") float senderId);
+
+    @POST("/api/direct-messages")
+    Call<Void> postMessage(@Header("Authorization") String userToken, @Body Message message);
 }
