@@ -40,6 +40,15 @@ public class TinderManager {
     private Invite[] acepted_invitations;
     private CardOfPeople aaaaa;
 
+
+    public Invite[] getPending_invitations() {
+        return pending_invitations;
+    }
+
+    public Invite[] getAcepted_invitations() {
+        return acepted_invitations;
+    }
+
     private TinderManager() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

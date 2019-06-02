@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.tinder.Activities.ProfileActivity;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Invite;
 
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +49,13 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
             viewHolder.age.setText(getAge(year, month, day));
         } else {
             viewHolder.age.setText("-");
+        }
+        viewHolder.heart.setVisibility(View.GONE);
+        Invite[] pending =  TinderManager.getInstance().getPending_invitations();
+        for (Invite h : pending) {
+            if (h.getSent().getId() == profile.getId()){
+                viewHolder.heart.setVisibility(View.VISIBLE);
+            }
         }
 
         if (profile.getPicture() != null) {
@@ -96,6 +104,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
         final TextView description;
         final TextView age;
         final ImageView image;
+        final ImageView heart;
 
         ViewHolder(View view) {
             super(view);
@@ -104,6 +113,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);
+            heart = view.findViewById(R.id.heart);
         }
 
         View getView() {
