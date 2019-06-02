@@ -362,11 +362,11 @@ public class TinderManager {
     }
 
     public void getMessages(GetMessageCallback dataCallback, Message m){
-        Call<Object> call = service.getMessages(userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
+        Call<Message[]> call = service.getMessages(userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
 
-        call.enqueue(new Callback<Object>() {
+        call.enqueue(new Callback<Message[]>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
+            public void onResponse(Call<Message[]> call, Response<Message[]> response) {
                 if (response.isSuccessful()) {
                     dataCallback.onGetMessagesSuccess();
                 } else {
@@ -377,7 +377,7 @@ public class TinderManager {
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<Message[]> call, Throwable t) {
                 dataCallback.onGetMessagesFailed(t.getMessage());
             }
         });

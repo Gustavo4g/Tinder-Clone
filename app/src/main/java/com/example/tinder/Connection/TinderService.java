@@ -71,7 +71,7 @@ interface TinderService {
     Call<String> authenticate(@Header("Authorization") String userToken);
 
     @GET("/api/direct-messages")
-    Call<Object> getMessages(@Header("Authorization") String userToken,
+    Call<Message[]> getMessages(@Header("Authorization") String userToken,
                              @Query("RecipientId.equals") float recipientId,
                              @Query("SenderId.equals") float senderId);
 
