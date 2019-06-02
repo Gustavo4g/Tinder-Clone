@@ -181,7 +181,7 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
 
     @Override
     public void onProfileInviteSuccess() {
-        Snackbar.make(findViewById(R.id.main_layout2), "¡Ya sabe que te gusta!", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.main_layout2), "¡Esperemos que también le gustes!", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
