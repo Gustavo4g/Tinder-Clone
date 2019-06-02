@@ -36,6 +36,8 @@ public class TinderManager {
     private UserToken userToken;
 
     private CardOfPeople[] cardOfPeople;
+    private Invite[] pending_invitations;
+    private Invite[] acepted_invitations;
     private CardOfPeople aaaaa;
 
     private TinderManager() {
@@ -246,23 +248,24 @@ public class TinderManager {
     }
 
     public void pendingInvites(DataCallback dataCallback) {
-        Call<Invite[]> call = service.prendingInvites(userToken.getToken());
+        Call<Invite[]> call = service.prendingInvites("Bearer "+ userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
             @Override
             public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onPendingInvitesSuccess(response.body());
+                    pending_invitations = response.body();
+                    //dataCallback.onPendingInvitesSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onPendingInvitesFailed(getProblem(response.code()));
+                    //dataCallback.onPendingInvitesFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Invite[]> call, Throwable t) {
-                dataCallback.onPendingInvitesFailed(t.getMessage());
+                //dataCallback.onPendingInvitesFailed(t.getMessage());
             }
         });
     }
@@ -290,23 +293,24 @@ public class TinderManager {
     }
 
     public void acceptedInvites(DataCallback dataCallback) {
-        Call<Invite[]> call = service.acceptedInvites(userToken.getToken());
+        Call<Invite[]> call = service.acceptedInvites("Bearer "+userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
             @Override
             public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onAcceptedInvitesSuccess(response.body());
+                    acepted_invitations = response.body();
+//                    dataCallback.onAcceptedInvitesSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onAcceptedInvitesFailed(getProblem(response.code()));
+//                    dataCallback.onAcceptedInvitesFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Invite[]> call, Throwable t) {
-                dataCallback.onAcceptedInvitesFailed(t.getMessage());
+//                dataCallback.onAcceptedInvitesFailed(t.getMessage());
             }
         });
     }

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.LocationAdapter;
+import com.example.tinder.Model.Invite;
 import com.example.tinder.R;
 import com.example.tinder.SearchDialog;
 
@@ -42,6 +43,8 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 
+        TinderManager.getInstance().pendingInvites(null);
+        TinderManager.getInstance().acceptedInvites(null);
         TinderManager.getInstance().searchUsers(this, null);
         loadingView = findViewById(R.id.loading_layout);
 

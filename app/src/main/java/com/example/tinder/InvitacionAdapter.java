@@ -38,7 +38,6 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CardOfPeople profile = peopleList.get(i);
-
         viewHolder.name.setText(profile.getDisplayName());
         viewHolder.description.setText(profile.getAboutMe());
 
