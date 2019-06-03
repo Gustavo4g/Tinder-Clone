@@ -2,9 +2,12 @@ package com.example.tinder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +43,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         viewHolder.name.setText(row.getName());
         viewHolder.lastMessage.setText(row.getLastMessage());
+
+        if (row.getPicture() != null) {
+            byte[] decodedString = Base64.decode(row.getPicture(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            viewHolder.image.setImageBitmap(decodedByte);
+        } else {
+            viewHolder.image.setImageResource(R.drawable.iscle);
+        }
+
         viewHolder.mainLayout.setOnClickListener(v -> {
             Intent chatRoomIntent = new Intent(context, chatRoomActivity.class);
             chatRoomIntent.putExtra("USER_ID", row.getId());

@@ -59,16 +59,16 @@ public class ChatListActivity extends AppCompatActivity {
                         public void onSuccess(Object data) {
                             Message[] messages = (Message[]) data;
                             if (messages.length > 0)
-                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage()));
+                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
                             else
-                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!"));
+                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
                         }
 
                         @Override
                         public void onFailure(Object data) {
                             Log.d(TAG, "Adding " + p.getId());
-                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!"));
+                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
                         }
                     });
