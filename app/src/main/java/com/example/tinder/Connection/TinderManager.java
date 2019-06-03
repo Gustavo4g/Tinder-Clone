@@ -141,7 +141,7 @@ public class TinderManager {
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    //loginCallBack.onLoginFailed(getProblem(response.code()));
+                    loginCallBack.onLoginFailed(getProblem(response.code()));
                 }
             }
 
