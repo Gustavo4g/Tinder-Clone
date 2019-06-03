@@ -3,6 +3,7 @@ package com.example.tinder.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,10 +18,16 @@ public class SplashActivity extends AppCompatActivity implements IIsAuthenticate
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor sharedPrefEditor;
 
+    private MediaPlayer mp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        mp = MediaPlayer.create(this, R.raw.intro_sound);
+        mp.start();
+
         setTitle("Loading");
 
         sharedPref = getSharedPreferences(
@@ -47,6 +54,7 @@ public class SplashActivity extends AppCompatActivity implements IIsAuthenticate
             // Start SearchActivity via the intent
             startActivity(new Intent(this, SearchActivity.class));
             // Finish the SplashActivity
+            while (mp.isPlaying());
             finishAffinity();
         });
     }
@@ -58,6 +66,7 @@ public class SplashActivity extends AppCompatActivity implements IIsAuthenticate
             // Start MainActivity via the intent
             startActivity(loginActivityIntent);
             // Finish the SplashActivity
+            while (mp.isPlaying());
             finishAffinity();
         });
     }
