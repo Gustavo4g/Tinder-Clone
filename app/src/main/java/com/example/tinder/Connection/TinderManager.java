@@ -1,6 +1,7 @@
 package com.example.tinder.Connection;
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.tinder.GenericCallback;
 import com.example.tinder.Interfaces.DataBack;
@@ -70,6 +71,8 @@ public class TinderManager {
                 return "Bad request";
             case 401: // Unauthorized
                 return "Acces not authorized";
+            case 500:
+                return "Shit Internal Server Error";
             default: // In case we don't know what the error is...
                 return "Unknown error";
         }
@@ -283,24 +286,23 @@ public class TinderManager {
         });
     }
 
-    public void inviteAnswer(DataCallback dataCallback, long id, boolean state) {
-        Call<Void> call = service.inviteAnswer(userToken.getToken(), id, state);
+    public void inviteAnswer(DataBack dataCallback, long id, boolean state) {
+        Call<Void> call = service.inviteAnswer("Bearer "+userToken.getToken(), id, state);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onInviteAnswerSuccess();
+                    dataCallback.onLogin2Success(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
-
-                    dataCallback.onInviteAnswerFailure(getProblem(response.code()));
+                    dataCallback.onLogin2Failed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                dataCallback.onInviteAnswerFailure(t.getMessage());
+                dataCallback.onLogin2Failed(t.getMessage());
             }
         });
     }
