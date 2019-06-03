@@ -25,6 +25,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.ViewHolder> implements DataBack {
+    private static final String TAG = "InvitacionAdapter";
+
     private final List<CardOfPeople> peopleList;
 
     public InvitacionAdapter(List<CardOfPeople> peopleList) {
@@ -74,7 +76,8 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
     }
 
     private void aceptarPeticion(Invite invite) {
-        TinderManager.getInstance().inviteAnswer(this, (long) invite.getId(),true);
+        Log.d(TAG, "aceptarPeticion: inviteId = " + invite.getId());
+        TinderManager.getInstance().inviteAnswer(this, invite.getId(),true);
     }
 
     @Override

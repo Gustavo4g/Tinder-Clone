@@ -3,7 +3,7 @@ package com.example.tinder.Model;
 public class Invite {
     private boolean accepted;
     private String createdDate;
-    private int id;
+    private long id;
     private CardOfPeople recieved;
     private CardOfPeople sent;
 
@@ -31,7 +31,7 @@ public class Invite {
         this.createdDate = createdDate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

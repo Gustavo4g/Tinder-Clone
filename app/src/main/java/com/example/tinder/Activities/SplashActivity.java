@@ -54,7 +54,6 @@ public class SplashActivity extends AppCompatActivity implements IIsAuthenticate
             // Start SearchActivity via the intent
             startActivity(new Intent(this, SearchActivity.class));
             // Finish the SplashActivity
-            while (mp.isPlaying());
             finishAffinity();
         });
     }
@@ -66,7 +65,6 @@ public class SplashActivity extends AppCompatActivity implements IIsAuthenticate
             // Start MainActivity via the intent
             startActivity(loginActivityIntent);
             // Finish the SplashActivity
-            while (mp.isPlaying());
             finishAffinity();
         });
     }

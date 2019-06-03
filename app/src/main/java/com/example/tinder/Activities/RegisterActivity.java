@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterCallB
         String username = this.usernameEditText.getText().toString();
         String password = this.passwordEditText.getText().toString();
 
-        runOnUiThread(() -> Snackbar.make(mainLayout, "Register Done¡", Snackbar.LENGTH_LONG).show());
+        runOnUiThread(() -> Snackbar.make(mainLayout, "Registered successfully!", Snackbar.LENGTH_LONG).show());
         TinderManager.getInstance().login(this, new Login(username, password, false));
     }
 

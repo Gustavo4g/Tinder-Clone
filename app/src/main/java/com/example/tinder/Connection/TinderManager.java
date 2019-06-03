@@ -13,6 +13,7 @@ import com.example.tinder.Interfaces.GetMessageCallback;
 import com.example.tinder.Interfaces.PostMessageCallback;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
+import com.example.tinder.Model.BackendError;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
@@ -20,7 +21,9 @@ import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -199,7 +202,7 @@ public class TinderManager {
     }
 
     public void profilePut(DataCallback dataCallback, CardOfPeople profile) {
-        Call<Void> call = service.profilePut(userToken.getToken(), profile);
+        Call<Void> call = service.profilePut("Bearer " + userToken.getToken(), profile);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -221,7 +224,7 @@ public class TinderManager {
     }
 
     public void ownProfileGet(DataCallback dataCallback) {
-        Call<CardOfPeople> call = service.myProfileGet(userToken.getToken());
+        Call<CardOfPeople> call = service.myProfileGet("Bearer " + userToken.getToken());
 
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
@@ -243,7 +246,7 @@ public class TinderManager {
     }
 
     public void profileGet(DataCallback dataCallback, String userId) {
-        Call<CardOfPeople> call = service.profileGet(userToken.getToken(), userId);
+        Call<CardOfPeople> call = service.profileGet("Bearer " + userToken.getToken(), userId);
 
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
@@ -273,9 +276,13 @@ public class TinderManager {
                 if (response.isSuccessful()) {
                     dataCallback.onProfileInviteSuccess();
                 } else {
-                    Log.d(TAG, "onResponse error: " + response.raw());
-
-                    dataCallback.onProfileInviteFailed(getProblem(response.code()));
+                    try {
+                        BackendError be = new Gson().fromJson(response.errorBody().string(), BackendError.class);
+                        dataCallback.onProfileInviteFailed(be.getTitle());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        dataCallback.onProfileInviteFailed(getProblem(response.code()));
+                    }
                 }
             }
 
@@ -313,7 +320,7 @@ public class TinderManager {
     }
 
     public void inviteAnswer(DataBack dataCallback, long id, boolean state) {
-        Call<Void> call = service.inviteAnswer("Bearer "+userToken.getToken(), id, state);
+        Call<Void> call = service.inviteAnswer("Bearer " + userToken.getToken(), id, state);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -321,7 +328,12 @@ public class TinderManager {
                 if (response.isSuccessful()) {
                     dataCallback.onLogin2Success(null);
                 } else {
-                    Log.d(TAG, "onResponse error: " + response.raw());
+                    try {
+                        BackendError be = new Gson().fromJson(response.errorBody().string(), BackendError.class);
+                        Log.d(TAG, "inviteAnswer error: " + be.getDetail());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     dataCallback.onLogin2Failed(getProblem(response.code()));
                 }
             }
@@ -427,16 +439,25 @@ public class TinderManager {
     }
 
     public void getRelationship(RelationShipCallBack dataCallback, long id) {
-        Call<CardOfPeople> call = service.getRelationship(userToken.getToken());
+        Call<CardOfPeople> call = service.getRelationship("Bearer " + userToken.getToken(), id);
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
             public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
                 if (response.isSuccessful()) {
                     dataCallback.onRelationShipSuccess(response.body());
                 } else {
-                    Log.d(TAG, "onResponse error: " + response.raw());
-
-                    dataCallback.onRelationShipFailed(getProblem(response.code()));
+                    try {
+                        BackendError be = new Gson().fromJson(response.errorBody().string(), BackendError.class);
+                        if (be == null) {
+                            Log.d(TAG, "getRelationship unknown error! " + response.code());
+                            dataCallback.onRelationShipFailed(getProblem(response.code()));
+                        } else {
+                            Log.d(TAG, "getRelationship error " + be.getTitle() + " (" + be.getStatus() + "): " + be.getDetail());
+                            dataCallback.onRelationShipFailed(be.getTitle());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -456,7 +477,7 @@ public class TinderManager {
     }
 
     public void getMessages(GetMessageCallback dataCallback, Message m){
-        Call<Message[]> call = service.getMessages(userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
+        Call<Message[]> call = service.getMessages("Bearer " + userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
 
         call.enqueue(new Callback<Message[]>() {
             @Override
@@ -478,7 +499,7 @@ public class TinderManager {
     }
 
     public void postMessages(PostMessageCallback dataCallback, Message m){
-        Call<Void> call = service.postMessage(userToken.getToken(), m);
+        Call<Void> call = service.postMessage("Bearer " + userToken.getToken(), m);
 
         call.enqueue(new Callback<Void>() {
             @Override

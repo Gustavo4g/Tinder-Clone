@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity implements RelationShipCallBack, InviteRequestCallBack {
+    private static final String TAG = "ProfileActivity";
 
     private CoordinatorLayout mainLayout;
     private TextView display;
@@ -135,7 +136,8 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
             genderDisplay.setText(value.getGender().getType());
         }
 
-        TinderManager.getInstance().getRelationship(this, (long) value.getId());
+        // Esto no sirve para nada
+        //TinderManager.getInstance().getRelationship(this, value.getId());
 
         if (value.getPicture() != null) {
             byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
@@ -160,7 +162,7 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
 
             case "Tirar la caña":
                 Log.d("user", value.getUser().getId() + "");
-                TinderManager.getInstance().profileInvite(this, (long) value.getUser().getId());
+                TinderManager.getInstance().profileInvite(this, value.getUser().getId());
                 break;
 
         }
@@ -175,6 +177,7 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
     @Override
     public void onRelationShipFailed(String reason) {
         invite.setText("Tirar la caña");
+        Log.d(TAG, "onRelationShipFailed:");
 
         //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();
     }
@@ -186,6 +189,6 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
 
     @Override
     public void onProfileInviteFailed(String reason) {
-        Snackbar.make(findViewById(R.id.main_layout2), "Invite failed: " + reason, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(R.id.main_layout2), "Error: " + reason, Snackbar.LENGTH_LONG).show();
     }
 }

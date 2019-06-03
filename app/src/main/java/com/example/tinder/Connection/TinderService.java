@@ -53,7 +53,7 @@ interface TinderService {
 
     //PUT invite accept petition
     @PUT("api/invite/{id}/state/{state}")
-    Call<Void> inviteAnswer(@Header("Authorization") String userToken, @Path("id") long id, @Path("state") boolean state);
+    Call<Void> inviteAnswer(@Header("Authorization") String userToken, @Query("id") long id, @Query("state") boolean state);
 
     //GET accepted invites petition
     @GET("api/accepted-invites")
@@ -65,7 +65,7 @@ interface TinderService {
 
     //Relationship get on an id
     @GET("api/relationships/{id}")
-    Call<CardOfPeople> getRelationship(@Header("Authorization") String userToken);
+    Call<CardOfPeople> getRelationship(@Header("Authorization") String userToken, @Path("id") long id);
 
     //authenticating own user by a token
     @GET("api/authenticate")
