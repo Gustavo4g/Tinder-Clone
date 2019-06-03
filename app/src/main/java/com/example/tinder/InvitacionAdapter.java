@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +17,14 @@ import android.widget.TextView;
 
 import com.example.tinder.Activities.ProfileActivity;
 import com.example.tinder.Connection.TinderManager;
+import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.ViewHolder> {
+public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.ViewHolder> implements DataBack {
     private final List<CardOfPeople> peopleList;
 
     public InvitacionAdapter(List<CardOfPeople> peopleList) {
@@ -55,6 +58,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
         for (Invite h : pending) {
             if (h.getSent().getId() == profile.getId()){
                 viewHolder.heart.setVisibility(View.VISIBLE);
+                viewHolder.heart.setOnClickListener(v->aceptarPeticion(h));
             }
         }
 
@@ -67,6 +71,10 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
             viewHolder.image.setImageResource(R.drawable.iscle);
             viewHolder.image.setOnClickListener(v -> click(profile, viewHolder));
         }
+    }
+
+    private void aceptarPeticion(Invite invite) {
+        TinderManager.getInstance().inviteAnswer(this, (long) invite.getId(),true);
     }
 
     @Override
@@ -96,6 +104,16 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
 
         TinderManager.getInstance().setAaaaa(cardOfPeople);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onLogin2Success(Object id_token) {
+        Log.d("Bueno","Has termiando de estudiar?");
+    }
+
+    @Override
+    public void onLogin2Failed(String reason) {
+        Log.d("Shit","Nada de invitar a nadie, a estudiar");
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
