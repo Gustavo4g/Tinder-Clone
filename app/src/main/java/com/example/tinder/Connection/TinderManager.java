@@ -381,7 +381,7 @@ public class TinderManager {
         });
     }
 
-    public void getLastMessage(Long friendId, GenericCallback callback) {
+    public void getLastMessage(long friendId, GenericCallback callback) {
         Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), friendId, 1, "createdDate,desc");
 
         call.enqueue(new Callback<Message[]>() {
@@ -392,6 +392,7 @@ public class TinderManager {
                     callback.onSuccess(response.body());
                 } else {
                     Log.d(TAG, "getLastMessage: Failure (onResponse)!");
+                    Log.d(TAG, "getLastMessage: " + response.raw());
                     callback.onFailure(null);
                 }
             }
@@ -446,7 +447,6 @@ public class TinderManager {
     }
 
     public CardOfPeople getAaaaa() {
-
         return aaaaa;
     }
 

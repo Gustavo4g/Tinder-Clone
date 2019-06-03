@@ -2,7 +2,7 @@ package com.example.tinder.Model;
 
 
 public class User {
-    private float id;
+    private long id;
     private String login;
     private String firstName;
     private String lastName;
@@ -15,11 +15,11 @@ public class User {
 
     // Getter Methods
 
-    public float getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(float id) {
+    public void setId(long id) {
         this.id = id;
     }
 

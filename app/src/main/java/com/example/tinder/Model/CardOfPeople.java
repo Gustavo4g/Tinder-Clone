@@ -8,7 +8,7 @@ public class CardOfPeople implements Serializable {
     private Relationship relationship;
     private Gender gender;
     private Ethnicity ethnicity;
-    private float id;
+    private long id;
     private String birthDate;
     private String picture;
     private String pictureContentType;
@@ -30,11 +30,11 @@ public class CardOfPeople implements Serializable {
 
     // Getter Methods
 
-    public float getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(float id) {
+    public void setId(long id) {
         this.id = id;
     }
 
