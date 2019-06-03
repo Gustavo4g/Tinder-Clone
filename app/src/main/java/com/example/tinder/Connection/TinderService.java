@@ -6,6 +6,7 @@ import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
+import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
 
 import java.util.Map;
@@ -80,4 +81,7 @@ interface TinderService {
 
     @GET("api/my-friends")
     Call<CardOfPeople[]> getFriends(@Header("Authorization") String userToken);
+
+    @GET("api/users/{login}")
+    Call<User> getUser(@Header("Authorization") String userToken, @Path("login") String user);
 }

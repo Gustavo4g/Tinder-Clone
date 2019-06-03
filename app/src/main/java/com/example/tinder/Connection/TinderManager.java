@@ -18,6 +18,7 @@ import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
+import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
 
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class TinderManager {
     private Invite[] pending_invitations;
     private Invite[] acepted_invitations;
     private CardOfPeople aaaaa;
+    private User actualUser;
 
 
     public Invite[] getPending_invitations() {
@@ -123,6 +125,28 @@ public class TinderManager {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 callback.failure();
+            }
+        });
+    }
+
+    public void getUser(LoginCallBack loginCallBack, String login) {
+        Call<User> call = service.getUser("Bearer " + userToken.getToken(),login);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    actualUser  = response.body();
+                    //loginCallBack.onLoginSuccess(userToken.getToken());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    //loginCallBack.onLoginFailed(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                loginCallBack.onLoginFailed(t.getMessage());
             }
         });
     }

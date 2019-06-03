@@ -84,6 +84,9 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
                 sharedPrefEditor.apply();
             }
             // Create the MainActivity intent
+            TinderManager.getInstance().getUser(null, username);
+
+
             Intent mainActivityIntent = new Intent(this, SearchActivity.class);
             // Start MainActivity via the intent
             startActivity(mainActivityIntent);
