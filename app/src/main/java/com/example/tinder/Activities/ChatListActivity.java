@@ -54,7 +54,7 @@ public class ChatListActivity extends AppCompatActivity {
                 ArrayList<ChatRow> rows = new ArrayList<>();
 
                 for (CardOfPeople p : people) {
-                    TinderManager.getInstance().getLastMessage((long) p.getId(), new GenericCallback() {
+                    TinderManager.getInstance().getLastMessage(p.getId(), new GenericCallback() {
                         @Override
                         public void onSuccess(Object data) {
                             Message[] messages = (Message[]) data;

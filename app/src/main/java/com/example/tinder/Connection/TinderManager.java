@@ -42,7 +42,7 @@ public class TinderManager {
     private Invite[] pending_invitations;
     private Invite[] acepted_invitations;
     private CardOfPeople aaaaa;
-    private User actualUser;
+    private CardOfPeople actualUser;
 
 
     public Invite[] getPending_invitations() {
@@ -116,7 +116,7 @@ public class TinderManager {
                     } else {
                         callback.success();
                         setUserToken(token);
-                        getUser(null, response.body());
+                        getProfile(null);
                     }
                 } else {
                     callback.failure();
@@ -130,11 +130,11 @@ public class TinderManager {
         });
     }
 
-    public void getUser(LoginCallBack loginCallBack, String login) {
-        Call<User> call = service.getUser("Bearer " + userToken.getToken(),login);
-        call.enqueue(new Callback<User>() {
+    public void getProfile(LoginCallBack loginCallBack) {
+        Call<CardOfPeople> call = service.getProfile("Bearer " + userToken.getToken());
+        call.enqueue(new Callback<CardOfPeople>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
                 if (response.isSuccessful()) {
                     actualUser  = response.body();
                     //loginCallBack.onLoginSuccess(userToken.getToken());
@@ -146,7 +146,7 @@ public class TinderManager {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<CardOfPeople> call, Throwable t) {
                 loginCallBack.onLoginFailed(t.getMessage());
             }
         });
@@ -160,7 +160,7 @@ public class TinderManager {
                 if (response.isSuccessful()) {
                     userToken = response.body();
                     loginCallBack.onLoginSuccess(userToken.getToken());
-                    getUser(null, login.getUsername());
+                    getProfile(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
@@ -382,7 +382,8 @@ public class TinderManager {
     }
 
     public void getLastMessage(long friendId, GenericCallback callback) {
-        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), friendId, 1, "createdDate,desc");
+        Log.d(TAG, "getLastMessage: " + actualUser.getId() + ", " + friendId);
+        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), friendId, actualUser.getId(), friendId, 1, "createdDate,desc");
 
         call.enqueue(new Callback<Message[]>() {
             @Override
