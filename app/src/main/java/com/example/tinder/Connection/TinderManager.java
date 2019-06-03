@@ -2,6 +2,7 @@ package com.example.tinder.Connection;
 
 import android.util.Log;
 
+import com.example.tinder.GenericCallback;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
@@ -263,12 +264,15 @@ public class TinderManager {
             @Override
             public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
                 if (response.isSuccessful()) {
+                    Log.d(TAG, "pendingInivtes success!");
                     pending_invitations = response.body();
-                    //dataCallback.onPendingInvitesSuccess(response.body());
+                    Log.d(TAG, "pendingInvites length: " + pending_invitations.length);;
+                    if (dataCallback != null)
+                        dataCallback.onPendingInvitesSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
-
-                    //dataCallback.onPendingInvitesFailed(getProblem(response.code()));
+                    if (dataCallback != null)
+                        dataCallback.onPendingInvitesFailed(getProblem(response.code()));
                 }
             }
 
@@ -309,17 +313,42 @@ public class TinderManager {
             public void onResponse(Call<Invite[]> call, Response<Invite[]> response) {
                 if (response.isSuccessful()) {
                     acepted_invitations = response.body();
-//                    dataCallback.onAcceptedInvitesSuccess(response.body());
+                    if (dataCallback != null)
+                        dataCallback.onAcceptedInvitesSuccess(response.body());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-//                    dataCallback.onAcceptedInvitesFailed(getProblem(response.code()));
+                    if (dataCallback != null)
+                        dataCallback.onAcceptedInvitesFailed(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Invite[]> call, Throwable t) {
 //                dataCallback.onAcceptedInvitesFailed(t.getMessage());
+            }
+        });
+    }
+
+    public void getFriends(GenericCallback callback) {
+        Call<CardOfPeople[]> call = service.getFriends("Bearer " + userToken.getToken());
+
+        call.enqueue(new Callback<CardOfPeople[]>() {
+            @Override
+            public void onResponse(Call<CardOfPeople[]> call, Response<CardOfPeople[]> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "getFriends: Success!");
+                    callback.onSuccess(response.body());
+                } else {
+                    Log.d(TAG, "getFriends: Failure (onResponse)!");
+                    callback.onFailure(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CardOfPeople[]> call, Throwable t) {
+                Log.d(TAG, "getFriends: Failure!");
+                callback.onFailure(null);
             }
         });
     }

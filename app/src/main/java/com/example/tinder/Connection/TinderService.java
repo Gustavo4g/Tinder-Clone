@@ -77,4 +77,7 @@ interface TinderService {
 
     @POST("/api/direct-messages")
     Call<Void> postMessage(@Header("Authorization") String userToken, @Body Message message);
+
+    @GET("api/my-friends")
+    Call<CardOfPeople[]> getFriends(@Header("Authorization") String userToken);
 }
