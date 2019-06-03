@@ -15,6 +15,7 @@ import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.ChatRow;
 import com.example.tinder.Model.Invite;
+import com.example.tinder.Model.Message;
 import com.example.tinder.R;
 
 import java.util.ArrayList;
@@ -53,10 +54,25 @@ public class ChatListActivity extends AppCompatActivity {
                 ArrayList<ChatRow> rows = new ArrayList<>();
 
                 for (CardOfPeople p : people) {
-                    rows.add(new ChatRow(p.getId(), p.getDisplayName(), "Test message, bitch!"));
-                }
+                    TinderManager.getInstance().getLastMessage((long) p.getId(), new GenericCallback() {
+                        @Override
+                        public void onSuccess(Object data) {
+                            Message[] messages = (Message[]) data;
+                            if (messages.length > 0)
+                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage()));
+                            else
+                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!"));
+                            chatListAdapter.setDataset(rows);
+                        }
 
-                chatListAdapter.setDataset(rows);
+                        @Override
+                        public void onFailure(Object data) {
+                            Log.d(TAG, "Adding " + p.getId());
+                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!"));
+                            chatListAdapter.setDataset(rows);
+                        }
+                    });
+                }
             }
 
             @Override

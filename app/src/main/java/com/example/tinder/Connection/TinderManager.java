@@ -116,6 +116,7 @@ public class TinderManager {
                     } else {
                         callback.success();
                         setUserToken(token);
+                        getUser(null, response.body());
                     }
                 } else {
                     callback.failure();
@@ -159,6 +160,7 @@ public class TinderManager {
                 if (response.isSuccessful()) {
                     userToken = response.body();
                     loginCallBack.onLoginSuccess(userToken.getToken());
+                    getUser(null, login.getUsername());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
@@ -374,6 +376,29 @@ public class TinderManager {
             @Override
             public void onFailure(Call<CardOfPeople[]> call, Throwable t) {
                 Log.d(TAG, "getFriends: Failure!");
+                callback.onFailure(null);
+            }
+        });
+    }
+
+    public void getLastMessage(Long friendId, GenericCallback callback) {
+        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), friendId, 1, "createdDate,desc");
+
+        call.enqueue(new Callback<Message[]>() {
+            @Override
+            public void onResponse(Call<Message[]> call, Response<Message[]> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "getLastMessage: Success!");
+                    callback.onSuccess(response.body());
+                } else {
+                    Log.d(TAG, "getLastMessage: Failure (onResponse)!");
+                    callback.onFailure(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Message[]> call, Throwable t) {
+                Log.d(TAG, "getLastMessage: Failure (onResponse)!");
                 callback.onFailure(null);
             }
         });

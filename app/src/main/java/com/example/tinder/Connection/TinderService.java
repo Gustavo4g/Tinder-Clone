@@ -71,16 +71,23 @@ interface TinderService {
     @GET("api/authenticate")
     Call<String> authenticate(@Header("Authorization") String userToken);
 
-    @GET("/api/direct-messages")
+    @GET("api/direct-messages")
     Call<Message[]> getMessages(@Header("Authorization") String userToken,
-                             @Query("RecipientId.equals") float recipientId,
-                             @Query("SenderId.equals") float senderId);
+                             @Query("recipientId.equals") float recipientId,
+                             @Query("senderId.equals") float senderId);
 
-    @POST("/api/direct-messages")
+    @POST("api/direct-messages")
     Call<Void> postMessage(@Header("Authorization") String userToken, @Body Message message);
 
     @GET("api/my-friends")
     Call<CardOfPeople[]> getFriends(@Header("Authorization") String userToken);
+
+    @GET("api/direct-messages")
+    Call<Message[]> getLastMessage(@Header("Authorization") String userToken,
+                                   @Query("recipientId.equals") float recipientId,
+                                   @Query("senderId.equals") float senderId,
+                                   @Query("size") int size,
+                                   @Query("sort") String sort);
 
     @GET("api/users/{login}")
     Call<User> getUser(@Header("Authorization") String userToken, @Path("login") String user);
