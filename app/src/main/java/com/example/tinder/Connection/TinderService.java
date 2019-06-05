@@ -6,6 +6,7 @@ import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
+import com.example.tinder.Model.SendMensaje;
 import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
 
@@ -81,7 +82,7 @@ interface TinderService {
                                    @Query("sort") String sort);
 
     @POST("api/direct-messages")
-    Call<Void> postMessage(@Header("Authorization") String userToken, @Body Message message);
+    Call<Void> postMessage(@Header("Authorization") String userToken, @Body SendMensaje message);
 
     @GET("api/my-friends")
     Call<CardOfPeople[]> getFriends(@Header("Authorization") String userToken);

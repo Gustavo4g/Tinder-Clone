@@ -19,6 +19,7 @@ import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
+import com.example.tinder.Model.SendMensaje;
 import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
 import com.google.gson.Gson;
@@ -47,6 +48,13 @@ public class TinderManager {
     private CardOfPeople aaaaa;
     private CardOfPeople actualUser;
 
+    public CardOfPeople getActualUser() {
+        return actualUser;
+    }
+
+    public void setActualUser(CardOfPeople actualUser) {
+        this.actualUser = actualUser;
+    }
 
     public Invite[] getPending_invitations() {
         return pending_invitations;
@@ -498,24 +506,24 @@ public class TinderManager {
         });
     }
 */
-    public void postMessages(PostMessageCallback dataCallback, Message m){
+    public void postMessages(GenericCallback dataCallback, SendMensaje m){
         Call<Void> call = service.postMessage("Bearer " + userToken.getToken(), m);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onPostMessageSuccess();
+                    dataCallback.onSuccess(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onPostMessageFailed(getProblem(response.code()));
+                    dataCallback.onFailure(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                dataCallback.onPostMessageFailed(t.getMessage());
+                dataCallback.onSuccess(t.getMessage());
             }
         });
     }
