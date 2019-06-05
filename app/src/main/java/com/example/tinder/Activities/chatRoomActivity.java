@@ -9,12 +9,14 @@ import com.example.tinder.Interfaces.PostMessageCallback;
 import com.example.tinder.R;
 
 public class chatRoomActivity extends AppCompatActivity implements PostMessageCallback, InviteRequestCallBack {
-    private RecyclerView profileRV;
+    private RecyclerView messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_chat);
+
+        messages = findViewById(R.id.recyclerView);
 
     }
 
