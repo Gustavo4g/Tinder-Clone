@@ -42,6 +42,11 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         Button forgotPassword = findViewById(R.id.forgot_password);
         Button registerButton = findViewById(R.id.register);
 
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        usernameEditText.setText(sharedPref.getString("lastUser", ""));
+
         loginButton.setOnClickListener(v -> login());
         forgotPassword.setOnClickListener(v -> forgotPassword());
         registerButton.setOnClickListener(v -> register());
@@ -76,13 +81,17 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     @Override
     public void onLoginSuccess(Object userToken) {
         runOnUiThread(() -> {
+            SharedPreferences.Editor sharedPrefEditor = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit();
+
+            sharedPrefEditor.putString("lastUser", username); // Save the last logged in username
+
             if (rememberMeCheckBox.isChecked()) {
-                SharedPreferences.Editor sharedPrefEditor = getSharedPreferences(
-                        getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit();
                 sharedPrefEditor.putBoolean("rememberMe", true);
                 sharedPrefEditor.putString("userToken", (String) userToken);
-                sharedPrefEditor.apply();
             }
+
+            sharedPrefEditor.apply();
 
             // Create the MainActivity intent
             Intent mainActivityIntent = new Intent(this, SearchActivity.class);
