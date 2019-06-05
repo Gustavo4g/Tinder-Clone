@@ -49,18 +49,6 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
 
         button.setOnClickListener(v -> send());
 
-        TinderManager.getInstance().getMessages(id, new GenericCallback() {
-            @Override
-            public void onSuccess(Object data) {
-
-            }
-
-            @Override
-            public void onFailure(Object data) {
-
-            }
-        }, );
-
     }
 
     private void send(){
