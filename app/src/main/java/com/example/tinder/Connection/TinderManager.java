@@ -393,14 +393,9 @@ public class TinderManager {
         });
     }
 
-    public void getMessages(long friendId, GenericCallback callback,boolean swipe) {
+    public void getMessages(long friendId,int size, GenericCallback callback) {
         Log.d(TAG, "getLastMessage: " + actualUser.getId() + ", " + friendId);
-        Call<Message[]> call;
-        if (swipe){
-            call =  service.getLastMessage("Bearer " + userToken.getToken(),friendId, actualUser.getId(),"createdDate,desc");
-        }else{
-            call = service.getLastMessage("Bearer " + userToken.getToken(),actualUser.getId(),friendId,"createdDate,desc");
-        }
+        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), actualUser.getId(), friendId, friendId, size, "createdDate,desc");
 
         call.enqueue(new Callback<Message[]>() {
             @Override
@@ -480,7 +475,7 @@ public class TinderManager {
     public void setAaaaa(CardOfPeople aaaaa) {
         this.aaaaa = aaaaa;
     }
-
+        /*
     public void getMessages(GetMessageCallback dataCallback, Message m){
         Call<Message[]> call = service.getMessages("Bearer " + userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
 
@@ -502,7 +497,7 @@ public class TinderManager {
             }
         });
     }
-
+*/
     public void postMessages(PostMessageCallback dataCallback, Message m){
         Call<Void> call = service.postMessage("Bearer " + userToken.getToken(), m);
 

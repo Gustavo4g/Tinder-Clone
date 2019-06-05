@@ -29,8 +29,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         setContentView(R.layout.activity_personal_chat);
         id = (float) getIntent().getExtras().getSerializable("USER_ID");
         messages = new ArrayList<>();
-        TinderManager.getInstance().getMessages((long)id,this,false);
-        TinderManager.getInstance().getMessages(-1,this,true);
+        TinderManager.getInstance().getMessages((long)id,20,this);
         for (Message fer : messages){
             Log.d("Pepe",fer.getMessage());
         }
@@ -41,17 +40,6 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     public void onSuccess(Object data) {
         com.example.tinder.Model.Message[] men = (com.example.tinder.Model.Message[])data;
         messages.addAll(Arrays.asList(men));
-        Collections.sort(messages, (o1, o2) -> {
-            SimpleDateFormat defaultDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.getDefault());
-            try {
-                Date o1_date = defaultDateFormat.parse(o1.getCreatedDate());
-                Date o2_date = defaultDateFormat.parse(o2.getCreatedDate());
-                return o1_date.compareTo(o2_date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return 0;
-        });
     }
 
     @Override
