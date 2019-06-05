@@ -47,11 +47,9 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         TinderManager.getInstance().getMessages((long) id, 20, this);
 
 
-        //Esta funcion es para enviar mensajes
-        enviarMensaje("Tu mensaje puto");
 
         //Y esta otra para actualizar los mensajes
-        actualizaMensajes();
+        //actualizaMensajes();
 
         recycle = findViewById(R.id.recyclerView);
         perfil = findViewById(R.id.personalImage);
@@ -59,7 +57,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         tersto = findViewById(R.id.introducion);
         button = findViewById(R.id.button);
 
-        button.setOnClickListener(v -> send());
+        button.setOnClickListener(v -> enviarMensaje("mensaje poner aqui"));
 
     }
 

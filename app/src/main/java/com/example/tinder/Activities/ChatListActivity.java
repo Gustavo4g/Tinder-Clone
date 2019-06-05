@@ -30,7 +30,7 @@ public class ChatListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
-
+        ArrayList<CardOfPeople> friends = new ArrayList<>();
         // Esto es para la barra de arriba
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -52,27 +52,38 @@ public class ChatListActivity extends AppCompatActivity {
                 CardOfPeople[] people = (CardOfPeople[]) data;
 
                 ArrayList<ChatRow> rows = new ArrayList<>();
-
+                boolean inside = false;
                 for (CardOfPeople p : people) {
-                    TinderManager.getInstance().getMessages(p.getId(),20, new GenericCallback() {
-                        @Override
-                        public void onSuccess(Object data) {
-                            Message[] messages = (Message[]) data;
+                    for (CardOfPeople p2 : friends){
+                        if (p.getId() == p2.getId()){
+                            inside = true;
+                        }
+                    }
+                    if (!inside){
+                        TinderManager.getInstance().getMessages(p.getId(),1, new GenericCallback() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                Message[] messages = (Message[]) data;
 
-                            if (messages.length > 0)
-                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
-                            else
+                                if (messages.length > 0)
+                                    rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
+                                else{
+                                    rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
+                                }
+                                chatListAdapter.setDataset(rows);
+                            }
+
+                            @Override
+                            public void onFailure(Object data) {
+                                Log.d(TAG, "Adding " + p.getId());
                                 rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
-                            chatListAdapter.setDataset(rows);
-                        }
+                                chatListAdapter.setDataset(rows);
+                            }
+                        });
+                        friends.add(p);
+                        inside = false;
+                    }
 
-                        @Override
-                        public void onFailure(Object data) {
-                            Log.d(TAG, "Adding " + p.getId());
-                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
-                            chatListAdapter.setDataset(rows);
-                        }
-                    });
                 }
             }
 

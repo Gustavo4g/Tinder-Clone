@@ -146,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
         } else {
             image.setImageResource(R.drawable.iscle);
         }
-
+        invite.setText("Tirar la caña");
         invite.setOnClickListener(v -> invite());
 
 
