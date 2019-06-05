@@ -393,9 +393,14 @@ public class TinderManager {
         });
     }
 
-    public void getLastMessage(long friendId, GenericCallback callback) {
+    public void getMessages(long friendId, GenericCallback callback,boolean swipe) {
         Log.d(TAG, "getLastMessage: " + actualUser.getId() + ", " + friendId);
-        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), friendId, actualUser.getId(), friendId, 1, "createdDate,desc");
+        Call<Message[]> call;
+        if (swipe){
+            call =  service.getLastMessage("Bearer " + userToken.getToken(),friendId, actualUser.getId(),"createdDate,desc");
+        }else{
+            call = service.getLastMessage("Bearer " + userToken.getToken(),actualUser.getId(),friendId,"createdDate,desc");
+        }
 
         call.enqueue(new Callback<Message[]>() {
             @Override

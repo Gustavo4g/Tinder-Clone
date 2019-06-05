@@ -54,12 +54,13 @@ public class ChatListActivity extends AppCompatActivity {
                 ArrayList<ChatRow> rows = new ArrayList<>();
 
                 for (CardOfPeople p : people) {
-                    TinderManager.getInstance().getLastMessage(p.getId(), new GenericCallback() {
+                    TinderManager.getInstance().getMessages(p.getId(), new GenericCallback() {
                         @Override
                         public void onSuccess(Object data) {
                             Message[] messages = (Message[]) data;
+
                             if (messages.length > 0)
-                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
+                            rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
                             else
                                 rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
@@ -71,7 +72,7 @@ public class ChatListActivity extends AppCompatActivity {
                             rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
                         }
-                    });
+                    },false);
                 }
             }
 
