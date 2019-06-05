@@ -1,9 +1,13 @@
 package com.example.tinder.Activities;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.GenericCallback;
@@ -27,6 +31,10 @@ import java.util.TimeZone;
 
 public class chatRoomActivity extends AppCompatActivity implements GenericCallback {
     private RecyclerView recycle;
+    private ImageView perfil;
+    private TextView name;
+    private Button button;
+    private TextInputEditText tersto;
     private ArrayList<com.example.tinder.Model.Message> messages;
     private float id;
 
@@ -46,6 +54,13 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         actualizaMensajes();
 
         recycle = findViewById(R.id.recyclerView);
+        perfil = findViewById(R.id.personalImage);
+        name = findViewById(R.id.nameChat);
+        tersto = findViewById(R.id.introducion);
+        button = findViewById(R.id.button);
+
+        button.setOnClickListener(v -> send());
+
     }
 
     private void actualizaMensajes() {
