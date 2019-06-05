@@ -17,207 +17,195 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/weight"
-                android:layout_width="117dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/weight_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.082"
+                android:layout_marginEnd="16dp"
+                android:text="@string/weight"
+                app:layout_constraintEnd_toStartOf="@+id/gender_label"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AgeDisplay" />
+                app:layout_constraintTop_toBottomOf="@+id/age_tv" />
 
             <TextView
-                android:id="@+id/display"
-                android:layout_width="124dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/display_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="@string/display_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.089"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/person_photo" />
+                app:layout_constraintTop_toBottomOf="@+id/photo_iv" />
 
             <ImageView
-                android:id="@+id/person_photo"
-                android:layout_width="411dp"
-                android:layout_height="312dp"
+                android:id="@+id/photo_iv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:adjustViewBounds="true"
+                android:maxHeight="512dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/displayName"
-                android:layout_width="324dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/display_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
+                android:layout_marginEnd="32dp"
+                android:text="-"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.338"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/display" />
+                app:layout_constraintTop_toBottomOf="@+id/display_name_label" />
 
             <TextView
-                android:id="@+id/person_name"
-                android:layout_width="116dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/about_me_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.086"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/displayName" />
-
-            <TextView
-                android:id="@+id/nameName"
-                android:layout_width="327dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.347"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/person_name" />
-
-            <TextView
-                android:id="@+id/AboutMe"
-                android:layout_width="118dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="@string/about_me"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.086"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameName" />
+                app:layout_constraintTop_toBottomOf="@+id/display_name_tv" />
 
             <TextView
-                android:id="@+id/AboutMe_Display"
-                android:layout_width="321dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/about_me_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
+                android:layout_marginEnd="32dp"
+                android:text="-"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.324"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AboutMe" />
+                app:layout_constraintTop_toBottomOf="@+id/about_me_label" />
 
             <TextView
-                android:id="@+id/AgeDisplay"
-                android:layout_width="122dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/age_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.087"
+                android:layout_marginEnd="16dp"
+                android:text="-"
+                app:layout_constraintEnd_toStartOf="@+id/height_tv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Age" />
+                app:layout_constraintTop_toBottomOf="@+id/age_label" />
 
             <TextView
-                android:id="@+id/Age"
-                android:layout_width="118dp"
-                android:layout_height="31dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/age_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/age"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.086"
+                app:layout_constraintEnd_toStartOf="@+id/height_label"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AboutMe_Display" />
+                app:layout_constraintTop_toBottomOf="@+id/about_me_tv" />
 
             <TextView
-                android:id="@+id/heigh"
-                android:layout_width="118dp"
-                android:layout_height="30dp"
+                android:id="@+id/height_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="@string/height"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.57"
-                app:layout_constraintStart_toEndOf="@+id/Age"
-                app:layout_constraintTop_toBottomOf="@+id/AboutMe_Display" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/age_label"
+                app:layout_constraintTop_toBottomOf="@+id/about_me_tv" />
 
             <Button
-                android:id="@+id/invite"
+                android:id="@+id/invite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="tex"
+                android:text="Block"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.482"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weightDisplay" />
+                app:layout_constraintTop_toTopOf="@+id/barrier5" />
 
             <TextView
-                android:id="@+id/heighDisplay"
-                android:layout_width="116dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.52"
-                app:layout_constraintStart_toEndOf="@+id/AgeDisplay"
-                app:layout_constraintTop_toBottomOf="@+id/heigh" />
-
-            <TextView
-                android:id="@+id/weightDisplay"
-                android:layout_width="121dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/height_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
+                android:layout_marginEnd="32dp"
+                android:text="-"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.087"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/age_tv"
+                app:layout_constraintTop_toBottomOf="@+id/height_label" />
+
+            <TextView
+                android:id="@+id/weight_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="-"
+                app:layout_constraintEnd_toStartOf="@+id/gender_tv"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weight" />
+                app:layout_constraintTop_toBottomOf="@+id/weight_label" />
 
             <TextView
-                android:id="@+id/Gender"
-                android:layout_width="118dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/gender_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="@string/gender"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.55"
-                app:layout_constraintStart_toEndOf="@+id/weight"
-                app:layout_constraintTop_toBottomOf="@+id/heighDisplay" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/weight_label"
+                app:layout_constraintTop_toBottomOf="@+id/height_tv" />
 
             <TextView
-                android:id="@+id/genderDisplay"
-                android:layout_width="118dp"
-                android:layout_height="36dp"
-                android:layout_marginStart="8dp"
+                android:id="@+id/gender_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="TextView"
+                android:layout_marginEnd="32dp"
+                android:text="-"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.532"
-                app:layout_constraintStart_toEndOf="@+id/weightDisplay"
-                app:layout_constraintTop_toBottomOf="@+id/Gender" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/weight_tv"
+                app:layout_constraintTop_toBottomOf="@+id/gender_label" />
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrier5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="gender_tv,weight_tv"
+                tools:layout_editor_absoluteY="720dp" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

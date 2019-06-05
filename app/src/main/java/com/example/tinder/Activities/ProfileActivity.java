@@ -27,22 +27,20 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
     private static final String TAG = "ProfileActivity";
 
     private CoordinatorLayout mainLayout;
-    private TextView display;
-    private TextView displayName;
-    private TextView name;
-    private TextView nameName;
-    private TextView AboutMe;
-    private TextView AboutMe_Display;
-    private TextView Age;
-    private TextView AgeDisplay;
-    private TextView weight;
-    private TextView weightDisplay;
-    private TextView heigh;
-    private TextView heighDisplay;
-    private TextView Gender;
-    private TextView genderDisplay;
-    private Button invite;
-    private ImageView image;
+    private TextView displayNameLabel;
+    private TextView displayNameTV;
+    private TextView aboutMeLabel;
+    private TextView aboutMeTV;
+    private TextView ageLabel;
+    private TextView ageTV;
+    private TextView weightLabel;
+    private TextView weightTV;
+    private TextView heightLabel;
+    private TextView heightTV;
+    private TextView genderLabel;
+    private TextView genderTV;
+    private Button inviteButton;
+    private ImageView photoIV;
     private CardOfPeople value;
 
     @Override
@@ -58,36 +56,30 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
         this.getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
         this.getSupportActionBar().setDisplayShowCustomEnabled(true);
 
-        name = findViewById(R.id.person_name);
-        display = findViewById(R.id.display);
-        displayName = findViewById(R.id.displayName);
-        nameName = findViewById(R.id.nameName);
-        AboutMe = findViewById(R.id.AboutMe);
-        AboutMe_Display = findViewById(R.id.AboutMe_Display);
-        Age = findViewById(R.id.Age);
-        AgeDisplay = findViewById(R.id.AgeDisplay);
-        weight = findViewById(R.id.weight);
-        weightDisplay = findViewById(R.id.weightDisplay);
-        heigh = findViewById(R.id.heigh);
-        heighDisplay = findViewById(R.id.heighDisplay);
-        Gender = findViewById(R.id.Gender);
-        genderDisplay = findViewById(R.id.genderDisplay);
-        invite = findViewById(R.id.invite);
-
-        image = findViewById(R.id.person_photo);
+        displayNameLabel = findViewById(R.id.display_name_label);
+        displayNameTV = findViewById(R.id.display_name_tv);
+        aboutMeLabel = findViewById(R.id.about_me_label);
+        aboutMeTV = findViewById(R.id.about_me_tv);
+        ageLabel = findViewById(R.id.age_label);
+        ageTV = findViewById(R.id.age_tv);
+        weightLabel = findViewById(R.id.weight_label);
+        weightTV = findViewById(R.id.weight_tv);
+        heightLabel = findViewById(R.id.height_label);
+        heightTV = findViewById(R.id.height_tv);
+        genderLabel = findViewById(R.id.gender_label);
+        genderTV = findViewById(R.id.gender_tv);
+        inviteButton = findViewById(R.id.invite_button);
+        photoIV = findViewById(R.id.photo_iv);
 
         value = TinderManager.getInstance().getAaaaa();
 
         if (value.getDisplayName() == null || value.getDisplayName().isEmpty()) {
-            displayName.setText("No Name");
+            displayNameTV.setText("No Name");
         } else {
-            displayName.setText(value.getDisplayName());
-        }
-        if (value.getUser() != null && value.getUser().getFirstName() != null && value.getUser().getLastName() != null) {
-            nameName.setText(value.getUser().getFirstName() + " " + value.getUser().getLastName());
+            displayNameTV.setText(value.getDisplayName());
         }
         if (value.getAboutMe() != null) {
-            AboutMe_Display.setText(value.getAboutMe());
+            aboutMeTV.setText(value.getAboutMe());
         }
 
         if (value.getShowAge()) {
@@ -105,56 +97,56 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
                         j--;
                     }
                 }
-                AgeDisplay.setText(String.valueOf(j));
+                ageTV.setText(String.valueOf(j));
             } else {
-                Age.setVisibility(View.INVISIBLE);
-                AgeDisplay.setVisibility(View.INVISIBLE);
+                ageLabel.setVisibility(View.GONE);
+                ageTV.setVisibility(View.GONE);
             }
 
         } else {
-            Age.setVisibility(View.INVISIBLE);
-            AgeDisplay.setVisibility(View.INVISIBLE);
+            ageLabel.setVisibility(View.GONE);
+            ageTV.setVisibility(View.GONE);
         }
 
         if (value.getHeight() > 0) {
             if (value.getUnitSystem().equals("METRIC")) {
-                heighDisplay.setText(String.valueOf(value.getHeight()));
-                weightDisplay.setText(String.valueOf(value.getWeight()));
+                heightTV.setText(String.valueOf(value.getHeight()));
+                weightTV.setText(String.valueOf(value.getWeight()));
             } else {
-                heighDisplay.setText(String.valueOf(value.getHeight() * 3.28));
-                weightDisplay.setText(String.valueOf(value.getWeight() * 2.2));
+                heightTV.setText(String.valueOf(value.getHeight() * 3.28));
+                weightTV.setText(String.valueOf(value.getWeight() * 2.2));
             }
         } else {
-            heigh.setVisibility(View.INVISIBLE);
-            heighDisplay.setVisibility(View.INVISIBLE);
+            heightLabel.setVisibility(View.GONE);
+            heightTV.setVisibility(View.GONE);
         }
 
         if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")) {
-            genderDisplay.setVisibility(View.INVISIBLE);
-            Gender.setVisibility(View.INVISIBLE);
+            genderTV.setVisibility(View.GONE);
+            genderLabel.setVisibility(View.GONE);
         } else {
-            genderDisplay.setText(value.getGender().getType());
+            genderTV.setText(value.getGender().getType());
         }
 
-        // Esto no sirve para nada
+        // Esto no sirve para nada xddddddddddddddddddddddddddddddddddddddd
         //TinderManager.getInstance().getRelationship(this, value.getId());
 
         if (value.getPicture() != null) {
             byte[] decodedString = Base64.decode(value.getPicture(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            image.setImageBitmap(decodedByte);
+            photoIV.setImageBitmap(decodedByte);
         } else {
-            image.setImageResource(R.drawable.iscle);
+            photoIV.setImageResource(R.drawable.iscle);
         }
-        invite.setText("Tirar la caña");
-        invite.setOnClickListener(v -> invite());
+        inviteButton.setText("Tirar la caña");
+        inviteButton.setOnClickListener(v -> invite());
 
 
     }
 
     private void invite() {
 
-        switch (invite.getText().toString()) {
+        switch (inviteButton.getText().toString()) {
 
             case "Block":
 
@@ -171,12 +163,12 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
 
     @Override
     public void onRelationShipSuccess(Object profile) {
-        invite.setText("Block");
+        inviteButton.setText("Block");
     }
 
     @Override
     public void onRelationShipFailed(String reason) {
-        invite.setText("Tirar la caña");
+        inviteButton.setText("Tirar la caña");
         Log.d(TAG, "onRelationShipFailed:");
 
         //Snackbar.make(mainLayout, "Login failed: " + reason, Snackbar.LENGTH_LONG).show();

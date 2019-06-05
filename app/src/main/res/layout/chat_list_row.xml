@@ -41,11 +41,11 @@
         app:layout_constraintBottom_toTopOf="@+id/last_message"
         app:layout_constraintEnd_toStartOf="@+id/arrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/person_photo"
+        app:layout_constraintStart_toEndOf="@+id/photo_iv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/person_photo"
+        android:id="@+id/photo_iv"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -69,7 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toStartOf="@+id/arrow"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/person_photo"
+        app:layout_constraintStart_toEndOf="@+id/photo_iv"
         app:layout_constraintTop_toBottomOf="@+id/person_name" />
 
 </android.support.constraint.ConstraintLayout>

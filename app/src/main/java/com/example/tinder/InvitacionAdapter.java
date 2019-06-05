@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -130,7 +129,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
         ViewHolder(View view) {
             super(view);
             this.view = view;
-            image = view.findViewById(R.id.person_photo);
+            image = view.findViewById(R.id.photo_iv);
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);

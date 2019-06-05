@@ -108,7 +108,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         ViewHolder(View view) {
             super(view);
             mainLayout = view.findViewById(R.id.main_layout);
-            image = view.findViewById(R.id.person_photo);
+            image = view.findViewById(R.id.photo_iv);
             name = view.findViewById(R.id.person_name);
             description = view.findViewById(R.id.person_description);
             age = view.findViewById(R.id.person_age);
