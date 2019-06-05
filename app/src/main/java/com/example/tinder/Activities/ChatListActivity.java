@@ -54,7 +54,7 @@ public class ChatListActivity extends AppCompatActivity {
                 ArrayList<ChatRow> rows = new ArrayList<>();
 
                 for (CardOfPeople p : people) {
-                    TinderManager.getInstance().getMessages(p.getId(), new GenericCallback() {
+                    TinderManager.getInstance().getMessages(p.getId(),20, new GenericCallback() {
                         @Override
                         public void onSuccess(Object data) {
                             Message[] messages = (Message[]) data;
@@ -72,7 +72,7 @@ public class ChatListActivity extends AppCompatActivity {
                             rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
                         }
-                    },true);
+                    });
                 }
             }
 
