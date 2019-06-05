@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Login - Tinder");
+        setTitle("Login - Salle Tinder");
 
         mainLayout = findViewById(R.id.main_layout);
         usernameEditText = findViewById(R.id.username);
@@ -57,8 +57,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
         String password = this.passwordEditText.getText().toString();
         boolean rememberMe = rememberMeCheckBox.isSelected();
 
-        // TODO: Check for errors in user input!
-
         if (username.equals("") || password.equals("")) {
             username = password = "admin";
         }
@@ -69,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
     }
 
     private void forgotPassword() {
-        Snackbar.make(mainLayout, "No, you didn't", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mainLayout, "No, you didn't \uD83D\uDE1C (not implemented...)", Snackbar.LENGTH_LONG).show();
     }
 
     private void register() {
@@ -79,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
 
     @Override
-    public void onLoginSuccess(Object userToken) {
+    public void onLoginSuccess(String userToken) {
         runOnUiThread(() -> {
             SharedPreferences.Editor sharedPrefEditor = getSharedPreferences(
                     getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit();
@@ -104,7 +102,6 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
     @Override
     public void onLoginFailed(String reason) {
-
         runOnUiThread(() -> {
             // Hide the loading layout
             loadingLayout.setVisibility(View.GONE);
