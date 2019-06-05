@@ -73,8 +73,8 @@ interface TinderService {
 
     @GET("api/direct-messages")
     Call<Message[]> getLastMessage(@Header("Authorization") String userToken,
-                                   @Query("recipientId.equals") long recipientId,
-                                   @Query("senderId.equals") long senderId1,
+                                   @Query("recipientId.in") long recipientId,
+                                   @Query("senderId.in") long senderId1,
                                    @Query("recipientId.in") long recipientId2,
                                    @Query("senderId.in") long senderId2,
                                    @Query("size") int size,
