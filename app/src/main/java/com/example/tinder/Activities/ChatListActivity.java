@@ -72,7 +72,7 @@ public class ChatListActivity extends AppCompatActivity {
                             rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                             chatListAdapter.setDataset(rows);
                         }
-                    },false);
+                    },true);
                 }
             }
 
