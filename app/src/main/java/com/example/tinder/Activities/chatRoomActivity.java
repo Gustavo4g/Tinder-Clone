@@ -30,9 +30,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         id = (float) getIntent().getExtras().getSerializable("USER_ID");
         messages = new ArrayList<>();
         TinderManager.getInstance().getMessages((long)id,20,this);
-        for (Message fer : messages){
-            Log.d("Pepe",fer.getMessage());
-        }
+
         recycle = findViewById(R.id.recyclerView);
     }
 
@@ -41,6 +39,9 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     public void onSuccess(Object data) {
         com.example.tinder.Model.Message[] men = (com.example.tinder.Model.Message[])data;
         messages.addAll(Arrays.asList(men));
+        for (Message fer : messages){
+            Log.d("Pepe",fer.getMessage());
+        }
     }
 
     @Override
