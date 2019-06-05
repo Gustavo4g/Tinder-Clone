@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.tinder.Activities.chatRoomActivity;
 import com.example.tinder.Model.ChatRow;
+import com.example.tinder.R;
 
 import java.util.ArrayList;
 

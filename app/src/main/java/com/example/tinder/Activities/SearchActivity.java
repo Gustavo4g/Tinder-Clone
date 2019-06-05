@@ -9,16 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
-import com.example.tinder.LocationAdapter;
-import com.example.tinder.Model.Invite;
+import com.example.tinder.Adapters.LocationAdapter;
 import com.example.tinder.R;
-import com.example.tinder.SearchDialog;
+import com.example.tinder.Dialogs.SearchDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,8 +48,8 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
 
         ImageView settings = getSupportActionBar().getCustomView().findViewById(R.id.action_gear);
         settings.setOnClickListener(v -> {
-            Intent peticionAmistad = new Intent(SearchActivity.this, Invitacion.class);
-            startActivity(peticionAmistad);
+            Intent settingsActivity = new Intent(SearchActivity.this, SettingsActivity.class);
+            startActivity(settingsActivity);
         });
 
         ImageView chats = getSupportActionBar().getCustomView().findViewById(R.id.action_chat);
@@ -68,9 +66,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         profileRV.setAdapter(profileRVAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Log.d(TAG, "onClick: Filter button pressed!");
-
+        fab.setOnClickListener(v -> {
             SearchDialog dialog = new SearchDialog(this) {
                 @Override
                 public void onSearch(HashMap<String, String> parameters) {
@@ -92,6 +88,12 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
             };
 
             dialog.show();
+        });
+
+        FloatingActionButton pendingRequestsFAB = findViewById(R.id.pending_requests);
+        pendingRequestsFAB.setOnClickListener(v -> {
+            Intent peticionAmistad = new Intent(SearchActivity.this, Invitacion.class);
+            startActivity(peticionAmistad);
         });
     }
 

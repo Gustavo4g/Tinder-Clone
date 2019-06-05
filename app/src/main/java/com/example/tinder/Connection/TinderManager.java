@@ -1,16 +1,13 @@
 package com.example.tinder.Connection;
 
 import android.util.Log;
-import android.widget.ImageView;
 
-import com.example.tinder.GenericCallback;
+import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
 import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.LoginCallBack;
-import com.example.tinder.Interfaces.GetMessageCallback;
-import com.example.tinder.Interfaces.PostMessageCallback;
 import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.BackendError;
@@ -20,7 +17,6 @@ import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Register;
 import com.example.tinder.Model.SendMensaje;
-import com.example.tinder.Model.User;
 import com.example.tinder.Model.UserToken;
 import com.google.gson.Gson;
 

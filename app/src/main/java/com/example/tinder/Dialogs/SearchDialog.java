@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import com.example.tinder.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.InvitacionAdapter;
+import com.example.tinder.Adapters.InvitacionAdapter;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 

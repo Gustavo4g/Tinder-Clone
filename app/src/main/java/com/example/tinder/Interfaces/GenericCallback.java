@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Interfaces;
 
 public interface GenericCallback {
     void onSuccess(Object data);

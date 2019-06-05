@@ -10,23 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.GenericCallback;
-import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Recipient;
 import com.example.tinder.Model.SendMensaje;
-import com.example.tinder.Model.User;
 import com.example.tinder.R;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class chatRoomActivity extends AppCompatActivity implements GenericCallback {

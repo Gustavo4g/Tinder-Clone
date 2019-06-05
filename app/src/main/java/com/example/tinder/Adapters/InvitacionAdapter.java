@@ -1,4 +1,4 @@
-package com.example.tinder;
+package com.example.tinder.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.Invite;
+import com.example.tinder.R;
 
 import java.util.Calendar;
 import java.util.List;

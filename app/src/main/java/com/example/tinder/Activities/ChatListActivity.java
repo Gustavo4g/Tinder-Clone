@@ -8,13 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.tinder.ChatListAdapter;
+import com.example.tinder.Adapters.ChatListAdapter;
 import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.GenericCallback;
-import com.example.tinder.Interfaces.DataCallback;
+import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.Model.ChatRow;
-import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Message;
 import com.example.tinder.R;
 

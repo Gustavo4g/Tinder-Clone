@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/CustomTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.SettingsActivity"></activity>
         <activity android:name=".Activities.ChatListActivity" />
         <activity android:name=".Activities.SearchActivity" />
         <activity
