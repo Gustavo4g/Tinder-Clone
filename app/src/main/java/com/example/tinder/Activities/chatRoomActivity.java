@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class chatRoomActivity extends AppCompatActivity implements GenericCallback {
-    private RecyclerView profileRV;
+    private RecyclerView recycle;
     private ArrayList<com.example.tinder.Model.Message> messages;
     private float id;
     @Override
@@ -33,6 +33,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         for (Message fer : messages){
             Log.d("Pepe",fer.getMessage());
         }
+        recycle = findViewById(R.id.recyclerView);
     }
 
 
