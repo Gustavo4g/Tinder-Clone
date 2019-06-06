@@ -1,9 +1,12 @@
 package com.example.tinder.Activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,7 +49,15 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private String nameFriend;
     private messagesAdapter messagesAdapterView;
     private threadMissatges t;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
+    ImageView foto_gallery;
     private Button image;
+
+
+    // public chatRoomActivity(chatRoomActivity chat){
+     //   this.chat = chat;
+    //}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +113,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (bottom < oldBottom) {
-                    recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
+                    //recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
                 }
             }
         });
@@ -114,13 +125,27 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         messages.clear();
         TinderManager.getInstance().getMessages((long) id, 20, this);
 
-        //TODO : Para marc llamar para que actualize la view
     }
 
     private void atras(){
         t.running = false;
         finish();
     }
+
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            foto_gallery.setImageURI(imageUri);
+            enviarImagen(foto_gallery);
+        }
+    }
+
 
     private void enviarImagen(ImageView imagen){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -129,7 +154,15 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String mensaje = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        enviarMensaje(mensaje);
+        SendMensaje men = new SendMensaje();
+        men.setCreatedDate("");
+        men.setPicture(mensaje);
+        men.setRecipient(new Recipient(id));
+        men.setPictureContentType("");
+        men.setUrl("");
+        men.setMessage("");
+        TinderManager.getInstance().postMessages(this, men);
+        tersto.setText("");
     }
 
     private void enviarMensaje(String mensaje) {

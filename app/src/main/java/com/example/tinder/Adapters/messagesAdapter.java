@@ -3,18 +3,17 @@ package com.example.tinder.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.view.ContextMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tinder.Model.ChatRow;
 import com.example.tinder.Model.Message;
 import com.example.tinder.R;
 
@@ -46,10 +45,9 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
         }
     }
 
-    private void convertirImagen(String imagenEnString, ImageView imageViewAponerFoto){
+    private Bitmap convertirImagen(String imagenEnString){
         byte[] decodedString = Base64.decode(imagenEnString, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageViewAponerFoto.setImageBitmap(decodedByte);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
     @Override
@@ -67,8 +65,12 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
 
         Message message = messages.get((getItemCount() - 1) - i);
         viewHolder.texto.setText( "  " + message.getMessage());
-
-
+        if (!message.getPicture().equals("")){
+            Log.d("He Pasad","por aqui");
+            BitmapDrawable drawableLeft = new BitmapDrawable(context.getResources(), convertirImagen(message.getPicture()));
+            viewHolder.texto.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+            viewHolder.texto.setText( "  ");
+        }
     }
 
     public void setDataset(ArrayList<Message> messageList) {
