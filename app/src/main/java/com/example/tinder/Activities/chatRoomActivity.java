@@ -115,6 +115,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         men.setUrl("");
         men.setMessage(mensaje);
         TinderManager.getInstance().postMessages(this, men);
+        tersto.setText("");
 
     }
 
