@@ -3,12 +3,15 @@ package com.example.tinder.Activities;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tinder.Adapters.ChatListAdapter;
+import com.example.tinder.Adapters.messagesAdapter;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Model.Message;
@@ -30,6 +33,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private TextInputEditText tersto;
     private ArrayList<com.example.tinder.Model.Message> messages;
     private float id;
+    private messagesAdapter messagesAdapterView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,20 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         //actualizaMensajes();
 
         recycle = findViewById(R.id.recyclerView);
+
+        recycle.setHasFixedSize(true);
+        recycle.setLayoutManager(new LinearLayoutManager(this));
+
+        messagesAdapterView = new messagesAdapter(messages, this);
+        recycle.setAdapter(messagesAdapterView);
+
         perfil = findViewById(R.id.personalImage);
         name = findViewById(R.id.nameChat);
         tersto = findViewById(R.id.introducion);
         button = findViewById(R.id.button);
 
-        button.setOnClickListener(v -> enviarMensaje("mensaje poner aqui"));
+        if  (tersto.getText() != null)
+            button.setOnClickListener(v -> enviarMensaje(tersto.getText().toString()));
 
     }
 
