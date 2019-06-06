@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class chatRoomActivity extends AppCompatActivity implements GenericCallback {
+public class chatRoomActivity extends AppCompatActivity implements GenericCallback{
     private RecyclerView recycle;
     private ImageView perfil;
     private TextView name;
@@ -42,6 +42,11 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private String picture;
     private String nameFriend;
     private messagesAdapter messagesAdapterView;
+    private threadMissatges t;
+
+   // public chatRoomActivity(chatRoomActivity chat){
+     //   this.chat = chat;
+    //}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,16 +94,19 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         altra.setOnClickListener(v -> atras());
 
         TinderManager.getInstance().getMessages((long) id, 20, this);
-
+        t = new threadMissatges(this);
+        t.start();
     }
 
-    private void actualizaMensajes() {
+    public synchronized void actualizaMensajes() {
         messages.clear();
         TinderManager.getInstance().getMessages((long) id, 20, this);
+
         //TODO : Para marc llamar para que actualize la view
     }
 
     private void atras(){
+        t.running = false;
         finish();
     }
 
