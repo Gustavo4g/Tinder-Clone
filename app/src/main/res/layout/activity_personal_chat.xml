@@ -72,11 +72,12 @@
         android:id="@+id/button"
         android:layout_width="67dp"
         android:layout_height="47dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/SendButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        tools:layout_editor_absoluteY="675dp" />
+        app:layout_constraintStart_toEndOf="@+id/image" />
 
     <EditText
         android:id="@+id/introduccion"
@@ -95,10 +96,11 @@
         android:id="@+id/image"
         android:layout_width="62dp"
         android:layout_height="47dp"
+        android:layout_marginBottom="8dp"
         android:text="Imag"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/introduccion"
-        tools:layout_editor_absoluteY="674dp" />
+        app:layout_constraintStart_toEndOf="@+id/introduccion" />
 
 </android.support.constraint.ConstraintLayout>
