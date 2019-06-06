@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chat"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <View
         android:id="@+id/rectangle_at_the_top"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="72dp"
         android:layout_alignParentTop="true"
         android:background="#4CAF50"
@@ -37,10 +37,8 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/introduccion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_at_the_top"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/rectangle_at_the_top" />
 
     <ImageView
         android:id="@+id/personalImage"
@@ -80,7 +78,6 @@
         android:text="@string/SendButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/introduccion" />
 
     <EditText
@@ -95,7 +92,6 @@
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
