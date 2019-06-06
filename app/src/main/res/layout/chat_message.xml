@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="wrap_content"
@@ -7,10 +8,15 @@
 
     <TextView
         android:id="@+id/chat"
-        android:layout_width="84dp"
-        android:layout_height="37dp"
+        android:layout_width="86dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:background="#45F5A5"
         android:text="TextView"
-        tools:layout_editor_absoluteX="257dp"
-        tools:layout_editor_absoluteY="-1dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

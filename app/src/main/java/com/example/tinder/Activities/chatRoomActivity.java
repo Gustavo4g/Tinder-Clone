@@ -50,7 +50,6 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         nameFriend = (String) getIntent().getExtras().getSerializable("NAME");
         picture = (String) getIntent().getExtras().getSerializable("PICTURE");
         messages = new ArrayList<>();
-        TinderManager.getInstance().getMessages((long) id, 20, this);
 
 
 
@@ -62,7 +61,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
-        messagesAdapterView = new messagesAdapter(messages, this);
+        messagesAdapterView = new messagesAdapter(messages, this, nameFriend);
         recycle.setAdapter(messagesAdapterView);
 
         perfil = findViewById(R.id.personalImage);
@@ -73,6 +72,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         } else {
             perfil.setImageResource(R.drawable.iscle);
         }
+
 
         name = findViewById(R.id.nameChat);
         name.setText(nameFriend);
@@ -85,6 +85,8 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
             button.setOnClickListener(v -> enviarMensaje(tersto.getText().toString()));
 
         altra.setOnClickListener(v -> atras());
+
+        TinderManager.getInstance().getMessages((long) id, 20, this);
 
     }
 
@@ -124,6 +126,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
             for (Message fer : messages) {
                 Log.d("Pepe", fer.getMessage());
             }
+            messagesAdapterView.setDataset(messages);
         }
     }
 

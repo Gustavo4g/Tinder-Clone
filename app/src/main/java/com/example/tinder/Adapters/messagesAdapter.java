@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.tinder.Model.ChatRow;
 import com.example.tinder.Model.Message;
 import com.example.tinder.R;
 
@@ -19,11 +20,13 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
 
     Context context;
     ArrayList<Message> messages;
+    String name;
 
-    public messagesAdapter(ArrayList<Message> messages, Context context){
+    public messagesAdapter(ArrayList<Message> messages, Context context, String friend){
 
-        this.messages = messages != null ? messages : new ArrayList<Message>();
+        this.messages = messages != null ? messages : new ArrayList<>();
         this.context = context;
+        this.name = friend;
     }
 
 
@@ -38,8 +41,16 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     public void onBindViewHolder(@NonNull messagesAdapter.ViewHolder viewHolder, int i) {
 
         Message message = messages.get(i);
-        viewHolder.texto.setText(message.getMessage());
+        if (messages.get(i).getSender().getDisplayName().equals(name))
+            viewHolder.texto.setText(message.getMessage());
+        else
 
+
+    }
+
+    public void setDataset(ArrayList<Message> messageList) {
+        this.messages = messageList;
+        notifyDataSetChanged();
     }
 
     @Override
