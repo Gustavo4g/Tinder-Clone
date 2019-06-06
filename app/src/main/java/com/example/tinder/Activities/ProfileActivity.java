@@ -2,6 +2,7 @@ package com.example.tinder.Activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -145,6 +146,8 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
     }
 
     private void invite() {
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.like_sound);
+        mp.start();
 
         switch (inviteButton.getText().toString()) {
 
