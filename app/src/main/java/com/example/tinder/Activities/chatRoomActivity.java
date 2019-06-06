@@ -1,9 +1,12 @@
 package com.example.tinder.Activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,8 +49,12 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private String nameFriend;
     private messagesAdapter messagesAdapterView;
     private threadMissatges t;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
+    ImageView foto_gallery;
 
-   // public chatRoomActivity(chatRoomActivity chat){
+
+    // public chatRoomActivity(chatRoomActivity chat){
      //   this.chat = chat;
     //}
 
@@ -120,6 +127,21 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         t.running = false;
         finish();
     }
+
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            foto_gallery.setImageURI(imageUri);
+            enviarImagen(foto_gallery);
+        }
+    }
+
 
     private void enviarImagen(ImageView imagen){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
