@@ -10,7 +10,7 @@
         android:id="@+id/chat"
         android:layout_width="189dp"
         android:layout_height="47dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#C6F3DD"
