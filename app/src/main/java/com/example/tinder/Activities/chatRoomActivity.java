@@ -1,11 +1,15 @@
 package com.example.tinder.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,10 +33,13 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private RecyclerView recycle;
     private ImageView perfil;
     private TextView name;
+    private ImageView altra;
     private Button button;
     private TextInputEditText tersto;
     private ArrayList<com.example.tinder.Model.Message> messages;
     private float id;
+    private String picture;
+    private String nameFriend;
     private messagesAdapter messagesAdapterView;
 
     @Override
@@ -40,6 +47,8 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_chat);
         id = (float) getIntent().getExtras().getSerializable("USER_ID");
+        nameFriend = (String) getIntent().getExtras().getSerializable("NAME");
+        picture = (String) getIntent().getExtras().getSerializable("PICTURE");
         messages = new ArrayList<>();
         TinderManager.getInstance().getMessages((long) id, 20, this);
 
@@ -57,12 +66,25 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         recycle.setAdapter(messagesAdapterView);
 
         perfil = findViewById(R.id.personalImage);
+        if (picture != null) {
+            byte[] decodedString = Base64.decode(picture, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            perfil.setImageBitmap(decodedByte);
+        } else {
+            perfil.setImageResource(R.drawable.iscle);
+        }
+
         name = findViewById(R.id.nameChat);
+        name.setText(nameFriend);
+
         tersto = findViewById(R.id.introducion);
         button = findViewById(R.id.button);
+        altra = findViewById(R.id.atra);
 
         if  (tersto.getText() != null)
             button.setOnClickListener(v -> enviarMensaje(tersto.getText().toString()));
+
+        altra.setOnClickListener(v -> atras());
 
     }
 
@@ -70,6 +92,10 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         messages.clear();
         TinderManager.getInstance().getMessages((long) id, 20, this);
         //TODO : Para marc llamar para que actualize la view
+    }
+
+    private void atras(){
+        finish();
     }
 
     private void enviarMensaje(String mensaje) {
