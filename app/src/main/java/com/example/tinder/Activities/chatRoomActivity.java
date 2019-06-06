@@ -102,7 +102,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (bottom < oldBottom) {
-                    recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
+                    //recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
                 }
             }
         });
@@ -114,7 +114,6 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         messages.clear();
         TinderManager.getInstance().getMessages((long) id, 20, this);
 
-        //TODO : Para marc llamar para que actualize la view
     }
 
     private void atras(){
@@ -129,7 +128,15 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String mensaje = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        enviarMensaje(mensaje);
+        SendMensaje men = new SendMensaje();
+        men.setCreatedDate("");
+        men.setPicture(mensaje);
+        men.setRecipient(new Recipient(id));
+        men.setPictureContentType("");
+        men.setUrl("");
+        men.setMessage("");
+        TinderManager.getInstance().postMessages(this, men);
+        tersto.setText("");
     }
 
     private void enviarMensaje(String mensaje) {
