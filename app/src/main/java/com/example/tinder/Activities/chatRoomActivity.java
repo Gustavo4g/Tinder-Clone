@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,6 +95,15 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         altra.setOnClickListener(v -> atras());
 
         TinderManager.getInstance().getMessages((long) id, 20, this);
+
+        recycle.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom) {
+                    recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
+                }
+            }
+        });
         t = new threadMissatges(this);
         t.start();
     }
@@ -138,6 +148,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
                 Log.d("Pepe", fer.getMessage());
             }
             messagesAdapterView.setDataset(messages);
+            recycle.smoothScrollToPosition(messagesAdapterView.getItemCount() - 1);
         }else{
             actualizaMensajes();
         }
