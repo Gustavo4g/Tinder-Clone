@@ -52,6 +52,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private threadMissatges t;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
+    private Button image;
 
 
     // public chatRoomActivity(chatRoomActivity chat){
@@ -78,6 +79,8 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(this));
 
+        image = findViewById(R.id.image);
+
         messagesAdapterView = new messagesAdapter(messages, this, nameFriend);
         recycle.setAdapter(messagesAdapterView);
 
@@ -100,6 +103,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
 
         if  (tersto.getText() != null)
             button.setOnClickListener(v -> enviarMensaje(tersto.getText().toString()));
+        image.setOnClickListener(v -> openGallery());
 
         altra.setOnClickListener(v -> atras());
 
