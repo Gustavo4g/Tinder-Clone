@@ -30,6 +30,7 @@ import com.example.tinder.Model.SendMensaje;
 import com.example.tinder.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +52,6 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private threadMissatges t;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
-    ImageView foto_gallery;
 
 
     // public chatRoomActivity(chatRoomActivity chat){
@@ -137,16 +137,18 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
-            foto_gallery.setImageURI(imageUri);
-            enviarImagen(foto_gallery);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                enviarImagen(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
 
-    private void enviarImagen(ImageView imagen){
+    private void enviarImagen(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imagen.buildDrawingCache();
-        Bitmap bitmap = imagen.getDrawingCache();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         String mensaje = Base64.encodeToString(imageBytes, Base64.DEFAULT);
