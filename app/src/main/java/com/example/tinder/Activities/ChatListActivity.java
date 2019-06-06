@@ -30,9 +30,13 @@ public class ChatListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
 
-        if (TinderManager.getInstance().getActualUser().getDisplayName().equalsIgnoreCase("fernando")) {
-            MediaPlayer mp = MediaPlayer.create(this, R.raw.welcome_sound);
-            mp.start();
+        try {
+            if (TinderManager.getInstance().getActualUser().getDisplayName().equalsIgnoreCase("fernando")) {
+                MediaPlayer mp = MediaPlayer.create(this, R.raw.welcome_sound);
+                mp.start();
+            }
+        } catch (NullPointerException e) {
+            // Something failed...
         }
 
         ArrayList<CardOfPeople> friends = new ArrayList<>();
