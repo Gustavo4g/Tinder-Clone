@@ -130,6 +130,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
                 Log.d("Pepe", fer.getMessage());
             }
             messagesAdapterView.setDataset(messages);
+            recycle.smoothScrollToPosition(messagesAdapterView.getItemCount() - 1);
         }else{
             actualizaMensajes();
         }

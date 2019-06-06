@@ -399,13 +399,7 @@ public class TinderManager {
 
     public void getMessages(long friendId, int size, GenericCallback callback) {
         Log.d(TAG, "getLastMessage: " + actualUser.getId() + ", " + friendId);
-        Call<Message[]> call;
-
-        if (size == 1) {
-            call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), actualUser.getId(), friendId, friendId, size, "createdDate,desc");
-        } else {
-            call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), actualUser.getId(), friendId, friendId, size, "createdDate,asc");
-        }
+        Call<Message[]> call = service.getLastMessage("Bearer " + userToken.getToken(), actualUser.getId(), actualUser.getId(), friendId, friendId, size, "createdDate,desc");
 
         call.enqueue(new Callback<Message[]>() {
             @Override
