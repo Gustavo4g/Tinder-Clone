@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private TextView name;
     private ImageView altra;
     private Button button;
-    private TextInputEditText tersto;
+    private EditText tersto;
     private ArrayList<com.example.tinder.Model.Message> messages;
     private float id;
     private String picture;
@@ -45,6 +46,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_personal_chat);
         id = (float) getIntent().getExtras().getSerializable("USER_ID");
         nameFriend = (String) getIntent().getExtras().getSerializable("NAME");
@@ -77,7 +79,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         name = findViewById(R.id.nameChat);
         name.setText(nameFriend);
 
-        tersto = findViewById(R.id.introducion);
+        tersto = findViewById(R.id.introduccion);
         button = findViewById(R.id.button);
         altra = findViewById(R.id.atra);
 
@@ -114,19 +116,21 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         men.setMessage(mensaje);
         TinderManager.getInstance().postMessages(this, men);
 
-
     }
 
 
     @Override
     public void onSuccess(Object data) {
         if (data != null) {
+            messages.clear();
             com.example.tinder.Model.Message[] men = (com.example.tinder.Model.Message[]) data;
             messages.addAll(Arrays.asList(men));
             for (Message fer : messages) {
                 Log.d("Pepe", fer.getMessage());
             }
             messagesAdapterView.setDataset(messages);
+        }else{
+            actualizaMensajes();
         }
     }
 

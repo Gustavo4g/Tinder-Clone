@@ -56,7 +56,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     public void onBindViewHolder(@NonNull messagesAdapter.ViewHolder viewHolder, int i) {
 
         Message message = messages.get(i);
-        viewHolder.texto.setText(message.getMessage());
+        viewHolder.texto.setText( "  " + message.getMessage());
 
 
     }
