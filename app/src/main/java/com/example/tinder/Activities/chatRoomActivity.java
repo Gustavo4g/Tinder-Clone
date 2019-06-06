@@ -46,10 +46,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private String nameFriend;
     private messagesAdapter messagesAdapterView;
     private threadMissatges t;
-
-   // public chatRoomActivity(chatRoomActivity chat){
-     //   this.chat = chat;
-    //}
+    private Button image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +67,8 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
 
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(this));
+
+        image.findViewById(R.id.image);
 
         messagesAdapterView = new messagesAdapter(messages, this, nameFriend);
         recycle.setAdapter(messagesAdapterView);
@@ -93,6 +92,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
 
         if  (tersto.getText() != null)
             button.setOnClickListener(v -> enviarMensaje(tersto.getText().toString()));
+        image.setOnClickListener(openGallery());
 
         altra.setOnClickListener(v -> atras());
 
