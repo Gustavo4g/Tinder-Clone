@@ -1,13 +1,17 @@
 package com.example.tinder.Adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tinder.Model.ChatRow;
@@ -40,6 +44,12 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
             View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message_friend, viewGroup, false);
             return new messagesAdapter.ViewHolder(itemView);
         }
+    }
+
+    private void convertirImagen(String imagenEnString, ImageView imageViewAponerFoto){
+        byte[] decodedString = Base64.decode(imagenEnString, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        imageViewAponerFoto.setImageBitmap(decodedByte);
     }
 
     @Override

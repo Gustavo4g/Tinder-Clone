@@ -2,6 +2,7 @@ package com.example.tinder.Activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.example.tinder.Model.Recipient;
 import com.example.tinder.Model.SendMensaje;
 import com.example.tinder.R;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,11 +113,17 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
         finish();
     }
 
-    private void enviarMensaje(String mensaje) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        String a = sdf.format(new Date());
+    private void enviarImagen(ImageView imagen){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imagen.buildDrawingCache();
+        Bitmap bitmap = imagen.getDrawingCache();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String mensaje = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        enviarMensaje(mensaje);
+    }
 
+    private void enviarMensaje(String mensaje) {
         SendMensaje men = new SendMensaje();
         men.setCreatedDate("");
         men.setPicture("");
