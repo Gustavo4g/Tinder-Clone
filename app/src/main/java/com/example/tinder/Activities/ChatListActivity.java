@@ -1,5 +1,6 @@
 package com.example.tinder.Activities;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,12 @@ public class ChatListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
+
+        if (TinderManager.getInstance().getActualUser().getDisplayName().equalsIgnoreCase("fernando")) {
+            MediaPlayer mp = MediaPlayer.create(this, R.raw.welcome_sound);
+            mp.start();
+        }
+
         ArrayList<CardOfPeople> friends = new ArrayList<>();
         // Esto es para la barra de arriba
         getSupportActionBar().setDisplayShowHomeEnabled(false);
