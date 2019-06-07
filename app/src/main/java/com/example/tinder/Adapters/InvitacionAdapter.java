@@ -28,6 +28,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
     private static final String TAG = "InvitacionAdapter";
 
     private final List<CardOfPeople> peopleList;
+    private ViewHolder viewHolder;
 
     public InvitacionAdapter(List<CardOfPeople> peopleList) {
         this.peopleList = peopleList;
@@ -73,11 +74,14 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
             viewHolder.image.setImageResource(R.drawable.iscle);
             viewHolder.image.setOnClickListener(v -> click(profile, viewHolder));
         }
+        this.viewHolder = viewHolder;
     }
 
     private void aceptarPeticion(Invite invite) {
         Log.d(TAG, "aceptarPeticion: inviteId = " + invite.getId());
         TinderManager.getInstance().inviteAnswer(this, invite.getId(),true);
+        viewHolder.heart.setVisibility(View.GONE);
+        viewHolder.heart.setOnClickListener(null);
     }
 
     @Override
