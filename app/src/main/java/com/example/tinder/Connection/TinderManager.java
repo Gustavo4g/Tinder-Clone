@@ -205,24 +205,24 @@ public class TinderManager {
         });
     }
 
-    public void profilePut(DataCallback dataCallback, CardOfPeople profile) {
+    public void profilePut(GenericCallback dataCallback, CardOfPeople profile) {
         Call<Void> call = service.profilePut("Bearer " + userToken.getToken(), profile);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onProfilePutSuccess();
+                    dataCallback.onSuccess(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
-                    dataCallback.onProfilePutFailed(getProblem(response.code()));
+                    dataCallback.onFailure(getProblem(response.code()));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                dataCallback.onProfilePutFailed(t.getMessage());
+                dataCallback.onFailure(t.getMessage());
             }
         });
     }
