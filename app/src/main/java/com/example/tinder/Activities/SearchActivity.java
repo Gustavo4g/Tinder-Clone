@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Adapters.LocationAdapter;
+import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 import com.example.tinder.Dialogs.SearchDialog;
 

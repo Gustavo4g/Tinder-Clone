@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,12 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     Context context;
     ArrayList<Message> messages;
     String name;
+    ConstraintLayout.LayoutParams lparams;
 
     public messagesAdapter(ArrayList<Message> messages, Context context, String friend){
-
+        lparams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+        lparams.setMargins(10, 10, 10, 10);
         this.messages = messages != null ? messages : new ArrayList<>();
         this.context = context;
         this.name = friend;
@@ -37,8 +41,10 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     @Override
     public messagesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if (i == 2) {
+
             View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message, viewGroup, false);
             return new messagesAdapter.ViewHolder(itemView);
+
         }else{
             View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message_friend, viewGroup, false);
             return new messagesAdapter.ViewHolder(itemView);
@@ -64,11 +70,13 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     public void onBindViewHolder(@NonNull messagesAdapter.ViewHolder viewHolder, int i) {
 
         Message message = messages.get((getItemCount() - 1) - i);
+        //viewHolder.texto.setLayoutParams(lparams);
         viewHolder.texto.setText( "  " + message.getMessage());
         if (!message.getPicture().equals("")){
             Log.d("He Pasad","por aqui");
             BitmapDrawable drawableLeft = new BitmapDrawable(context.getResources(), convertirImagen(message.getPicture()));
             viewHolder.texto.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+          //  viewHolder.texto.setLayoutParams(lparams);
             viewHolder.texto.setText( "  ");
         }
     }
