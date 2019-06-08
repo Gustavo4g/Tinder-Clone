@@ -298,7 +298,7 @@ public class TinderManager {
     }
 
     public void pendingInvites(DataCallback dataCallback) {
-        Call<Invite[]> call = service.prendingInvites("Bearer "+ userToken.getToken());
+        Call<Invite[]> call = service.prendingInvites("Bearer " + userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
             @Override
@@ -306,7 +306,7 @@ public class TinderManager {
                 if (response.isSuccessful()) {
                     Log.d(TAG, "pendingInivtes success!");
                     pending_invitations = response.body();
-                    Log.d(TAG, "pendingInvites length: " + pending_invitations.length);;
+                    Log.d(TAG, "pendingInvites length: " + pending_invitations.length);
                     if (dataCallback != null)
                         dataCallback.onPendingInvitesSuccess(response.body());
                 } else {

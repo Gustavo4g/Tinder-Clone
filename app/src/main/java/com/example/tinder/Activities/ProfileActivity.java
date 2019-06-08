@@ -61,15 +61,15 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
         displayNameTV = findViewById(R.id.display_name_tv);
         aboutMeLabel = findViewById(R.id.about_me_label);
         aboutMeTV = findViewById(R.id.about_me_tv);
-        ageLabel = findViewById(R.id.age_label);
-        ageTV = findViewById(R.id.age_tv);
+        ageLabel = findViewById(R.id.birthday_label);
+        ageTV = findViewById(R.id.birthday_tv);
         weightLabel = findViewById(R.id.weight_label);
         weightTV = findViewById(R.id.weight_tv);
         heightLabel = findViewById(R.id.height_label);
         heightTV = findViewById(R.id.height_tv);
         genderLabel = findViewById(R.id.gender_label);
         genderTV = findViewById(R.id.gender_tv);
-        inviteButton = findViewById(R.id.invite_button);
+        inviteButton = findViewById(R.id.save_button);
         photoIV = findViewById(R.id.photo_iv);
 
         value = TinderManager.getInstance().getAaaaa();

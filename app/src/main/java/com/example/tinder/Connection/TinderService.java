@@ -33,7 +33,7 @@ interface TinderService {
     Call<UserToken> login(@Body Login login);
 
     //Profile update call
-    @PUT("api/my-activity_profile")
+    @PUT("api/my-profile")
     Call<Void> profilePut(@Header("Authorization") String userToken, @Body CardOfPeople profile);
 
     //Own activity_profile GET call

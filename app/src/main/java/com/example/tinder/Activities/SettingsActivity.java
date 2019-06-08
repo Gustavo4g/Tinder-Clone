@@ -1,62 +1,76 @@
 package com.example.tinder.Activities;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.Interfaces.DataCallback;
 import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.util.Calendar;
 
 public class SettingsActivity extends AppCompatActivity implements GenericCallback {
+    private static final String TAG = "SettingsActivity";
 
-    private EditText weight;
-    private EditText height;
-    private EditText birth;
-    private EditText about;
-    private Button image;
-    private Button send;
-    private String picture;
-    private String aboutMe;
-    private static final int PICK_IMAGE = 100;
-    Uri imageUri;
+    private ImageView profileIV;
+    private EditText nameET;
+    private EditText descriptionET;
+    private TextView birthdayTV;
+
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        weight = findViewById(R.id.Weight);
-        height = findViewById(R.id.Height);
-        birth = findViewById(R.id.Birth);
-        about = findViewById(R.id.description);
-        image = findViewById(R.id.ImageButton);
-        send = findViewById(R.id.SendButtonProfile);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        image.setOnClickListener(v -> openGallery());
-        send.setOnClickListener(v -> sendData());
+        setTitle("Edit profile - Salle Tinder");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        profileIV = findViewById(R.id.photo_iv);
+        nameET = findViewById(R.id.name_et);
+        descriptionET = findViewById(R.id.description_et);
+        birthdayTV = findViewById(R.id.birthday_tv);
+
+        saveButton = findViewById(R.id.save_button);
+
+        profileIV.setImageResource(R.drawable.iscle);
+
+        //profileIV.setOnClickListener(v -> openGallery());
+        saveButton.setOnClickListener(v -> sendData());
+        //birthdayTV.setOnClickListener(v -> setBirth());
+    }
+
+    private void setBirth() {
+        Calendar c = Calendar.getInstance();
+        if (true) { // No hi ha cap data de naixement
+            c.add(Calendar.YEAR, -18);
+        }
+        new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            birthdayTV.setText(String.format("%02d/%02d/%02d", dayOfMonth, month + 1, year));
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void sendData() {
-        CardOfPeople newProfile = new CardOfPeople();
-        newProfile.setAboutMe(about.getText().toString());
-        newProfile.setWeight(Float.parseFloat(weight.getText().toString()));
-        newProfile.setHeight(Float.parseFloat(height.getText().toString()));
+        CardOfPeople newProfile = TinderManager.getInstance().getActualUser();
+        //newProfile.setAboutMe(about.getText().toString());
+        //newProfile.setWeight(Float.parseFloat(weight.getText().toString()));
+        //newProfile.setHeight(Float.parseFloat(height.getText().toString()));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        /*
 
         Bitmap bitmap = null;
         try {
@@ -67,11 +81,18 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         newProfile.setPicture(Base64.encodeToString(imageBytes, Base64.DEFAULT));
-        newProfile.setBirthDate(birth.getText().toString());
 
-        TinderManager.getInstance().profilePut(this ,newProfile);
+        */
+
+        if (true) { // Date is set
+            String[] birthday = birthdayTV.getText().toString().split("/");
+            newProfile.setBirthDate(birthday[2] + "-" + birthday[1] + "-" + birthday[0]);
+        }
+
+        TinderManager.getInstance().profilePut(this, newProfile);
     }
 
+    /*
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
@@ -79,10 +100,11 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
         }
     }
+    */
 
     @Override
     public void onSuccess(Object data) {
@@ -91,11 +113,11 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     @Override
     public void onFailure(Object data) {
-        CoordinatorLayout mainLayout = findViewById(R.id.main_layout);
         runOnUiThread(() -> {
             // Create a Snackbar showing the error to the user
             String message = ((String) data);
-            Snackbar.make(mainLayout, "Login failed: " + message + " \uD83D\uDE05", Snackbar.LENGTH_LONG).show();
+            Toast.makeText(SettingsActivity.this, "Login failed: " + message + " \uD83D\uDE05", Toast.LENGTH_LONG).show();
+            //Snackbar.make(mainLayout, "Login failed: " + message + " \uD83D\uDE05", Snackbar.LENGTH_LONG).show();
             finishAffinity();
         });
     }
