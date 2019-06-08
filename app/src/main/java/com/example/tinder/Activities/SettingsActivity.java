@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         profileIV = findViewById(R.id.photo_iv);
         nameET = findViewById(R.id.name_et);
         descriptionET = findViewById(R.id.description_et);
-        birthdayTV = findViewById(R.id.birthday_tv);
+        birthdayTV = findViewById(R.id.editText3);
 
         saveButton = findViewById(R.id.save_button);
 
@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         //profileIV.setOnClickListener(v -> openGallery());
         saveButton.setOnClickListener(v -> sendData());
         //birthdayTV.setOnClickListener(v -> setBirth());
+        setBirth();
     }
 
     private void setBirth() {
