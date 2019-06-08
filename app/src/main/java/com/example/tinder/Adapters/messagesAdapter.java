@@ -59,9 +59,11 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     @Override
     public int getItemViewType(int position) {
         Message m = messages.get(position);
-        if (m.getSender().getDisplayName().equals(name)){
+        if (!m.getSender().getDisplayName().equals(name)){
+            Log.d("RETURN 1", m.getSender().getDisplayName());
             return 1;
         }else{
+            Log.d("RETURN 2", m.getSender().getDisplayName());
             return 2;
         }
     }

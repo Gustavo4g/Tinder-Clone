@@ -25,6 +25,8 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     private EditText nameET;
     private EditText descriptionET;
     private TextView birthdayTV;
+    private EditText weight;
+    private EditText height;
 
     private Button saveButton;
 
@@ -42,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         nameET = findViewById(R.id.name_et);
         descriptionET = findViewById(R.id.description_et);
         birthdayTV = findViewById(R.id.editText3);
+        weight = findViewById(R.id.editText4);
+        height = findViewById(R.id.editText5);
 
         saveButton = findViewById(R.id.save_button);
 
@@ -65,9 +69,9 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     private void sendData() {
         CardOfPeople newProfile = TinderManager.getInstance().getActualUser();
-        //newProfile.setAboutMe(about.getText().toString());
-        //newProfile.setWeight(Float.parseFloat(weight.getText().toString()));
-        //newProfile.setHeight(Float.parseFloat(height.getText().toString()));
+        newProfile.setAboutMe(descriptionET.getText().toString());
+        newProfile.setWeight(Float.parseFloat(weight.getText().toString()));
+        newProfile.setHeight(Float.parseFloat(height.getText().toString()));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
