@@ -15,7 +15,7 @@ public class threadMissatges extends Thread {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
         while (running) {
             try {
-                Thread.sleep(60000);
+                Thread.sleep(15000);
                 c.actualizaMensajes();
             } catch (InterruptedException e) {
 
