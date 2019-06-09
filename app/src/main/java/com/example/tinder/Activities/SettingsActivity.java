@@ -1,6 +1,9 @@
 package com.example.tinder.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -33,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     private EditText height;
     private Gender[] genders;
     private Button saveButton;
+    private Button logoutButton;
 
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
@@ -56,7 +60,9 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         height = findViewById(R.id.editText5);
         saveButton = findViewById(R.id.save_button);
         profileIV.setImageResource(R.drawable.iscle);
+        logoutButton = findViewById(R.id.logout);
 
+        logoutButton.setOnClickListener(v -> logout());
         saveButton.setOnClickListener(v -> sendData());
 //        setBirth();
         spinner = (Spinner) findViewById(R.id.gender);
@@ -70,6 +76,25 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+    }
+
+    private void logout() {
+        runOnUiThread(() -> {
+            SharedPreferences.Editor sharedPrefEditor = getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE).edit();
+
+            sharedPrefEditor.putBoolean("rememberMe", false);
+
+            sharedPrefEditor.apply();
+
+
+            // Create the LoginActivity intent
+            Intent loginActivityIntent = new Intent(this, LoginActivity.class);
+            // Start MainActivity via the intent
+            startActivity(loginActivityIntent);
+            // Finish the LoginActivity
+            finishAffinity();
+        });
     }
 
     private void setBirth() {
