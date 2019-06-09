@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
@@ -23,9 +25,11 @@ import com.example.tinder.Model.Gender;
 import com.example.tinder.R;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
-public class SettingsActivity extends AppCompatActivity implements GenericCallback {
+public class SettingsActivity extends AppCompatActivity implements GenericCallback, AdapterView.OnItemSelectedListener {
     private static final String TAG = "SettingsActivity";
 
     private ImageView profileIV;
@@ -39,7 +43,6 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     private Button logoutButton;
 
     Spinner spinner;
-    ArrayAdapter<CharSequence> adapter;
 
 
     @Override
@@ -64,18 +67,10 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
         logoutButton.setOnClickListener(v -> logout());
         saveButton.setOnClickListener(v -> sendData());
-//        setBirth();
+        setBirth();
         spinner = (Spinner) findViewById(R.id.gender);
 
         TinderManager.getInstance().getGenders(this);
-
-
-        adapter = ArrayAdapter.createFromResource(this,
-                R.array.gender_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
     }
 
     private void logout() {
@@ -154,12 +149,14 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     @Override
     public void onSuccess(Object data) {
-            genders = (Gender[])data;
-            setDropDownAdapter((Gender[]) genders.clone());
-    }
-
-    private void setDropDownAdapter(Gender[] genders) {
-
+        genders = (Gender[])data;
+        ArrayList<String> gendersList = new ArrayList<>();
+        for(int i = 0; i < genders.length; i++){
+            gendersList.add(genders[i].getType());
+        }
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, gendersList);
+        spinner.setAdapter(adapter);
     }
 
     @Override
@@ -171,5 +168,15 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
             //Snackbar.make(mainLayout, "Login failed: " + message + " \uD83D\uDE05", Snackbar.LENGTH_LONG).show();
             finishAffinity();
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
