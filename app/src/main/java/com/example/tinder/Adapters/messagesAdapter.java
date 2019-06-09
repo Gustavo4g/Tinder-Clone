@@ -36,7 +36,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     public messagesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView;
 
-        if (getItemViewType(i) == 1) { // Friend
+        if (i == 1) { // Friend
             itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message_friend, viewGroup, false);
         } else {
             itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message, viewGroup, false);
@@ -52,7 +52,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        Message m = messages.get(position);
+        Message m = messages.get((getItemCount() - 1) - position);
 
         if (m.getSender().getDisplayName().equals(name)) { // Friend
             return 1;
