@@ -2,6 +2,7 @@ package com.example.tinder.Connection;
 
 
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Gender;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
@@ -98,4 +99,8 @@ interface TinderService {
 
     @GET("api/my-profile")
     Call<CardOfPeople> getProfile(@Header("Authorization") String userToken);
+
+    //Gender get call
+    @GET("/api/genders")
+    Call<Gender[]> getGenders(@Header("Authorization") String userToken);
 }

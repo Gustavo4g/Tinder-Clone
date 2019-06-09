@@ -12,6 +12,7 @@ import com.example.tinder.Interfaces.RegisterCallBack;
 import com.example.tinder.Interfaces.RelationShipCallBack;
 import com.example.tinder.Model.BackendError;
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Gender;
 import com.example.tinder.Model.Invite;
 import com.example.tinder.Model.Login;
 import com.example.tinder.Model.Message;
@@ -212,7 +213,7 @@ public class TinderManager {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    dataCallback.onSuccess(null);
+                    //dataCallback.onSuccess(null);
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
 
@@ -523,6 +524,28 @@ public class TinderManager {
             }
         });
     }
+
+    public void getGenders(GenericCallback dataCallback){
+        Call<Gender[]> call = service.getGenders("Bearer " + userToken.getToken());
+
+        call.enqueue(new Callback<Gender[]>() {
+            @Override
+            public void onResponse(Call<Gender[]> call, Response<Gender[]> response) {
+                if (response.isSuccessful()) {
+                    dataCallback.onSuccess(response.body());
+                } else {
+                    Log.d(TAG, "onResponse error: " + response.raw());
+
+                    dataCallback.onFailure(getProblem(response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Gender[]> call, Throwable t) {
+                dataCallback.onSuccess(t.getMessage());
+            }
+        });
+        }
 
     private static class Holder {
         private static final TinderManager instance = new TinderManager();

@@ -1,6 +1,6 @@
 package com.example.tinder.Model;
 
-public class Gender {
+public class Gender implements Cloneable {
     private float id;
     private String type;
 
@@ -23,5 +23,10 @@ public class Gender {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+
+        return super.clone();
     }
 }

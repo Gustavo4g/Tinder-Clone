@@ -4,15 +4,19 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Model.CardOfPeople;
+import com.example.tinder.Model.Gender;
 import com.example.tinder.R;
 
 import java.io.ByteArrayOutputStream;
@@ -27,8 +31,12 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     private TextView birthdayTV;
     private EditText weight;
     private EditText height;
-
+    private Gender[] genders;
     private Button saveButton;
+
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +54,22 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         birthdayTV = findViewById(R.id.editText3);
         weight = findViewById(R.id.editText4);
         height = findViewById(R.id.editText5);
-
         saveButton = findViewById(R.id.save_button);
-
         profileIV.setImageResource(R.drawable.iscle);
 
-        //profileIV.setOnClickListener(v -> openGallery());
         saveButton.setOnClickListener(v -> sendData());
-        //birthdayTV.setOnClickListener(v -> setBirth());
-        setBirth();
+//        setBirth();
+        spinner = (Spinner) findViewById(R.id.gender);
+
+        TinderManager.getInstance().getGenders(this);
+
+
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
     }
 
     private void setBirth() {
@@ -95,6 +110,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         }
 
         TinderManager.getInstance().profilePut(this, newProfile);
+        TinderManager.getInstance().getGenders(this);
     }
 
     /*
@@ -113,6 +129,11 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     @Override
     public void onSuccess(Object data) {
+            genders = (Gender[])data;
+            setDropDownAdapter((Gender[]) genders.clone());
+    }
+
+    private void setDropDownAdapter(Gender[] genders) {
 
     }
 
