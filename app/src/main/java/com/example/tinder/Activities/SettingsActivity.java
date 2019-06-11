@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -28,7 +27,6 @@ import com.example.tinder.R;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 
 public class SettingsActivity extends AppCompatActivity implements GenericCallback, AdapterView.OnItemSelectedListener {
     private static final String TAG = "SettingsActivity";
@@ -42,8 +40,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     private Gender[] genders;
     private Button saveButton;
     private Button logoutButton;
-
-    Spinner spinner;
+    private Spinner genderSpinner;
 
 
     @Override
@@ -59,17 +56,31 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         profileIV = findViewById(R.id.photo_iv);
         nameET = findViewById(R.id.name_et);
         descriptionET = findViewById(R.id.description_et);
-        birthdayTV = findViewById(R.id.editText3);
-        weight = findViewById(R.id.editText4);
-        height = findViewById(R.id.editText5);
+        birthdayTV = findViewById(R.id.birthday_tv);
+        weight = findViewById(R.id.height_et);
+        height = findViewById(R.id.weight_et);
         saveButton = findViewById(R.id.save_button);
         profileIV.setImageResource(R.drawable.iscle);
         logoutButton = findViewById(R.id.logout);
+        genderSpinner = findViewById(R.id.gender_spinner);
+
+        CardOfPeople user = TinderManager.getInstance().getActualUser();
+        if (user.getDisplayName() != null)
+            nameET.setText(user.getDisplayName());
+        if (user.getAboutMe() != null)
+            descriptionET.setText(user.getAboutMe());
+        if (user.getBirthDate() != null) {
+            String[] bd = user.getBirthDate().split("-");
+            birthdayTV.setText(bd[2] + "/" + bd[1] + "/" + bd[0]);
+        } else
+            birthdayTV.setText("xx/xx/xxxx");
+
+        height.setText(String.valueOf(user.getHeight()));
+        weight.setText(String.valueOf(user.getWeight()));
 
         logoutButton.setOnClickListener(v -> logout());
         saveButton.setOnClickListener(v -> sendData());
-        setBirth();
-        spinner = (Spinner) findViewById(R.id.gender);
+        birthdayTV.setOnClickListener(v -> setBirth());
 
         TinderManager.getInstance().getGenders(this);
     }
@@ -105,9 +116,12 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     private void sendData() {
         CardOfPeople newProfile = TinderManager.getInstance().getActualUser();
+        newProfile.setDisplayName(nameET.getText().toString());
         newProfile.setAboutMe(descriptionET.getText().toString());
         newProfile.setWeight(Float.parseFloat(weight.getText().toString()));
         newProfile.setHeight(Float.parseFloat(height.getText().toString()));
+        String[] birthday = birthdayTV.getText().toString().split("/");
+        newProfile.setBirthDate(birthday[2] + "-" + birthday[1] + "-" + birthday[0]);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -125,13 +139,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
         */
 
-        if (true) { // Date is set
-            String[] birthday = birthdayTV.getText().toString().split("/");
-            newProfile.setBirthDate(birthday[2] + "-" + birthday[1] + "-" + birthday[0]);
-        }
-
         TinderManager.getInstance().profilePut(this, newProfile);
-        TinderManager.getInstance().getGenders(this);
     }
 
     /*
@@ -152,12 +160,12 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
     public void onSuccess(Object data) {
         genders = (Gender[])data;
         ArrayList<String> gendersList = new ArrayList<>();
-        for(int i = 0; i < genders.length; i++){
+        for (int i = 0; i < genders.length; i++) {
             gendersList.add(genders[i].getType());
         }
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, gendersList);
-        spinner.setAdapter(adapter);
+        genderSpinner.setAdapter(adapter);
     }
 
     @Override
