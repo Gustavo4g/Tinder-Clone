@@ -57,11 +57,11 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
             viewHolder.age.setText("-");
         }
         viewHolder.heart.setVisibility(View.GONE);
-        Invite[] pending =  TinderManager.getInstance().getPending_invitations();
+        Invite[] pending = TinderManager.getInstance().getPending_invitations();
         for (Invite h : pending) {
-            if (h.getSent().getId() == profile.getId()){
+            if (h.getSent().getId() == profile.getId()) {
                 viewHolder.heart.setVisibility(View.VISIBLE);
-                viewHolder.heart.setOnClickListener(v->aceptarPeticion(h));
+                viewHolder.heart.setOnClickListener(v -> aceptarPeticion(h));
             }
         }
 
@@ -79,7 +79,7 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
 
     private void aceptarPeticion(Invite invite) {
         Log.d(TAG, "aceptarPeticion: inviteId = " + invite.getId());
-        TinderManager.getInstance().inviteAnswer(this, invite.getId(),true);
+        TinderManager.getInstance().inviteAnswer(this, invite.getId(), true);
         viewHolder.heart.setVisibility(View.GONE);
         viewHolder.heart.setOnClickListener(null);
     }
@@ -115,12 +115,12 @@ public class InvitacionAdapter extends RecyclerView.Adapter<InvitacionAdapter.Vi
 
     @Override
     public void onLogin2Success(Object id_token) {
-        Log.d("Bueno","Has termiando de estudiar?");
+        Log.d("Bueno", "Has termiando de estudiar?");
     }
 
     @Override
     public void onLogin2Failed(String reason) {
-        Log.d("Shit","Nada de invitar a nadie, a estudiar");
+        Log.d("Shit", "Nada de invitar a nadie, a estudiar");
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

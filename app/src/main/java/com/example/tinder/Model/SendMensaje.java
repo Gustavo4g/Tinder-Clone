@@ -6,7 +6,7 @@ public class SendMensaje {
     private String picture;
     private String pictureContentType;
     private String url;
-    private  Recipient recipient;
+    private Recipient recipient;
 
     public String getCreatedDate() {
         return createdDate;

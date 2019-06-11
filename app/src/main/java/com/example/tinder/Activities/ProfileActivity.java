@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity implements RelationShipCa
             heightTV.setVisibility(View.GONE);
         }
 
-        if (value.getGender() == null || value.getGender().equals("DO NOT SHOW")) {
+        if (value.getGender() == null || value.getGender().getType().equals("DO NOT SHOW")) {
             genderTV.setVisibility(View.GONE);
             genderLabel.setVisibility(View.GONE);
         } else {

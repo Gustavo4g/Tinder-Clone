@@ -1,9 +1,9 @@
 package com.example.tinder.Activities;
 
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +24,58 @@ public class ChatListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ChatListAdapter chatListAdapter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ArrayList<CardOfPeople> friends = new ArrayList<>();
+        TinderManager.getInstance().getFriends(new GenericCallback() {
+            @Override
+            public void onSuccess(Object data) {
+                CardOfPeople[] people = (CardOfPeople[]) data;
+
+                ArrayList<ChatRow> rows = new ArrayList<>();
+                boolean inside = false;
+                for (CardOfPeople p : people) {
+                    for (CardOfPeople p2 : friends) {
+                        if (p.getId() == p2.getId()) {
+                            inside = true;
+                        }
+                    }
+                    if (!inside) {
+                        TinderManager.getInstance().getMessages(p.getId(), 1, new GenericCallback() {
+                            @Override
+                            public void onSuccess(Object data) {
+                                Message[] messages = (Message[]) data;
+
+                                if (messages.length > 0)
+                                    rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
+                                else {
+                                    rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
+                                }
+                                chatListAdapter.setDataset(rows);
+                            }
+
+                            @Override
+                            public void onFailure(Object data) {
+                                Log.d(TAG, "Adding " + p.getId());
+                                rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
+                                chatListAdapter.setDataset(rows);
+                            }
+                        });
+                        friends.add(p);
+                        inside = false;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Object data) {
+                Toast.makeText(ChatListActivity.this, "Error while getting friends!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +115,20 @@ public class ChatListActivity extends AppCompatActivity {
                 ArrayList<ChatRow> rows = new ArrayList<>();
                 boolean inside = false;
                 for (CardOfPeople p : people) {
-                    for (CardOfPeople p2 : friends){
-                        if (p.getId() == p2.getId()){
+                    for (CardOfPeople p2 : friends) {
+                        if (p.getId() == p2.getId()) {
                             inside = true;
                         }
                     }
-                    if (!inside){
-                        TinderManager.getInstance().getMessages(p.getId(),1, new GenericCallback() {
+                    if (!inside) {
+                        TinderManager.getInstance().getMessages(p.getId(), 1, new GenericCallback() {
                             @Override
                             public void onSuccess(Object data) {
                                 Message[] messages = (Message[]) data;
 
                                 if (messages.length > 0)
                                     rows.add(new ChatRow(p.getId(), p.getDisplayName(), messages[0].getMessage(), p.getPicture()));
-                                else{
+                                else {
                                     rows.add(new ChatRow(p.getId(), p.getDisplayName(), "No messages yet!", p.getPicture()));
                                 }
                                 chatListAdapter.setDataset(rows);

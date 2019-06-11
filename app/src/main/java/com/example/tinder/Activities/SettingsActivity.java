@@ -4,8 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -109,9 +109,7 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
         if (true) { // No hi ha cap data de naixement
             c.add(Calendar.YEAR, -18);
         }
-        new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            birthdayTV.setText(String.format("%02d/%02d/%02d", dayOfMonth, month + 1, year));
-        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(this, (view, year, month, dayOfMonth) -> birthdayTV.setText(String.format("%02d/%02d/%02d", dayOfMonth, month + 1, year)), c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void sendData() {
@@ -158,10 +156,10 @@ public class SettingsActivity extends AppCompatActivity implements GenericCallba
 
     @Override
     public void onSuccess(Object data) {
-        genders = (Gender[])data;
+        genders = (Gender[]) data;
         ArrayList<String> gendersList = new ArrayList<>();
-        for (int i = 0; i < genders.length; i++) {
-            gendersList.add(genders[i].getType());
+        for (Gender gender : genders) {
+            gendersList.add(gender.getType());
         }
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, gendersList);

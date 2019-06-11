@@ -12,12 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.tinder.Connection.TinderManager;
-import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Adapters.LocationAdapter;
-import com.example.tinder.Model.CardOfPeople;
-import com.example.tinder.R;
+import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Dialogs.SearchDialog;
+import com.example.tinder.Interfaces.DataBack;
+import com.example.tinder.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,9 +53,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
         });
 
         ImageView chats = getSupportActionBar().getCustomView().findViewById(R.id.action_chat);
-        chats.setOnClickListener(v -> {
-            startActivity(new Intent(SearchActivity.this, ChatListActivity.class));
-        });
+        chats.setOnClickListener(v -> startActivity(new Intent(SearchActivity.this, ChatListActivity.class)));
 
         profileRV = findViewById(R.id.profile_rv);
         profileRV.setHasFixedSize(true);
@@ -77,7 +74,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
                     TinderManager.getInstance().searchUsers(new DataBack() {
                         @Override
                         public void onLogin2Success(Object id_token) {
-                            runOnUiThread(() -> startActivity(new Intent(SearchActivity.this, Invitacion.class)));
+                            runOnUiThread(() -> startActivity(new Intent(SearchActivity.this, InvitacionActivity.class)));
                         }
 
                         @Override
@@ -93,7 +90,7 @@ public class SearchActivity extends AppCompatActivity implements DataBack {
 
         FloatingActionButton pendingRequestsFAB = findViewById(R.id.pending_requests);
         pendingRequestsFAB.setOnClickListener(v -> {
-            Intent peticionAmistad = new Intent(SearchActivity.this, Invitacion.class);
+            Intent peticionAmistad = new Intent(SearchActivity.this, InvitacionActivity.class);
             startActivity(peticionAmistad);
         });
     }

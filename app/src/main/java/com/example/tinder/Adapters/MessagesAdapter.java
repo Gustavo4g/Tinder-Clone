@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,13 @@ import com.example.tinder.R;
 
 import java.util.ArrayList;
 
-public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHolder> {
+public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private ArrayList<Message> messages;
-    private String name;
+    private final String name;
 
-    public messagesAdapter(ArrayList<Message> messages, Context context, String friend) {
+    public MessagesAdapter(ArrayList<Message> messages, Context context, String friend) {
         this.messages = messages != null ? messages : new ArrayList<>();
         this.context = context;
         this.name = friend;
@@ -33,7 +32,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
 
     @NonNull
     @Override
-    public messagesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public MessagesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View itemView;
 
         if (i == 1) { // Friend
@@ -42,7 +41,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
             itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_message, viewGroup, false);
         }
 
-        return new messagesAdapter.ViewHolder(itemView);
+        return new MessagesAdapter.ViewHolder(itemView);
     }
 
     private Bitmap convertirImagen(String imagenEnString) {
@@ -62,7 +61,7 @@ public class messagesAdapter extends RecyclerView.Adapter<messagesAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull messagesAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull MessagesAdapter.ViewHolder viewHolder, int i) {
         Message message = messages.get((getItemCount() - 1) - i);
         viewHolder.texto.setText(message.getMessage());
         if (!message.getPicture().equals("")) {

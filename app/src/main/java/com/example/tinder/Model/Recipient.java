@@ -4,7 +4,7 @@ public class Recipient {
     private long id;
 
     public Recipient(float id) {
-        this.id = (long)id;
+        this.id = (long) id;
     }
 
     public long getId() {

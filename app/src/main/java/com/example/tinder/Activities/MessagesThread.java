@@ -1,23 +1,23 @@
 package com.example.tinder.Activities;
 
-public class threadMissatges extends Thread {
+class MessagesThread extends Thread {
 
-    chatRoomActivity c;
+    private final ChatRoomActivity c;
     boolean running;
 
-    public threadMissatges(chatRoomActivity c){
+    public MessagesThread(ChatRoomActivity c) {
         this.c = c;
         running = true;
     }
 
     @Override
-    public void run(){
+    public void run() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
         while (running) {
             try {
                 Thread.sleep(15000);
                 c.actualizaMensajes();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
 
             }
         }

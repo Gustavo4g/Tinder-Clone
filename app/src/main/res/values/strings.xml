@@ -15,11 +15,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="password_confirmation">Password confirmation</string>
     <string name="register">Register</string>
-    <string name="name">Name:</string>
     <string name="about_me">About Me:</string>
     <string name="age">Age:</string>
     <string name="height">Height:</string>
-    <string name="message">Write your message here</string>
     <string name="SendButton">Send</string>
     <string name="weight">Weight:</string>
     <string name="gender">Gender:</string>

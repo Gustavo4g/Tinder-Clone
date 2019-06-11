@@ -1,10 +1,10 @@
 package com.example.tinder.Model;
 
 public class ChatRow {
-    public long id;
-    public String name;
-    public String lastMessage;
-    public String picture;
+    private final long id;
+    private final String name;
+    private final String lastMessage;
+    private final String picture;
 
     public ChatRow(long id, String name, String lastMessage, String picture) {
         this.id = id;

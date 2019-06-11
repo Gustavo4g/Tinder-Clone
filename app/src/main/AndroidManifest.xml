@@ -22,7 +22,7 @@
         <activity
             android:name=".Activities.RegisterActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activities.Invitacion" />
+        <activity android:name=".Activities.InvitacionActivity" />
         <activity
             android:name=".Activities.SplashActivity"
             android:theme="@style/CustomTheme.NoActionBar">
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.chatRoomActivity" />
+        <activity android:name=".Activities.ChatRoomActivity" />
     </application>
 
 </manifest>

@@ -2,9 +2,9 @@ package com.example.tinder.Connection;
 
 import android.util.Log;
 
-import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Interfaces.DataBack;
 import com.example.tinder.Interfaces.DataCallback;
+import com.example.tinder.Interfaces.GenericCallback;
 import com.example.tinder.Interfaces.IIsAuthenticated;
 import com.example.tinder.Interfaces.InviteRequestCallBack;
 import com.example.tinder.Interfaces.LoginCallBack;
@@ -45,6 +45,20 @@ public class TinderManager {
     private CardOfPeople aaaaa;
     private CardOfPeople actualUser;
 
+    private TinderManager() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        service = retrofit.create(TinderService.class);
+    }
+
+    public static TinderManager getInstance() {
+        return Holder.instance;
+    }
+
     public CardOfPeople getActualUser() {
         return actualUser;
     }
@@ -59,20 +73,6 @@ public class TinderManager {
 
     public Invite[] getAcepted_invitations() {
         return acepted_invitations;
-    }
-
-    private TinderManager() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        service = retrofit.create(TinderService.class);
-    }
-
-    public static TinderManager getInstance() {
-        return Holder.instance;
     }
 
     private String getProblem(int responseCode) {
@@ -138,13 +138,13 @@ public class TinderManager {
         });
     }
 
-    public void getProfile(LoginCallBack loginCallBack) {
+    private void getProfile(LoginCallBack loginCallBack) {
         Call<CardOfPeople> call = service.getProfile("Bearer " + userToken.getToken());
         call.enqueue(new Callback<CardOfPeople>() {
             @Override
             public void onResponse(Call<CardOfPeople> call, Response<CardOfPeople> response) {
                 if (response.isSuccessful()) {
-                    actualUser  = response.body();
+                    actualUser = response.body();
                     //loginCallBack.onLoginSuccess(userToken.getToken());
                 } else {
                     Log.d(TAG, "onResponse error: " + response.raw());
@@ -351,7 +351,7 @@ public class TinderManager {
     }
 
     public void acceptedInvites(DataCallback dataCallback) {
-        Call<Invite[]> call = service.acceptedInvites("Bearer "+userToken.getToken());
+        Call<Invite[]> call = service.acceptedInvites("Bearer " + userToken.getToken());
 
         call.enqueue(new Callback<Invite[]>() {
             @Override
@@ -480,30 +480,31 @@ public class TinderManager {
     public void setAaaaa(CardOfPeople aaaaa) {
         this.aaaaa = aaaaa;
     }
-        /*
-    public void getMessages(GetMessageCallback dataCallback, Message m){
-        Call<Message[]> call = service.getMessages("Bearer " + userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
 
-        call.enqueue(new Callback<Message[]>() {
-            @Override
-            public void onResponse(Call<Message[]> call, Response<Message[]> response) {
-                if (response.isSuccessful()) {
-                    dataCallback.onGetMessagesSuccess();
-                } else {
-                    Log.d(TAG, "onResponse error: " + response.raw());
+    /*
+public void getMessages(GetMessageCallback dataCallback, Message m){
+    Call<Message[]> call = service.getMessages("Bearer " + userToken.getToken(), m.getRecipient().getId(), m.getSender().getId());
 
-                    dataCallback.onGetMessagesFailed(getProblem(response.code()));
-                }
+    call.enqueue(new Callback<Message[]>() {
+        @Override
+        public void onResponse(Call<Message[]> call, Response<Message[]> response) {
+            if (response.isSuccessful()) {
+                dataCallback.onGetMessagesSuccess();
+            } else {
+                Log.d(TAG, "onResponse error: " + response.raw());
+
+                dataCallback.onGetMessagesFailed(getProblem(response.code()));
             }
+        }
 
-            @Override
-            public void onFailure(Call<Message[]> call, Throwable t) {
-                dataCallback.onGetMessagesFailed(t.getMessage());
-            }
-        });
-    }
+        @Override
+        public void onFailure(Call<Message[]> call, Throwable t) {
+            dataCallback.onGetMessagesFailed(t.getMessage());
+        }
+    });
+}
 */
-    public void postMessages(GenericCallback dataCallback, SendMensaje m){
+    public void postMessages(GenericCallback dataCallback, SendMensaje m) {
         Call<Void> call = service.postMessage("Bearer " + userToken.getToken(), m);
 
         call.enqueue(new Callback<Void>() {
@@ -525,7 +526,7 @@ public class TinderManager {
         });
     }
 
-    public void getGenders(GenericCallback dataCallback){
+    public void getGenders(GenericCallback dataCallback) {
         Call<Gender[]> call = service.getGenders("Bearer " + userToken.getToken());
 
         call.enqueue(new Callback<Gender[]>() {
@@ -545,7 +546,7 @@ public class TinderManager {
                 dataCallback.onSuccess(t.getMessage());
             }
         });
-        }
+    }
 
     private static class Holder {
         private static final TinderManager instance = new TinderManager();

@@ -14,14 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tinder.Activities.chatRoomActivity;
+import com.example.tinder.Activities.ChatRoomActivity;
 import com.example.tinder.Model.ChatRow;
 import com.example.tinder.R;
 
 import java.util.ArrayList;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     private ArrayList<ChatRow> chatList;
 
     public ChatListAdapter(Context context, ArrayList<ChatRow> chatList) {
@@ -54,7 +54,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         }
 
         viewHolder.mainLayout.setOnClickListener(v -> {
-            Intent chatRoomIntent = new Intent(context, chatRoomActivity.class);
+            Intent chatRoomIntent = new Intent(context, ChatRoomActivity.class);
             chatRoomIntent.putExtra("USER_ID", row.getId());
             chatRoomIntent.putExtra("NAME", row.getName());
             chatRoomIntent.putExtra("PICTURE", row.getPicture());

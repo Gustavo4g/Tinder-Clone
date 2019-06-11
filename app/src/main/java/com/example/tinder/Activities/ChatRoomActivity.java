@@ -10,16 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tinder.Adapters.messagesAdapter;
+import com.example.tinder.Adapters.MessagesAdapter;
 import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Interfaces.GenericCallback;
-import com.example.tinder.Model.Message;
 import com.example.tinder.Model.Recipient;
 import com.example.tinder.Model.SendMensaje;
 import com.example.tinder.R;
@@ -29,9 +27,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class chatRoomActivity extends AppCompatActivity implements GenericCallback {
+public class ChatRoomActivity extends AppCompatActivity implements GenericCallback {
     private static final int PICK_IMAGE = 100;
-    Uri imageUri;
+    private Uri imageUri;
     private RecyclerView recycle;
     private ImageView perfil;
     private TextView name;
@@ -42,8 +40,8 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
     private long id;
     private String picture;
     private String nameFriend;
-    private messagesAdapter messagesAdapterView;
-    private threadMissatges t;
+    private MessagesAdapter messagesAdapterView;
+    private MessagesThread t;
     private Button image;
 
     @Override
@@ -61,7 +59,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
 
         image = findViewById(R.id.image);
 
-        messagesAdapterView = new messagesAdapter(messages, this, nameFriend);
+        messagesAdapterView = new MessagesAdapter(messages, this, nameFriend);
         recycle.setAdapter(messagesAdapterView);
 
         perfil = findViewById(R.id.personalImage);
@@ -93,7 +91,7 @@ public class chatRoomActivity extends AppCompatActivity implements GenericCallba
                 recycle.smoothScrollToPosition(recycle.getAdapter().getItemCount() - 1);
             }
         });
-        t = new threadMissatges(this);
+        t = new MessagesThread(this);
         t.start();
     }
 

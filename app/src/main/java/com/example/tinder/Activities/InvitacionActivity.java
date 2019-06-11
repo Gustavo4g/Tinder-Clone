@@ -7,8 +7,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Adapters.InvitacionAdapter;
+import com.example.tinder.Connection.TinderManager;
 import com.example.tinder.Model.CardOfPeople;
 import com.example.tinder.R;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Invitacion extends AppCompatActivity {
+public class InvitacionActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<CardOfPeople> peopleList = null;

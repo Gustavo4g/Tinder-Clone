@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoginCallBack {
 
             if (rememberMeCheckBox.isChecked()) {
                 sharedPrefEditor.putBoolean("rememberMe", true);
-                sharedPrefEditor.putString("userToken", (String) userToken);
+                sharedPrefEditor.putString("userToken", userToken);
             }
 
             sharedPrefEditor.apply();

@@ -94,7 +94,6 @@
             tools:layout_editor_absoluteY="731dp" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Años"
@@ -104,7 +103,6 @@
             card_view:layout_constraintTop_toTopOf="@+id/person_age" />
 
         <View
-            android:id="@+id/divider4"
             android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
